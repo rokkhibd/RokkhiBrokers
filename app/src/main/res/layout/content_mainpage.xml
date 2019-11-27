@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/fragment_show_profile"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:id="@+id/pro"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/guard"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/round_background_white"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/propic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@color/grey_300"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+
+                <TextView
+
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:text="Name"
+                    android:textColor="@color/grey_2000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/propic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="mailID"
+                    android:textColor="@color/grey_2000"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@+id/propic"
+                    app:layout_constraintTop_toBottomOf="@+id/username" />
+
+
+                <TextView
+                    android:id="@+id/joinDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="joining date"
+                    android:textColor="@color/link_blue"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@+id/propic"
+                    app:layout_constraintTop_toBottomOf="@+id/mail" />
+
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_edit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:id="@+id/bkash_no"
+                android:layout_below="@+id/guard"
+                android:background="@drawable/round_edittext2"
+                android:layout_margin="10dp"
+                android:backgroundTint="#e32e6d"
+                android:text="BKash no: Not found"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/earning_text"
+                android:text="Earning"
+                android:layout_below="@+id/bkash_no"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/orange"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/lin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/earning_text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:weightSum="2">
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/visitorrel"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/total_earning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/total_earning"
+                        android:layout_centerHorizontal="true"
+                        android:text="Total earning"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/due_earningrel"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/due_earning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/due_earning"
+                        android:layout_centerHorizontal="true"
+                        android:text="Due earning"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/building_text"
+                android:text="Building"
+                android:layout_below="@+id/lin1"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/orange"
+                />
+
+            <LinearLayout
+                android:id="@+id/lin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/building_text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:weightSum="3">
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/totalbuildingrel"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/total_building"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/total_building"
+                        android:layout_centerHorizontal="true"
+                        android:text="Total buildings"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/due_buildingrel"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/due_building"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/due_building"
+                        android:layout_centerHorizontal="true"
+                        android:text="Due buildings"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/active_buildingrel"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/active_building"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/active_building"
+                        android:layout_centerHorizontal="true"
+                        android:text="Live buildings"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/meeting_text"
+                android:text="Meeting"
+                android:layout_below="@+id/lin2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/orange"
+                />
+
+            <LinearLayout
+                android:id="@+id/lin3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/meeting_text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:weightSum="2">
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/meetingrel"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/total_meeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/total_meeting"
+                        android:layout_centerHorizontal="true"
+                        android:text="Total meeting"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/reldue_meeting"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/due_meeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/due_meeting"
+                        android:layout_centerHorizontal="true"
+                        android:text="Due meeting"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/referal_text"
+                android:text="Referal"
+                android:layout_below="@+id/lin3"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/orange"
+                />
+
+            <LinearLayout
+                android:id="@+id/lin4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/referal_text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="50dp"
+                android:weightSum="2">
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/total_referal_rel"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/total_referal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/total_referal"
+                        android:layout_centerHorizontal="true"
+                        android:text="Total referal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/reldue_referal"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/due_referal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/due_referal"
+                        android:layout_centerHorizontal="true"
+                        android:text="Due referal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

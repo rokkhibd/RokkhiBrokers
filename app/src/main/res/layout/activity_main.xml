@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        style="@style/AppTheme.AppBarOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/logout_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/logout" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/guard"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/round_background_white"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/propic"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/male1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+
+                <TextView
+
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:text="name"
+                    android:textColor="@color/grey_2000"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/propic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/userphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="No flat found"
+                    android:textColor="@color/grey_2000"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@+id/propic"
+                    app:layout_constraintTop_toBottomOf="@+id/username" />
+
+                <ImageView
+                    android:id="@+id/edit_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_edit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/guard"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:weightSum="3">
+
+
+
+                <RelativeLayout
+
+                    android:layout_width="0dp"
+                    android:id="@+id/buildngs_relative"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/visitor"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/building"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/visitor"
+                        android:layout_centerHorizontal="true"
+                        android:text="Buildings"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/payment_relative"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/parcel"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/payment"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/parcel"
+                        android:layout_centerHorizontal="true"
+                        android:text="Payments"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/notice_relative"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/whitelist"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/notice_new"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/whitelist"
+                        android:layout_centerHorizontal="true"
+                        android:text="Notice"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/lin1"
+                android:layout_marginBottom="15dp"
+                android:weightSum="3">
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/profile_realtive"
+                    android:background="@drawable/round_background_white"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/notice"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/boy"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/notice"
+                        android:layout_centerHorizontal="true"
+                        android:text="Profile"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/guard_relative"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/family"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/guard_avatar"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/family"
+                        android:layout_centerHorizontal="true"
+                        android:text="Guard Track"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

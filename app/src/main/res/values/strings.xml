@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Rokkhi Brokers</string>
+
+
+    <string name="hint"><font size="40">Hint!</font></string>
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No Internet connection</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="sign_out_failed">Sign out failed</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="house_not_found">This house is not visited yet, you may proceed.</string>
+    <string name="house_status_pending">This House already visited</string>
+    <string name="referraldialog"> যার মাধ্যমে আপনার এখানে আসা, তার মোবাইল নাম্বার লিখুন</string>
+    <string name="ok">Yes</string>
+    <string name="error_field_required">This field is required</string>
+
+    <string name="col_users">users</string>
+    <string name="col_fBuildings">fBuildings</string>
+    <string name="col_fWorkers">fWorkers</string>
+    <string name="col_fPayment">fPayment</string>
+    <string name="col_fpaymentHistory">paymentHistory</string>
+    <string name="col_fWorkerBuilding">fWorkerBuilding</string>
+    <string name="col_fBbuildingContacts">fBbuildingContacts</string>
+    <string name="col_logoutsession">logoutsession</string>
+    <string name="col_loginsession">loginsession</string>
+    <string name="col_buildingstatus">buildingStatus</string>
+    <string name="col_fNotification">fNotification</string>
+    <string name="col_fPeopleType">fPeopleType</string>
+    <string name="col_GuardTrainerTrack">guardTrainerTrack</string>
+    <string name="col_guards">guards</string>
+    <string name="end_train"> আপনি কি গার্ড  ট্রেইনিং এর সমাপ্ত ঘটাতে চাচ্ছেন ?</string>
+</resources>

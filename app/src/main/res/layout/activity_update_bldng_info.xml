@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".Ui.UpdateBldngInfoActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            style="@style/AppTheme.AppBarOverlay"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:background="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/logo"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"/>
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/update_bldng_image"
+            android:src="@drawable/building"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            app:civ_border_color="@color/lightorange"
+            app:civ_border_width="2dp"
+            app:civ_border_overlay="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="House Name:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_houseName"
+                android:background="@drawable/round_edittext2"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="45dp"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="House Address:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:textSize="15sp"
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_houseAddress"
+                android:background="@drawable/round_edittext2"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="45dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="Flat Format:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_flatformat"
+                android:background="@android:color/transparent"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="35dp"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="Flat Per Floor:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_flatpfloor"
+                android:background="@android:color/transparent"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="35dp"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="Total Floor:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_totalfloor"
+                android:background="@android:color/transparent"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="35dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="Building Status:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <AutoCompleteTextView
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_bldngStatus"
+                android:background="@drawable/round_edittext2"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="45dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="37dp">
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:paddingLeft="1dp"
+                android:text="Followup Date:"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:focusableInTouchMode="false"
+                android:paddingLeft="10dp"
+                android:id="@+id/update_bldng_followupdate"
+                android:background="@drawable/round_edittext2"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="35dp"/>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_marginBottom="20dp"
+            android:id="@+id/update_bldng_updatebtn"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:text="Update Information"
+            android:background="@drawable/round_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

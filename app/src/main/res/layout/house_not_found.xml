@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/check"
+            android:id="@id/txt"
+            android:textColor="@color/orange"
+            android:textSize="17sp"
+            android:gravity="center_horizontal"
+            android:text="@string/house_not_found"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:textColor="@color/white"
+            android:id="@+id/btn"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/round_edittext2"
+            android:backgroundTint="@color/orange"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txt"
+            android:text="OK"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/check"
+            android:src="@drawable/chekctwo"
+            android:layout_width="50dp"
+            android:layout_height="30dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

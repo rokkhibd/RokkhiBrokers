@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_edit_profile">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="20dp">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prorel"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@color/grey_300"
+                app:civ_border_color="@color/black"
+                app:civ_border_width=".5dp" />
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+        <TextView
+            android:id="@+id/changeProfilePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prorel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Upload Photo"
+            android:textStyle="bold"
+            android:textColor="@color/orange"
+            android:textSize="16sp" />
+
+
+        <!-- username section -->
+        <LinearLayout
+            android:id="@+id/relname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/changeProfilePhoto"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/grey_border_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Name *"
+                android:textColor="@color/orange"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Name"
+                android:inputType="textNoSuggestions" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/relphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relname"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/grey_border_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Mail "
+                android:textColor="@color/orange"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/usermail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="your mail id (Recommended)"
+
+                android:inputType="textEmailAddress" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/relgender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relphone"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/grey_border_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Gender *"
+                android:textColor="@color/orange"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="(gender)"
+                android:clickable="true"
+                android:focusable="false"
+                android:inputType="textNoSuggestions" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reldept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relgender"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/grey_border_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="BirthDay"
+                android:textColor="@color/orange"
+                android:textSize="15sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="7"
+                android:id="@+id/blinn"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:id="@+id/bday"
+                    android:background="@null"
+                    android:inputType="textNoSuggestions"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Your birth day"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/datepicker"
+                    app:srcCompat="@drawable/ic_calendar"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:id="@+id/done"
+            android:backgroundTint="@color/orange"
+            android:background="@drawable/less_round_button"
+            android:textColor="@color/white"
+            android:layout_below="@+id/reldept"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            />
+
+
+
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true" />
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</ScrollView>

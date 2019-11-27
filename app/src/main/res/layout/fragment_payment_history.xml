@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Ui.PaymentHistoryFragment">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        style="@style/AppTheme.AppBarOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:background="?attr/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/logo"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/paymentHistoryRecyclerViewID"
+            tools:listitem="@layout/payment_history_layout"
+            android:layout_height="match_parent"/>
+
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+</FrameLayout>

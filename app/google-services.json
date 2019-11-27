@@ -1,0 +1,243 @@
+{
+  "project_info": {
+    "project_number": "1098122328211",
+    "firebase_url": "https://rokkhi-f7514.firebaseio.com",
+    "project_id": "rokkhi-f7514",
+    "storage_bucket": "rokkhi-f7514.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098122328211:android:c4b64b1b68590fb1c97566",
+        "android_client_info": {
+          "package_name": "com.rokkhi.brokers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098122328211-l36ribjv4bubr39p5bmrpeprnl1hb60l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.brokers",
+            "certificate_hash": "3b8a2b7ceb2b732949ca9fe73bb1c1942eb8e20c"
+          }
+        },
+        {
+          "client_id": "1098122328211-k68vk2h8642daekbgi4spokbehveh0dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoMvfTBdlLn1g5kJUXX5WICgd-rtfGhV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098122328211-d48cn5unitniloi1dd4bn2qgn2f0559i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1098122328211-8u3lt0cn8749nmobu25fi7sl67v3o3ke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rokkhi.PhoneUI"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098122328211:android:9bc1f0a3292c41c4",
+        "android_client_info": {
+          "package_name": "com.rokkhi.rokkhi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098122328211-ukp6iq9kka5sgvdrk2bokfkeblrgr048.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhi",
+            "certificate_hash": "1559f6dda8b88294c61aee9a483d81314d23316f"
+          }
+        },
+        {
+          "client_id": "1098122328211-chl09fb6stla6ts521alma4rb9k06q7e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhi",
+            "certificate_hash": "f1aabb6a92190f89abef8c6f204c85738ca58bd3"
+          }
+        },
+        {
+          "client_id": "1098122328211-4s79abcbpo28fsbrsbn0rca6vmlstkeh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhi",
+            "certificate_hash": "2cc437071e1c6020ca9a8ec5a3f072dd17981576"
+          }
+        },
+        {
+          "client_id": "1098122328211-d3c4sbn4cp2kebrp240i9grv1ms5jhe5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhi",
+            "certificate_hash": "2b62119d74ac673e710fa950efe78738ea59c3ef"
+          }
+        },
+        {
+          "client_id": "1098122328211-g95pbgpa8741q8583bsifpgt3k9l4rju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhi",
+            "certificate_hash": "c9f676d663792f94603844023aa889963af6a2b6"
+          }
+        },
+        {
+          "client_id": "1098122328211-k68vk2h8642daekbgi4spokbehveh0dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoMvfTBdlLn1g5kJUXX5WICgd-rtfGhV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098122328211-d48cn5unitniloi1dd4bn2qgn2f0559i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1098122328211-8u3lt0cn8749nmobu25fi7sl67v3o3ke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rokkhi.PhoneUI"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098122328211:android:ad73cdd84042cf93",
+        "android_client_info": {
+          "package_name": "com.rokkhi.rokkhiadminhome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098122328211-l07r1j0snvvgj5da9j92g10dgbk9d4t2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhiadminhome",
+            "certificate_hash": "f1aabb6a92190f89abef8c6f204c85738ca58bd3"
+          }
+        },
+        {
+          "client_id": "1098122328211-k68vk2h8642daekbgi4spokbehveh0dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoMvfTBdlLn1g5kJUXX5WICgd-rtfGhV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098122328211-d48cn5unitniloi1dd4bn2qgn2f0559i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1098122328211-8u3lt0cn8749nmobu25fi7sl67v3o3ke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rokkhi.PhoneUI"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098122328211:android:a3da40def9fee6b9",
+        "android_client_info": {
+          "package_name": "com.rokkhi.rokkhiguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098122328211-qcaftubudjmvuiqgok3llpgaf3u5jgm1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhiguard",
+            "certificate_hash": "1559f6dda8b88294c61aee9a483d81314d23316f"
+          }
+        },
+        {
+          "client_id": "1098122328211-mm29ift6atpe013g4m0oeannk1uknnf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhiguard",
+            "certificate_hash": "2cc437071e1c6020ca9a8ec5a3f072dd17981576"
+          }
+        },
+        {
+          "client_id": "1098122328211-0al2o6fpla5d1hth15b6t0ifv7rc021u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhiguard",
+            "certificate_hash": "c9f676d663792f94603844023aa889963af6a2b6"
+          }
+        },
+        {
+          "client_id": "1098122328211-n462vjeci7i4ep9mfikdcc0me12gkkrc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhiguard",
+            "certificate_hash": "f1aabb6a92190f89abef8c6f204c85738ca58bd3"
+          }
+        },
+        {
+          "client_id": "1098122328211-k68vk2h8642daekbgi4spokbehveh0dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoMvfTBdlLn1g5kJUXX5WICgd-rtfGhV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098122328211-d48cn5unitniloi1dd4bn2qgn2f0559i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1098122328211-8u3lt0cn8749nmobu25fi7sl67v3o3ke.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rokkhi.PhoneUI"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

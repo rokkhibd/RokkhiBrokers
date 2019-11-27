@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    tools:context=".Ui.FworkerProfileActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            style="@style/AppTheme.AppBarOverlay"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/logo" />
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fworker_photo"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:src="@color/grey_300"
+            app:civ_border_color="@color/black"
+            app:civ_border_width=".5dp" />
+
+        <TextView
+            android:id="@+id/clickphototxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fworker_photo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Click Above to capture image"
+            android:textColor="@color/grey_2000" />
+
+        <EditText
+
+            android:id="@+id/fworker_name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/clickphototxt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="Name *"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            android:id="@+id/addresstxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fworker_name_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Address *"
+            android:textColor="@color/lightorange" />
+
+        <LinearLayout
+            android:id="@+id/addressLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addresstxt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <EditText
+
+                android:id="@+id/fworker_address_area"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:paddingLeft="10sp"
+                android:scrollHorizontally="true"
+                android:layout_height="50dp"
+                android:layout_below="@id/addresstxt"
+                android:background="@drawable/round_edittext2"
+                android:focusableInTouchMode="false"
+                android:hint="area"/>
+
+            <EditText
+                android:id="@+id/fworker_address_road"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_below="@id/addresstxt"
+                android:layout_toRightOf="@id/fworker_address_area"
+                android:background="@drawable/round_edittext2"
+                android:focusableInTouchMode="false"
+                android:hint="road" />
+
+            <EditText
+
+                android:id="@+id/fworker_address_block"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_below="@id/addresstxt"
+                android:layout_toRightOf="@id/fworker_address_road"
+                android:background="@drawable/round_edittext2"
+                android:focusableInTouchMode="false"
+                android:hint="block" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/housetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addressLinear"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:text="House Number *"
+            android:textColor="@color/lightorange" />
+
+        <EditText
+            android:id="@+id/fworker_address_housenmbr"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:layout_below="@id/housetxt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/round_edittext2"
+            android:focusableInTouchMode="false"
+            android:hint="house no."
+            android:paddingLeft="10dp" />
+
+        <EditText
+            android:id="@+id/fworker_address_roadletter"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:layout_below="@id/housetxt"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@id/fworker_address_housenmbr"
+            android:background="@drawable/round_edittext2"
+            android:focusableInTouchMode="false"
+            android:hint="block"
+            android:paddingLeft="10dp" />
+
+        <EditText
+            android:id="@+id/fworker_phone_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_address_housenmbr"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="Phone number"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            android:id="@+id/getnumber_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/fworker_phone_edit"
+            android:layout_alignRight="@id/fworker_phone_edit"
+            android:layout_alignBottom="@id/fworker_phone_edit"
+            android:layout_marginTop="15dp"
+            android:paddingRight="10dp"
+            android:text="Get number"
+            android:textColor="@color/lightorange"
+            android:textStyle="bold" />
+
+
+        <EditText
+
+            android:id="@+id/fworker_refcode_edit"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_below="@id/fworker_phone_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="Referral code"
+            android:inputType="number"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            android:id="@+id/ref_knowMore_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignTop="@id/fworker_refcode_edit"
+            android:layout_alignRight="@id/fworker_refcode_edit"
+            android:layout_alignBottom="@id/fworker_refcode_edit"
+            android:layout_marginTop="10dp"
+            android:paddingRight="10dp"
+            android:text="know more"
+            android:textColor="@color/lightorange"
+            android:textStyle="bold" />
+
+
+        <EditText
+
+            android:id="@+id/fworker_nid_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_refcode_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="N.I.D *"
+            android:inputType="number"
+            android:paddingLeft="5dp" />
+
+
+        <EditText
+
+            android:id="@+id/fworker_bkash_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_nid_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="Bkash acc"
+            android:inputType="number"
+            android:paddingLeft="5dp" />
+
+        <!--      <TextView
+                  android:id="@+id/getbkashnumber_txt"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignTop="@id/fworker_bkash_edit"
+                  android:layout_alignRight="@id/fworker_bkash_edit"
+                  android:layout_alignBottom="@id/fworker_bkash_edit"
+                  android:layout_marginTop="15dp"
+                  android:paddingRight="10dp"
+                  android:text="Get number"
+                  android:textColor="@color/lightorange"
+                  android:textStyle="bold" />
+
+
+              <EditText
+
+                  android:id="@+id/fworker_nogod_edit"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp"
+                  android:layout_below="@id/fworker_bkash_edit"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/round_edittext2"
+                  android:hint="Nogod acc"
+                  android:inputType="number"
+                  android:paddingLeft="5dp" />-->
+
+
+        <TextView
+            android:id="@+id/getbkashnumber_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/fworker_bkash_edit"
+            android:layout_alignRight="@id/fworker_bkash_edit"
+            android:layout_alignBottom="@id/fworker_bkash_edit"
+            android:layout_marginTop="15dp"
+            android:paddingRight="10dp"
+            android:text="Get number"
+            android:textColor="@color/lightorange"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/fworker_dob_edit"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@id/fworker_bkash_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:focusableInTouchMode="false"
+            android:hint="date of birth *"
+            android:inputType="number"
+            android:paddingLeft="5dp" />
+
+        <ImageView
+            android:id="@+id/calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/fworker_dob_edit"
+            android:layout_alignRight="@id/fworker_dob_edit"
+            android:layout_alignBottom="@id/fworker_dob_edit"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/calendarlight" />
+
+        <EditText
+
+            android:id="@+id/fworker_uni_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_dob_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="univesity/college"
+            android:paddingLeft="5dp" />
+
+        <EditText
+            android:id="@+id/fworker_mail_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_uni_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="mail id"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp" />
+
+        <EditText
+            android:id="@+id/fworker_joining_edit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_mail_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:hint="joining date"
+            android:paddingLeft="5dp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/calendar_joining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/fworker_joining_edit"
+            android:layout_alignRight="@id/fworker_joining_edit"
+            android:layout_alignBottom="@id/fworker_joining_edit"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/calendarlight"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/fworker_gender_edit"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_below="@id/fworker_joining_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:focusableInTouchMode="false"
+            android:hint="gender"
+            android:paddingLeft="5dp" />
+
+        <ImageView
+            android:id="@+id/gender_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/fworker_gender_edit"
+            android:layout_alignRight="@id/fworker_gender_edit"
+            android:layout_alignBottom="@id/fworker_gender_edit"
+            android:paddingLeft="5dp"
+            android:src="@drawable/menudown"
+            android:visibility="gone" />
+
+
+        <Button
+            android:id="@+id/fworker_data_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/fworker_gender_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_edittext"
+            android:backgroundTint="@color/orange"
+            android:text="Create Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/lightorange" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/error_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@id/txt"
+        android:textColor="@color/orange"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/img"
+        android:text="@string/house_status_pending"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="90dp"
+        android:background="@drawable/round_edittext2"
+        android:backgroundTint="@color/orange"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txt"
+        android:text="OK"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

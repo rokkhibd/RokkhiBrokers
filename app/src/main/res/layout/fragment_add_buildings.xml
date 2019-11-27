@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/white"
+
+    tools:context=".Ui.AddBuildingsFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            style="@style/AppTheme.AppBarOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:background="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textColor="@color/orange"
+                        android:textSize="25sp"
+                        android:layout_centerVertical="true"
+                        android:text="Building Information"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/building_photo"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/building"
+            android:layout_alignParentTop="true"
+            app:civ_border_color="@color/black"
+            app:civ_border_width=".5dp" />
+
+
+        <TextView
+            android:textColor="@color/grey"
+            android:id="@+id/clickphototxt"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/building_photo"
+            android:text="Click Above to capture image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+        <TextView
+            android:textColor="@color/lightorange"
+            android:text="Address *"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/clickphototxt"
+            android:id="@+id/addresstxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <EditText
+            android:focusableInTouchMode="false"
+            android:paddingLeft="5dp"
+            android:hint="area"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/bldng_edit_area"
+            android:layout_below="@id/addresstxt"
+            android:background="@drawable/round_edittext2"
+            android:layout_width="185dp"
+            android:layout_height="38dp"/>
+
+        <EditText
+            android:focusableInTouchMode="false"
+            android:paddingLeft="5dp"
+            android:hint="road"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/bldng_edit_road"
+            android:layout_below="@id/addresstxt"
+            android:layout_toRightOf="@id/bldng_edit_area"
+            android:background="@drawable/round_edittext2"
+            android:layout_width="70dp"
+            android:layout_height="38dp"/>
+
+        <EditText
+            android:focusableInTouchMode="false"
+            android:id="@+id/bldng_edit_block"
+            android:paddingLeft="5dp"
+            android:hint="block"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_edittext2"
+            android:layout_toRightOf="@id/bldng_edit_road"
+            android:layout_below="@id/addresstxt"
+            android:layout_width="70dp"
+            android:layout_height="38dp"/>
+
+
+        <ImageView
+            android:id="@+id/roadmenudown"
+            android:layout_alignTop="@id/bldng_edit_road"
+            android:layout_alignRight="@id/bldng_edit_road"
+            android:layout_alignBottom="@id/bldng_edit_road"
+            android:src="@drawable/menudown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:id="@+id/blockmenudown"
+            android:layout_alignTop="@id/bldng_edit_block"
+            android:layout_alignRight="@id/bldng_edit_block"
+            android:layout_alignBottom="@id/bldng_edit_block"
+            android:src="@drawable/menudown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/areamenudown"
+            android:layout_alignRight="@id/bldng_edit_area"
+            android:layout_alignBottom="@id/bldng_edit_area"
+            android:layout_alignTop="@id/bldng_edit_area"
+            android:src="@drawable/menudown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+
+            android:textColor="@color/lightorange"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/housetxt"
+            android:text="House *"
+            android:layout_below="@id/bldng_edit_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <EditText
+            android:focusableInTouchMode="false"
+            android:inputType="number"
+            android:paddingLeft="5dp"
+            android:hint="number"
+            android:id="@+id/bldng_edit_house"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:layout_below="@id/housetxt"
+            android:layout_width="100dp"
+            android:layout_height="38dp"/>
+
+        <ImageView
+            android:id="@+id/number"
+            android:src="@drawable/menudown"
+            android:layout_alignTop="@id/bldng_edit_house"
+            android:layout_alignBottom="@id/bldng_edit_house"
+            android:layout_alignRight="@id/bldng_edit_house"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:focusableInTouchMode="false"
+            android:paddingLeft="5dp"
+            android:hint="letter"
+            android:id="@+id/bldng_edit_houseformat"
+            android:layout_toRightOf="@id/bldng_edit_house"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_edittext2"
+            android:layout_below="@id/housetxt"
+            android:layout_width="100dp"
+            android:layout_height="38dp"/>
+
+        <AutoCompleteTextView
+            android:focusableInTouchMode="false"
+            android:id="@+id/bldng_edit_disctrict"
+            android:layout_toRightOf="@+id/bldng_edit_houseformat"
+            android:paddingLeft="5dp"
+            android:hint="district"
+            android:background="@drawable/round_edittext2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/housetxt"
+            android:layout_width="150dp"
+            android:layout_height="38dp"/>
+
+        <ImageView
+            android:id="@+id/districtMenu"
+            android:src="@drawable/menudown"
+            android:layout_alignTop="@id/bldng_edit_disctrict"
+            android:layout_alignBottom="@id/bldng_edit_disctrict"
+            android:layout_alignRight="@id/bldng_edit_disctrict"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:textAllCaps="false"
+            android:visibility="visible"
+            android:id="@+id/bldng_button_housecheck"
+            android:textColor="@color/white"
+            android:text="Check The House"
+            android:background="@drawable/round_button"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/bldng_edit_house"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"/>
+
+        <ImageView
+            android:id="@+id/letterdown"
+            android:src="@drawable/menudown"
+            android:layout_alignTop="@id/bldng_edit_houseformat"
+            android:layout_alignBottom="@id/bldng_edit_houseformat"
+            android:layout_alignRight="@id/bldng_edit_houseformat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <RelativeLayout
+            android:id="@+id/addbldng_relative_layout"
+            android:visibility="visible"
+            android:layout_below="@id/bldng_button_housecheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:paddingLeft="5dp"
+                android:hint="house name"
+                android:background="@drawable/round_edittext2"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/bldng_edit_husename"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+            <EditText
+                android:visibility="gone"
+                android:hint="code"
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_bcode"
+                android:background="@drawable/round_edittext2"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/bldng_edit_husename"
+                android:layout_width="250dp"
+                android:layout_height="38dp"/>
+
+            <Button
+                android:visibility="gone"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/tap_bcode"
+                android:layout_toRightOf="@id/bldng_edit_bcode"
+                android:layout_below="@id/bldng_edit_husename"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:text="tap for code"
+                android:background="@drawable/round_button"
+                android:layout_width="100dp"
+                android:layout_height="38dp"/>
+
+
+
+            <EditText
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_totalflt"
+                android:layout_below="@id/bldng_edit_bcode"
+                android:hint="total flat per floor"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+                android:background="@drawable/round_edittext2"
+                android:id="@+id/bldng_edit_totalfloor"
+                android:layout_below="@id/bldng_edit_totalflt"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="total floor"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+            <AutoCompleteTextView
+                android:paddingLeft="5dp"
+                android:layout_below="@id/bldng_edit_totalfloor"
+                android:hint="flat format"
+                android:background="@drawable/round_edittext2"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/bldng_edit_flatformat"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <ImageView
+
+                android:id="@+id/flatformatMenu"
+                android:layout_alignRight="@id/bldng_edit_flatformat"
+                android:layout_alignBottom="@id/bldng_edit_flatformat"
+                android:layout_alignTop="@id/bldng_edit_flatformat"
+                android:src="@drawable/menudown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+            <EditText
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_totalguard"
+                android:layout_below="@id/bldng_edit_flatformat"
+                android:hint="total guards"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_ownername"
+                android:layout_below="@id/bldng_edit_totalguard"
+                android:hint="owner name"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_ownernmbr"
+                android:layout_below="@id/bldng_edit_ownername"
+                android:hint="owner number"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_managername"
+                android:layout_below="@id/bldng_edit_ownernmbr"
+                android:hint="manager name"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_managernmbr"
+                android:layout_below="@id/bldng_edit_managername"
+                android:hint="manager number"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+            <EditText
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_guardname"
+                android:layout_below="@+id/bldng_edit_ownernmbr"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:hint="guard name"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+            <EditText
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_guardnmbr"
+                android:layout_below="@+id/bldng_edit_guardname"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:hint="guard number"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_caretakername"
+                android:layout_below="@+id/bldng_edit_guardnmbr"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:hint="caretaker name"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <EditText
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_caretakernmbr"
+                android:layout_below="@+id/bldng_edit_caretakername"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:hint="caretaker number"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+            <EditText
+
+                android:layout_below="@id/bldng_edit_caretakernmbr"
+                android:id="@+id/bldng_edit_visitdate"
+                android:paddingLeft="5dp"
+                android:hint="visited date"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <ImageView
+
+                android:id="@+id/visitcalimg"
+                android:layout_marginRight="10dp"
+                android:layout_alignBottom="@id/bldng_edit_visitdate"
+                android:layout_alignRight="@id/bldng_edit_visitdate"
+                android:layout_alignTop="@id/bldng_edit_visitdate"
+                android:src="@drawable/calendarlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+
+                android:layout_below="@id/bldng_edit_visitdate"
+                android:id="@+id/bldng_edit_followingdate"
+                android:paddingLeft="5dp"
+                android:hint="followup date"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+            <AutoCompleteTextView
+                android:id="@+id/bldng_edit_status"
+                android:paddingLeft="5dp"
+                android:hint="status/outcome"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/bldng_edit_followingdate"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+            <ImageView
+                android:id="@+id/statusMenu"
+                android:layout_alignTop="@id/bldng_edit_status"
+                android:layout_alignRight="@id/bldng_edit_status"
+                android:layout_alignBottom="@id/bldng_edit_status"
+                android:src="@drawable/menudown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+
+                android:id="@+id/followingcalimg"
+                android:layout_marginRight="10dp"
+                android:layout_alignBottom="@id/bldng_edit_followingdate"
+                android:layout_alignRight="@id/bldng_edit_followingdate"
+                android:layout_alignTop="@id/bldng_edit_followingdate"
+                android:src="@drawable/calendarlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+            <EditText
+
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_lat"
+                android:layout_below="@id/bldng_edit_status"
+                android:hint="Latitude"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="180dp"
+                android:layout_height="38dp"/>
+
+
+            <EditText
+                android:layout_toRightOf="@id/bldng_edit_lat"
+                android:paddingLeft="5dp"
+                android:id="@+id/bldng_edit_long"
+                android:layout_below="@id/bldng_edit_status"
+                android:hint="Longitude"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext2"
+                android:layout_width="200dp"
+                android:layout_height="38dp"/>
+
+
+
+
+
+            <Button
+                android:id="@+id/addblgnInfoBtn"
+                android:layout_below="@id/bldng_edit_lat"
+                android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_button"
+                android:text="Add Information"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"/>
+
+
+
+        </RelativeLayout>
+
+
+
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_marginTop="500dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
