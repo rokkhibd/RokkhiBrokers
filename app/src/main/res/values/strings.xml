@@ -10,6 +10,8 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="house_not_found">This house is not visited yet, you may proceed.</string>
+    <string name="house_done">This house Information is unable to update.</string>
+
     <string name="house_status_pending">This House is already visited</string>
     <string name="referraldialog"> যার মাধ্যমে আপনার এখানে আসা, তার মোবাইল নাম্বারটি লিখুন</string>
     <string name="ok">Yes</string>
@@ -32,4 +34,5 @@
     <string name="end_train"> আপনি কি গার্ড  ট্রেইনিং এর সমাপ্ত ঘটাতে চাচ্ছেন ?</string>
     <string name="col_area">area</string>
     <string name="col_district">district</string>
+
 </resources>

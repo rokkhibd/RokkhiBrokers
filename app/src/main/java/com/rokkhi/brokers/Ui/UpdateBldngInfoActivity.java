@@ -195,6 +195,15 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     Glide.with(UpdateBldngInfoActivity.this).load(fBuildings.getB_imageUrl().get(0)).fitCenter().placeholder(R.drawable.building).into(houseImage);
 
 
+                    String status=fBuildings.getStatus().toString();
+
+                    if (status.equalsIgnoreCase("Done")){
+                        updateInfo_Button.setVisibility(View.GONE);
+                        //Toast.makeText(UpdateBldngInfoActivity.this, "You can not update the building Info", Toast.LENGTH_SHORT).show();
+                       // showMessageAlertDialogue();
+
+                    }
+
                 }
             }
         });

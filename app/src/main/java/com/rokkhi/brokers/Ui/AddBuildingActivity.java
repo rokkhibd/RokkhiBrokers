@@ -1189,11 +1189,11 @@ public class AddBuildingActivity extends AppCompatActivity {
                 statusList.clear();
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     String status = documentSnapshot.getString("status_type");
-
+                    statusList.add(status);
                     //Ignore Done status
-                    if (!status.equalsIgnoreCase("Done")){
+                    /*if (!status.equalsIgnoreCase("Done")){
                         statusList.add(status);
-                    }
+                    }*/
 
                 }
 

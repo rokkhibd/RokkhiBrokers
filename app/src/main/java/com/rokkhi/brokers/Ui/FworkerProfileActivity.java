@@ -759,7 +759,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         String fw_bkash = f_bkash.getText().toString();
         String fw_nogod = "";
 
-        fPayments = new FPayments(userId, "", fw_phone, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
+        fPayments = new FPayments(userId, "", fw_phone, 0, 0, 0,0,0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
 
         db.collection("fPayment").document(userId).set(fPayments).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
