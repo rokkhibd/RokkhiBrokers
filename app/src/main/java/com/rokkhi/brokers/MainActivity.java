@@ -166,13 +166,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         utoken = instanceIdResult.getToken();
                                         editor.putString("token", utoken);
                                         editor.apply();
-                                        // Log.d(TAG, "onSuccess: tokenxx "+ useertoken +"xx"+ utoken);
                                         Log.d(TAG, "onSuccess: tttt7 "+signoutstate);
                                         //signoutstate=true;
 
-                                        //if (MainActivity.this!=null){
+                                        //if (getApplicationContext()!=null){
 
-                                            /*if (usertoken != null && !usertoken.contains(utoken)  ) {
+                                            if (usertoken != null && !usertoken.contains(utoken)  ) {
                                                 String logID= db.collection(getString(R.string.col_loginsession)).document().getId();
                                                 LogSession logSession= new LogSession(logID,userId,utoken,"FieldWork", Calendar.getInstance().getTime());
                                                 db.collection(getString(R.string.col_loginsession)).document(logID).set(logSession)
@@ -183,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                                             }
                                                         });
-                                            }*/
+                                            }
                                         //}
 
 
