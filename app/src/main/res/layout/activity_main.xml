@@ -71,7 +71,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/male1"
+                    android:src="@drawable/boy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_below="@+id/guard"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:weightSum="3">
 
@@ -148,7 +148,7 @@
                         android:layout_height="60dp"
                         android:layout_margin="5dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/building"
+                        android:src="@drawable/building2"
                         />
 
 
@@ -218,7 +218,7 @@
                         android:layout_height="60dp"
                         android:layout_margin="5dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/notice_new"
+                        android:src="@drawable/notification"
 
                         />
 
@@ -268,7 +268,7 @@
                         android:layout_height="60dp"
                         android:layout_margin="5dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/boy"
+                        android:src="@drawable/profile2"
                         />
 
 
@@ -305,7 +305,7 @@
                         android:layout_height="60dp"
                         android:layout_margin="5dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/guard_avatar"
+                        android:src="@drawable/guard2"
                         />
 
 
@@ -324,7 +324,42 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:visibility="invisible"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/vehiclerel"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
 
+                    <ImageView
+                        android:id="@+id/vehicle"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="5dp"
+                        android:layout_centerHorizontal="true"
+
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/vehicle"
+                        android:layout_centerHorizontal="true"
+                        android:text="Vehicle"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+
+                        />
+
+                </RelativeLayout>
 
 
 

@@ -131,9 +131,6 @@ public class MyhomeFragment extends Fragment {
         spinKitProgress.setIndeterminateDrawable(wave);
 
 
-        //checkUserExistence(getActivity());
-
-
         progressBar=view.findViewById(R.id.progressbar);
         recyclerView=view.findViewById(R.id.myhome_frag_recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
@@ -141,9 +138,11 @@ public class MyhomeFragment extends Fragment {
 
         fBuildingsList=new ArrayList<>();
 
-        spinKitProgress.setVisibility(View.VISIBLE);
+        //spinKitProgress.setVisibility(View.VISIBLE);
+
         getfirstdata();
-        spinKitProgress.setVisibility(View.INVISIBLE);
+
+        //spinKitProgress.setVisibility(View.INVISIBLE);
 
 //      shoWorkerDetails();
 
@@ -232,7 +231,6 @@ public class MyhomeFragment extends Fragment {
     }
 
 
-
     private void gotoFworkerActivty() {
 
         Intent intent=new Intent(getContext(),FworkerProfileActivity.class);
@@ -245,9 +243,10 @@ public class MyhomeFragment extends Fragment {
     public void getfirstdata(){
 
         spinKitProgress.setVisibility(View.VISIBLE);
-        Log.d(TAG, "getfirstdata: ttt2 "+userID);
+
 
         userID=firebaseUser.getUid();
+        Log.d(TAG, "getfirstdata: ttt2 "+userID);
         db.collection(getString(R.string.col_fWorkerBuilding)).whereEqualTo("f_uid",userID)
                 .orderBy("updated_at", Query.Direction.DESCENDING).limit(10)
                 .get().
@@ -264,8 +263,8 @@ public class MyhomeFragment extends Fragment {
                                 fBuildingsList.add(fb);
                             }
                             Log.d(TAG, "onComplete: ttt "+ fBuildingsList.size());
-                            spinKitProgress.setVisibility(View.GONE);
 
+                            spinKitProgress.setVisibility(View.GONE);
                             buildingsListAdapter=new BuildingsListAdapter(fBuildingsList,context);
                             buildingsListAdapter.setHasStableIds(true);
                             recyclerView.setAdapter(buildingsListAdapter);
