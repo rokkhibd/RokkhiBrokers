@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean signoutstate=false;
     String utoken="";
 
+    String eke;
+
     SharedPreferences.Editor editor;
     SharedPreferences sharedPref;
 
