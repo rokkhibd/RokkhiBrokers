@@ -10,7 +10,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="house_not_found">This house is not visited yet, you may proceed.</string>
-    <string name="house_done">This house Information is unable to update.Because the status is Done</string>
+    <string name="house_done">This house Information is unable for Active Building</string>
 
     <string name="house_status_pending">This House is already visited</string>
     <string name="referraldialog"> যার মাধ্যমে আপনার এখানে আসা, তার মোবাইল নাম্বারটি লিখুন</string>

@@ -463,7 +463,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                             FBuildings fBuildings = documentSnapshot.toObject(FBuildings.class);
                             String status = fBuildings.getStatus();
 
-                            if (status.equalsIgnoreCase("Done")) {
+                            if (status.equalsIgnoreCase("Building Active")) {
                                 shoeAlertforPendingHouse();
                             } if (status.equalsIgnoreCase("Meeting Pending")) {
                                 shoeAlertforPendingHouse();

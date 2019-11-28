@@ -198,7 +198,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
                     String status=fBuildings.getStatus().toString();
 
-                    if (status.equalsIgnoreCase("Done")){
+                    if (status.equalsIgnoreCase("Building Active")){
                         updateInfo_Button.setVisibility(View.GONE);
                         //Toast.makeText(UpdateBldngInfoActivity.this, "You can not update the building Info", Toast.LENGTH_SHORT).show();
                         showMessageAlertDialogue();

@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                         //if (getApplicationContext()!=null){
 
-                                            /*if (usertoken != null && !usertoken.contains(utoken)  ) {
+                                            if (usertoken != null && !usertoken.contains(utoken)  ) {
                                                 String logID= db.collection(getString(R.string.col_loginsession)).document().getId();
                                                 LogSession logSession= new LogSession(logID,userId,utoken,"FieldWork", Calendar.getInstance().getTime());
                                                 db.collection(getString(R.string.col_loginsession)).document(logID).set(logSession)
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                                             }
                                                         });
-                                            }*/
+                                            }
                                         //}
 
 
