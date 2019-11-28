@@ -189,7 +189,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.gender);
 
 
-        db.collection("area").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection(getString(R.string.col_area)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 areaList.clear();
@@ -856,6 +856,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
     private void stayAtMainActvity() {
         Intent intent= new Intent(FworkerProfileActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
 

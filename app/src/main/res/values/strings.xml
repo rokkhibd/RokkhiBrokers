@@ -30,4 +30,6 @@
     <string name="col_GuardTrainerTrack">guardTrainerTrack</string>
     <string name="col_guards">guards</string>
     <string name="end_train"> আপনি কি গার্ড  ট্রেইনিং এর সমাপ্ত ঘটাতে চাচ্ছেন ?</string>
+    <string name="col_area">area</string>
+    <string name="col_district">district</string>
 </resources>

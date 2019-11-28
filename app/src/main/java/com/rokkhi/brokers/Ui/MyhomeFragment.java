@@ -91,7 +91,7 @@ public class MyhomeFragment extends Fragment {
 
     TextView f_name;
     ProgressBar profile_progressBar,spinKitProgress;
-   FirebaseAuth.AuthStateListener mAuthListener;
+     FirebaseAuth.AuthStateListener mAuthListener;
 
     private static final String TAG = "xxx";
     RelativeLayout mrootview;
@@ -140,9 +140,10 @@ public class MyhomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         fBuildingsList=new ArrayList<>();
-        getfirstdata();
 
         spinKitProgress.setVisibility(View.VISIBLE);
+        getfirstdata();
+        spinKitProgress.setVisibility(View.INVISIBLE);
 
 //      shoWorkerDetails();
 
@@ -156,27 +157,7 @@ public class MyhomeFragment extends Fragment {
 
             }
         });
-/*
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //mAuth.signOut();
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Logout")
-                        .setIcon(R.drawable.logout_black)
-                        .setMessage("Are you sure you want to logout?")
-                        .setNegativeButton(android.R.string.no, null)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                normalfunc.removeTokenId();
-                                mAuth.signOut();
 
-                            }
-
-                        }).create().show();
-            }
-        });*/
     }
 
     private void checkUserExistence(FragmentActivity activity) {
@@ -388,55 +369,7 @@ public class MyhomeFragment extends Fragment {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RC_SIGN_IN) {
-            handleSignInResponse(resultCode, data);
-        }
-    }
-
-    private void handleSignInResponse(int resultCode, Intent data) {
-        IdpResponse response = IdpResponse.fromResultIntent(data);
-
-        if (resultCode == RESULT_OK) {
-            Log.d(TAG, "handleSignInResponse: checkhere ");
-            Log.d(TAG, "handleSignInResponse: jjj " + FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
-
-        } else {
-            if (response == null) {
-                showSnackbar(R.string.sign_in_cancelled);
-                return;
-            }
-            if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                showSnackbar(R.string.no_internet_connection);
-                return;
-            }
-            if (response.getError().getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                showSnackbar(R.string.unknown_error);
-                return;
-            }
-        }
-
-    }
-
-    private void showSnackbar(int errorMessageRes) {
-        Snackbar.make(mrootview, errorMessageRes, Snackbar.LENGTH_LONG).show();
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-       // mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-       // mAuth.removeAuthStateListener(mAuthListener);
-    }
 
 
 

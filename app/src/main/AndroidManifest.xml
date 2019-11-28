@@ -26,6 +26,8 @@
         <activity android:name=".Ui.NoticeActivity" />
         <activity android:name=".Ui.PaymentHistoryActivity" />
         <activity android:name=".Ui.MyHomeActivity" />
+        <activity android:name=".Ui.AddBuildingActivity"/>
+        <activity android:name=".Ui.UpdateBldngInfoActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

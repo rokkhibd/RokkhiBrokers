@@ -1122,7 +1122,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         districtListView = rowList.findViewById(R.id.listview);
         districtEdit = rowList.findViewById(R.id.search_edit);
 
-        db.collection("district").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 districtList.clear();
