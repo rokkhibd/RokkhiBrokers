@@ -24,7 +24,7 @@
             android:layout_marginRight="10dp"
             android:id="@id/txt"
             android:textColor="@color/orange"
-            android:textSize="17sp"
+            android:textSize="20sp"
             android:gravity="center_horizontal"
             android:text="@string/house_done"
             android:layout_width="match_parent"

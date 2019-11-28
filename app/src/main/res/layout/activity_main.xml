@@ -144,8 +144,10 @@
                     android:gravity="center">
 
                     <ImageView
+
+                        android:paddingTop="10dp"
                         android:id="@+id/visitor"
-                        android:layout_width="60dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:layout_margin="5dp"
                         android:layout_centerHorizontal="true"
@@ -153,11 +155,17 @@
                         />
 
 
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
                         android:layout_below="@+id/visitor"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Buildings"
                         android:layout_marginBottom="10dp"
@@ -165,6 +173,19 @@
                         android:textStyle="bold"
 
                         />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/visitorcount"
+                            android:text=" (2)"
+                            android:textStyle="bold"
+                            android:textColor="@color/link_blue"
+                            android:visibility="gone"
+                            />
+                    </LinearLayout>
+
+
 
                 </RelativeLayout>
 
@@ -180,6 +201,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:paddingTop="10dp"
                         android:id="@+id/parcel"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -214,6 +236,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:paddingTop="10dp"
                         android:id="@+id/whitelist"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -264,6 +287,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:paddingTop="10dp"
                         android:id="@+id/notice"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -301,6 +325,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:paddingTop="10dp"
                         android:id="@+id/family"
                         android:layout_width="60dp"
                         android:layout_height="60dp"

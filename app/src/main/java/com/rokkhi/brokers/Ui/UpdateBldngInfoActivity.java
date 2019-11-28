@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -200,7 +201,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     if (status.equalsIgnoreCase("Done")){
                         updateInfo_Button.setVisibility(View.GONE);
                         //Toast.makeText(UpdateBldngInfoActivity.this, "You can not update the building Info", Toast.LENGTH_SHORT).show();
-                       // showMessageAlertDialogue();
+                        showMessageAlertDialogue();
 
                     }
 
@@ -251,10 +252,11 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 statusList.clear();
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     String status = documentSnapshot.getString("status_type");
+                    statusList.add(status);
 
-                    if (!status.equalsIgnoreCase("Done")){
-                        statusList.add(status);
-                    }
+                    /*if (!status.equalsIgnoreCase("Done")){
+
+                    }*/
 
                     //statusList.add(status);
                 }
@@ -289,10 +291,10 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     private void updateBuildingInfo() {
 
         WriteBatch batch = db.batch();
-
+        String update_bstatus = building_status.getText().toString();
         String update_address = house_address.getText().toString();
         String update_houseName = house_name.getText().toString();
-        //String update_followdate=followup_date.getText().toString();
+        String update_followdate=followup_date.getText().toString();
 
         ArrayList<String> b_array = new ArrayList<>(normalfunc.splitchar(update_houseName));
 
@@ -303,6 +305,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         map.put("housename", update_houseName);
         map.put("b_array", b_array);
         map.put("updated_at", date);
+        map.put("status",update_bstatus);
 
         docRef.set(map, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -328,24 +331,29 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
     }
 
-    /*private void getThePeoplesInfo() {
+    public void showMessageAlertDialogue(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(UpdateBldngInfoActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.status_done_layout, null);
 
-        db.collection(getString(R.string.col_fBbuildingContacts)).whereEqualTo("b_code", fBuildings.getB_code()).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                            FBPeople fbPeople = documentSnapshot.toObject(FBPeople.class);
-                            Log.e("xxxx", fbPeople.getDesignation());
-                            Log.e("xxxx", fbPeople.getName());
-                            Log.e("xxxx", fbPeople.getNumber());
+        Button btn = view.findViewById(R.id.btn);
+        TextView txt = view.findViewById(R.id.txt);
+        alert.setView(view);
 
+        final AlertDialog alertDialog1 = alert.create();
+        alertDialog1.setCanceledOnTouchOutside(false);
+        alertDialog1.show();
 
-                        }
-                    }
-                });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    }*/
+                alertDialog1.dismiss();
+                Intent intent=new Intent(UpdateBldngInfoActivity.this,MyHomeActivity.class);
+                startActivity(intent);
+                //relativeLayout.setVisibility(View.GO);
+            }
+        });
+    }
 
 
     public void saveImageToStorage() {
