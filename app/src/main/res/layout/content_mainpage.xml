@@ -499,7 +499,7 @@
                 android:orientation="horizontal"
                 android:layout_below="@+id/referal_text"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="10dp"
                 android:weightSum="2">
 
 
@@ -587,6 +587,116 @@
 
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/bonus_earntxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bonus Earning"
+                android:layout_below="@+id/lin4"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/orange"
+                />
+
+            <LinearLayout
+                android:id="@+id/lin5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/bonus_earntxt"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:weightSum="2">
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/visitorrelone"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/bonus_earning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/bonus_earning"
+                        android:layout_centerHorizontal="true"
+                        android:text="Bonus earning"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/bonus_due_earningrel"
+                    android:background="@drawable/round_background_white"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/bonus_due_earning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/bonus_due_earning"
+                        android:layout_centerHorizontal="true"
+                        android:text="Due Bonus earning"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
 
 
 

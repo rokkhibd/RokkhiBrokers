@@ -6,6 +6,9 @@ public class FPayments {
 
     private int total_earning=0;
     private int due_earning=0;
+    private int bonus_earning=0;
+    private int due_bonus_earning=0;
+
     private int total_buildings=0;//onetime
     private int active_buildings=0;//monthly
     private int due_buildings=0;
@@ -28,12 +31,14 @@ public class FPayments {
 
     }
 
-    public FPayments(String user_id, String ref_id, String fw_phone, int total_earning, int due_earning, int total_buildings, int active_buildings, int due_buildings, String bkash_no, String nogod_no, Date created_at, Date updated_at, Date working_from, int total_meeting, int due_meeting, int total_referral, int due_referral) {
+    public FPayments(String user_id, String ref_id, String fw_phone, int total_earning, int due_earning,int bonus_earning,int due_bonus_earning, int total_buildings, int active_buildings, int due_buildings, String bkash_no, String nogod_no, Date created_at, Date updated_at, Date working_from, int total_meeting, int due_meeting, int total_referral, int due_referral) {
         this.user_id = user_id;
         this.ref_id = ref_id;
         this.fw_phone = fw_phone;
         this.total_earning = total_earning;
         this.due_earning = due_earning;
+        this.bonus_earning=bonus_earning;
+        this.due_bonus_earning=due_bonus_earning;
         this.total_buildings = total_buildings;
         this.active_buildings = active_buildings;
         this.due_buildings = due_buildings;
@@ -46,6 +51,23 @@ public class FPayments {
         this.due_meeting = due_meeting;
         this.total_referral = total_referral;
         this.due_referral = due_referral;
+    }
+
+
+    public int getBonus_earning() {
+        return bonus_earning;
+    }
+
+    public void setBonus_earning(int bonus_earning) {
+        this.bonus_earning = bonus_earning;
+    }
+
+    public int getDue_bonus_earning() {
+        return due_bonus_earning;
+    }
+
+    public void setDue_bonus_earning(int due_bonus_earning) {
+        this.due_bonus_earning = due_bonus_earning;
     }
 
     public String getUser_id() {

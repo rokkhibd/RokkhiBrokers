@@ -363,7 +363,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showAvailableRoads();
-                //showAddressAlert(Arrays.asList(allStringValues.road_no),b_roadnumber);
+
             }
         });
 
@@ -472,6 +472,8 @@ public class AddBuildingActivity extends AppCompatActivity {
                             } if (status.equalsIgnoreCase("Followup")){
                                 shoeAlertforPendingHouse();
                             } if (status.equalsIgnoreCase("Meeting Done")){
+                                shoeAlertforPendingHouse();
+                            }if (status.equalsIgnoreCase("Meeting Rejected")){
                                 shoeAlertforPendingHouse();
                             }
                             progressDialog.dismiss();
