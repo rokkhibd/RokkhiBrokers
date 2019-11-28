@@ -32,47 +32,46 @@
                     android:src="@drawable/logo" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/logout_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/logout" />
+                    android:src="@drawable/logout"
+                    android:visibility="gone" />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="10dp"
-        tools:listitem="@layout/item_guardtrack_list"
-        android:layout_below="@id/appbar"
         android:id="@+id/guard_track_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appbar"
+        android:layout_margin="10dp"
+        tools:listitem="@layout/item_guardtrack_list" />
 
 
     <TextView
         android:id="@+id/text"
-        android:layout_margin="10dp"
-        android:layout_below="@id/guard_track_recycler"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/guard_track_recycler"
+        android:layout_margin="10dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/guard_floatingbtn"
-        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
         android:src="@drawable/plus"
-        app:fabSize="normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:fabSize="normal" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/spin_kit"
         style="@style/SpinKitView.Large.Wave"
         android:layout_width="50dp"

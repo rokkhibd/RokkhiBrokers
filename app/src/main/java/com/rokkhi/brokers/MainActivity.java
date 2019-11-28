@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPref.edit();
 
+
         buldng_rel=findViewById(R.id.buildngs_relative);
         payment_rel=findViewById(R.id.payment_relative);
         notice_rel=findViewById(R.id.notice_relative);
