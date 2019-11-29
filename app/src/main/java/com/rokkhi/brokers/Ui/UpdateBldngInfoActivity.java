@@ -252,11 +252,12 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 statusList.clear();
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     String status = documentSnapshot.getString("status_type");
-                    statusList.add(status);
+                    //statusList.add(status);
 
-                    /*if (!status.equalsIgnoreCase("Done")){
+                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done")){
+                        statusList.add(status);
+                    }
 
-                    }*/
 
                     //statusList.add(status);
                 }
