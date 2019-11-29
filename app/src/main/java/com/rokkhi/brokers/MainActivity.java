@@ -34,6 +34,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.mf.library.OnCallBack;
+import com.mf.library.UpdateChecker;
 import com.rokkhi.brokers.Model.FWorkers;
 import com.rokkhi.brokers.Model.LogSession;
 import com.rokkhi.brokers.Model.Users;
@@ -87,6 +89,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //update Checker start
+
+
+        new UpdateChecker(this)
+                .setUpdateLabel("Update") // optional - this to edit update button (default is "Update NOW")
+                .setRemindLabel("Remind me") // optional - this to edit remind button (default is "Remind me later")
+                .setRemindDays(2) //optional app remind user every 2 days (default is everyday)
+                .setForceCloseOnSkip(true) //optional user will choose update or close app
+                .setOnCallBack(new OnCallBack() {     //optional Callback to implement your own custom logic it
+                    @Override
+                    public boolean Done(boolean success, boolean isUpdateAvailable, String new_version) {
+                        System.out.println("is success=" + success + " is update available=" + isUpdateAvailable + " new version is" + new_version);
+
+                        //return true will show default library dialog if new version available
+                        // and false will hide the dialog
+
+                        return true;
+                    }
+                }).checkUpdate();
+
+        //start app update checker
+
+        UpdateChecker.clearReminder(this); // if you setRemindDays and want to clear cache to appear everyday again
+
+
+
+        //update Checker End
+
         db=FirebaseFirestore.getInstance();
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
@@ -130,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int which) {
                                 normalfunc.removeTokenId();
                                 mAuth.signOut();
+
                             }
 
                         }).create().show();
@@ -204,6 +235,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 
     }
+
+
 
 
     public void getUsersData(){
@@ -360,7 +393,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showSnackbar(int errorMessageRes) {
-        Snackbar.make(mrootview, errorMessageRes, Snackbar.LENGTH_LONG).show();
+        if (mrootview!=null){
+
+            Snackbar.make(mrootview, errorMessageRes, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override

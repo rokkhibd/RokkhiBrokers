@@ -102,7 +102,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     FirebaseStorage firebaseStorage;
     StorageReference storageRef;
     FirebaseUser currentUser;
-    String userId, downloadImageUri="";
+    String userId, downloadImageUri = "";
 
     DatePickerDialog datePickerDialog;
     CircleImageView circleImageView;
@@ -125,20 +125,21 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        context= FworkerProfileActivity.this;
-        normalfunc= new Normalfunc(context);
+        context = FworkerProfileActivity.this;
+        normalfunc = new Normalfunc(context);
         // storageRef = FirebaseStorage.getInstance().getReference().child("fworkers_photo");
 
 
-
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (currentUser!=null){
+        if (currentUser == null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        } else {
             userId = currentUser.getUid();
         }
 
 
-        storageRef=FirebaseStorage.getInstance().getReference()
+        storageRef = FirebaseStorage.getInstance().getReference()
                 .child("users/" + userId + "/pic");
 
 
@@ -193,20 +194,26 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.gender);
 
 
+
         db.collection(getString(R.string.col_area)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 areaList.clear();
 
-                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                if (queryDocumentSnapshots!=null){
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-                    String area_eng = documentSnapshot.getString("english");
-                    String area_ban = documentSnapshot.getString("bangla");
+                        String area_eng = documentSnapshot.getString("english");
+                        String area_ban = documentSnapshot.getString("bangla");
 
-                    areaList.add(area_eng + "(" + area_ban + ")");
+                        areaList.add(area_eng + "(" + area_ban + ")");
+
+
+
+                    }
+
 
                 }
-
 
             }
         });
@@ -218,11 +225,11 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
                 spinKitProgressBar.setVisibility(View.VISIBLE);
 
 
-                if (pickedImageUri==null){
+                if (pickedImageUri == null) {
 
                     saveAllDataToFirestore();
 
-                }else {
+                } else {
 
                     saveImageToStorage();
 
@@ -523,6 +530,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
 
     }
+
     private void showAvailableRoadLetter() {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
@@ -693,7 +701,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             List<String> atoken = fWorkers.getAtoken();
             List<String> itoken = fWorkers.getItoken();
 
-            fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date,false, u_array, atoken, itoken);
+            fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
             db.collection("fWorkers").document(userId)
                     .set(fWorkers)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -763,7 +771,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         String fw_bkash = f_bkash.getText().toString();
         String fw_nogod = "";
 
-        fPayments = new FPayments(userId, "", fw_phone, 0, 0, 0,0,0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
+        fPayments = new FPayments(userId, "", fw_phone, 0, 0, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
 
         db.collection("fPayment").document(userId).set(fPayments).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -859,8 +867,8 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     }
 
     private void stayAtMainActvity() {
-        Intent intent= new Intent(FworkerProfileActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent intent = new Intent(FworkerProfileActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
 
