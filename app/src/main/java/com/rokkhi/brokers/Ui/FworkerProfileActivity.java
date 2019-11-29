@@ -132,7 +132,11 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        userId = currentUser.getUid();
+
+        if (currentUser!=null){
+            userId = currentUser.getUid();
+        }
+
 
         storageRef=FirebaseStorage.getInstance().getReference()
                 .child("users/" + userId + "/pic");
