@@ -260,7 +260,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (users.getThumb()!=null){
                         if(!users.getThumb().isEmpty() && !users.getThumb().equals("none")){
 
-                            Glide.with(getApplicationContext()).load(users.getThumb()).error(R.drawable.error_icon).into(userPic);
+                            Glide.with(getApplicationContext()).load(users.getThumb())
+                                    .error(R.drawable.error_icon).into(userPic);
+                            userPic.setRotation(90f);
 
                         }
                     }

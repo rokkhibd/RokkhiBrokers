@@ -213,6 +213,8 @@ public class ProfileFragment extends Fragment {
                                 if(!users.getThumb().isEmpty() && !users.getThumb().equals("none")){
 
                                     Glide.with(context).load(users.getThumb()).error(R.drawable.error_icon).into(propic);
+
+                                    propic.setRotation(90f);
                                 }
 
                             }
