@@ -193,7 +193,7 @@
           <EditText
               android:focusableInTouchMode="false"
               android:paddingLeft="5dp"
-              android:hint="letter"
+              android:hint="house text"
               android:id="@+id/bldng_edit_houseformat"
               android:layout_toRightOf="@id/bldng_edit_house"
               android:layout_marginTop="10dp"

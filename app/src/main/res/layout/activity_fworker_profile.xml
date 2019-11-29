@@ -172,7 +172,7 @@
             android:layout_toRightOf="@id/fworker_address_housenmbr"
             android:background="@drawable/round_edittext2"
             android:focusableInTouchMode="false"
-            android:hint="block"
+            android:hint="house text"
             android:paddingLeft="10dp" />
 
         <EditText

@@ -35,6 +35,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -61,6 +62,7 @@ import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 import com.vansuita.pickimage.listeners.IPickResult;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,9 +81,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     ProgressBar progressBar;
 
-
     RelativeLayout relativeLayout;
-
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
@@ -218,7 +218,11 @@ public class AddBuildingActivity extends AppCompatActivity {
 
                 if (pickedImageUri == null) {
                    // Toast.makeText(AddBuildingActivity.this, "No Image", Toast.LENGTH_SHORT).show();
-                    saveBuildingDataInDB();
+                    try {
+                        saveBuildingDataInDB();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                   //  Toast.makeText(AddBuildingActivity.this, "Image", Toast.LENGTH_SHORT).show();
 
@@ -643,7 +647,6 @@ public class AddBuildingActivity extends AppCompatActivity {
                     // Toast.makeText(AddBuildingActivity.this, roadListCode, Toast.LENGTH_SHORT).show();
                 }
 
-
                 dialog.dismiss();
             }
         });
@@ -755,7 +758,6 @@ public class AddBuildingActivity extends AppCompatActivity {
                     houseListCode = "0";
 
                 } else {
-
                     houseListCode = houseno;
                     b_housenmbr.setText(houseno);
                 }
@@ -792,7 +794,6 @@ public class AddBuildingActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 AddBuildingActivity.this.adapter.getFilter().filter(s);
-
             }
 
             @Override
@@ -854,7 +855,11 @@ public class AddBuildingActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             downloadImageUri = task.getResult().toString();
-                            saveBuildingDataInDB();
+                            try {
+                                saveBuildingDataInDB();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 });
@@ -863,7 +868,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     }
 
-    public void saveBuildingDataInDB() {
+    public void saveBuildingDataInDB() throws ParseException {
 
         if (b_totalfloor.length() == 0) {
             b_totalfloor.setError("Insert total floor");
@@ -890,7 +895,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             districtValue = b_district.getText().toString();
             status = b_status.getText().toString();
 
-            String theWholeAddress = area + " " + road + block + " " + houseNmbr + housefrmt + " " + districtValue;
+            String theWholeAddress = area + " " + road +""+block +" "+ houseNmbr +""+ housefrmt + " " + districtValue;
 
             wholeAddress = theWholeAddress;
 
@@ -925,8 +930,14 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             FWorkerBuilding fWorkerBuilding=new FWorkerBuilding(build_id,fWorkersDocID, currentUserID,status,date,date,totalCode);
 
+//            normalfunc.getTimestampFromDate(date);
+            String date1 = b_follwing.getText().toString();
+
+            Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+            Log.d("TAG", "saveBuildingDataInDB: "+date2);
+
             fBuildings = new FBuildings(build_id, wholeAddress, totalCode, houseNmbr, road, districtValue, area, flatformat,
-                    flatperFloor, date, housename, totlflr, date, date, status, "Pending", imageurl, code_array, 0, 0);
+                    flatperFloor, date2, housename, totlflr, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), status, "Pending", imageurl, code_array, 0, 0);
 
             WriteBatch batch=db.batch();
 
@@ -990,8 +1001,8 @@ public class AddBuildingActivity extends AppCompatActivity {
             b_peoplesName.setError("Insert the name");
             b_peoplesName.requestFocus();
         }
-        if (b_peopleNumber.length()==0){
-            b_peopleNumber.setError("Insert the mobile number");
+        if (b_peopleNumber.getText().toString().length()<=10){
+            b_peopleNumber.setError("Insert the valid mobile number");
             b_peopleNumber.requestFocus();
         }else {
             String design_type = people_we_talk.getText().toString();
