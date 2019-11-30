@@ -217,6 +217,7 @@ public class ProfileFragment extends Fragment {
                                     propic.setRotation(90f);
                                 }
 
+
                             }
                             mailid.setText(users.getMail());
                             joiningDate.setText(normalfunc.getDateMMMdyyyy(users.getJoindate()));
