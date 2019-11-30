@@ -53,6 +53,7 @@ import com.rokkhi.brokers.Model.AllStringValues;
 import com.rokkhi.brokers.Model.FBPeople;
 import com.rokkhi.brokers.Model.FBuildings;
 import com.rokkhi.brokers.Model.FWorkerBuilding;
+import com.rokkhi.brokers.Model.FWorkers;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
 import com.rokkhi.brokers.Utils.StringAdapter;
@@ -194,6 +195,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         allStringValues = new AllStringValues();
 
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.status);
         //b_status.setAdapter(adapter);
 
@@ -209,26 +211,25 @@ public class AddBuildingActivity extends AppCompatActivity {
         //TODO: get the current date
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         currentDate = sdf.format(new Date());
-        //Toast.makeText(AddBuildingActivity.this, currentDate, Toast.LENGTH_SHORT).show();
 
         addInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 progressBar.setVisibility(View.VISIBLE);
 
                 if (pickedImageUri == null) {
-                   // Toast.makeText(AddBuildingActivity.this, "No Image", Toast.LENGTH_SHORT).show();
                     try {
                         saveBuildingDataInDB();
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 } else {
-                  //  Toast.makeText(AddBuildingActivity.this, "Image", Toast.LENGTH_SHORT).show();
-
                     saveImageToStorage();
-
                 }
+
+
 
             }
         });
@@ -401,42 +402,66 @@ public class AddBuildingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (b_area.length() == 0) {
-                    b_area.setError("Insert the area name");
-                } else if (b_roadnumber.length() == 0) {
-                    b_roadnumber.setError("Insert the road number");
-                } else if (b_block.length() == 0) {
-                    b_block.setError("Insert the block number");
-                } else if (b_district.length() == 0) {
-                    b_block.setError("Insert the District number");
-                } else {
+                db.collection(getString(R.string.col_fWorkers)).document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot doc=task.getResult();
 
-                    String area = b_area.getText().toString();
-                    String road = b_roadnumber.getText().toString();
-                    String block = b_block.getText().toString();
-                    String houseNmbr = b_housenmbr.getText().toString();
-                    String housefrmt = b_housefrmt.getText().toString();
-                    districtValue = b_district.getText().toString();
+                            FWorkers fWorkers=task.getResult().toObject(FWorkers.class);
+
+                            boolean train=fWorkers.isTrained();
+
+                            //Check if the guard is trained or not while adding building
+                            if (train==false){
+                                checkTrainOrNot();
+                            }else {
+
+                                if (b_area.length() == 0) {
+                                    b_area.setError("Insert the area name");
+                                } else if (b_roadnumber.length() == 0) {
+                                    b_roadnumber.setError("Insert the road number");
+                                } else if (b_block.length() == 0) {
+                                    b_block.setError("Insert the block number");
+                                } else if (b_district.length() == 0) {
+                                    b_block.setError("Insert the District number");
+                                } else {
+
+                                    String area = b_area.getText().toString();
+                                    String road = b_roadnumber.getText().toString();
+                                    String block = b_block.getText().toString();
+                                    String houseNmbr = b_housenmbr.getText().toString();
+                                    String housefrmt = b_housefrmt.getText().toString();
+                                    districtValue = b_district.getText().toString();
 
 
-                    String theWholeAddress = area + " " + road + block + " " + houseNmbr + housefrmt + " " + districtValue;
+                                    String theWholeAddress = area + " " + road + block + " " + houseNmbr + housefrmt + " " + districtValue;
 
-                    wholeAddress = theWholeAddress;
+                                    wholeAddress = theWholeAddress;
 
-                    districtValue = String.valueOf(1);
+                                    districtValue = String.valueOf(1);
 
-                    //Toast.makeText(AddBuildingActivity.this, districtValue, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(AddBuildingActivity.this, districtValue, Toast.LENGTH_SHORT).show();
 
-                    totalCode = areaCodeList.get(areaCodePos) + "*" + roadListCode + "*" + blockListCode + "*" + houseListCode + "*" + housefrmntListCode + "*" + districtCodeList.get(districtCodePos);
+                                    totalCode = areaCodeList.get(areaCodePos) + "*" + roadListCode + "*" + blockListCode + "*" + houseListCode + "*" + housefrmntListCode + "*" + districtCodeList.get(districtCodePos);
 
-                   // Toast.makeText(AddBuildingActivity.this, "" + totalCode, Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(AddBuildingActivity.this, "" + totalCode, Toast.LENGTH_SHORT).show();
 
 
-                    totalHouseCode = areaListCode + "" + roadListCode + "" + blockListCode + "" + houseListCode + "" + housefrmntListCode + "" + districtValue;
+                                    totalHouseCode = areaListCode + "" + roadListCode + "" + blockListCode + "" + houseListCode + "" + housefrmntListCode + "" + districtValue;
 
-                    //b_code.setText(totalHouseCode);
-                    checkTheHouseAvailability(totalCode);
-                }
+                                    //b_code.setText(totalHouseCode);
+                                    checkTheHouseAvailability(totalCode);
+                                }
+
+
+                            }
+                        }
+                    }
+                });
+
+
+
 
             }
         });
@@ -1267,4 +1292,29 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         });
     }
+
+    public void checkTrainOrNot(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(AddBuildingActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.trained_untrained_layout, null);
+
+        Button btn = view.findViewById(R.id.btn);
+        TextView txt = view.findViewById(R.id.txt);
+        alert.setView(view);
+
+        final AlertDialog alertDialog1 = alert.create();
+        alertDialog1.setCanceledOnTouchOutside(false);
+        alertDialog1.show();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog1.dismiss();
+                Intent intent=new Intent(AddBuildingActivity.this,MyHomeActivity.class);
+                startActivity(intent);
+                //relativeLayout.setVisibility(View.GO);
+            }
+        });
+    }
+
 }

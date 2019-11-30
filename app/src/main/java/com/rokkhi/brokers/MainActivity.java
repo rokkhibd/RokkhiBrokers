@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+
 import com.mf.library.OnCallBack;
 import com.mf.library.UpdateChecker;
 import com.rokkhi.brokers.Model.FWorkers;
@@ -260,9 +261,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (users.getThumb()!=null){
                         if(!users.getThumb().isEmpty() && !users.getThumb().equals("none")){
 
-                            Glide.with(getApplicationContext()).load(users.getThumb())
+                            Glide.with(getApplicationContext()).load(users.getThumb()).fitCenter()
                                     .error(R.drawable.error_icon).into(userPic);
-                            userPic.setRotation(90f);
+                            //userPic.setRotation(90f);
 
                         }
                     }

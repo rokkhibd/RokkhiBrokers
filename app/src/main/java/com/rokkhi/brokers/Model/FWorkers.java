@@ -20,6 +20,7 @@ public class FWorkers {
 
 
     public FWorkers() {
+
     }
 
     public FWorkers(String user_id, String fw_nid, String fw_phone, String fw_university, String fw_address, Date created_at, Date updated_at, boolean trained, List<String> u_array, List<String> atoken, List<String> itoken) {

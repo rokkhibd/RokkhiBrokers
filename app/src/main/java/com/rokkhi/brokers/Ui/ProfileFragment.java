@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
     CircleImageView propic;
     TextView name,mailid,joiningDate;
     Button bkashno;
-    TextView tearning,dearning,tref,dref,tmeeting,dmeeting,tbuilding,dbuilding,abuilding;
+    TextView tearning,dearning,tref,dref,tmeeting,dmeeting,tbuilding,dbuilding,abuilding,bonusearning,dbonusearing;
     FirebaseFirestore firebaseFirestore;
 
     Context context;
@@ -95,6 +95,8 @@ public class ProfileFragment extends Fragment {
         tbuilding=view.findViewById(R.id.total_building);
         dbuilding=view.findViewById(R.id.due_building);
         abuilding=view.findViewById(R.id.active_building);
+        bonusearning=view.findViewById(R.id.bonus_earning);
+        dbonusearing=view.findViewById(R.id.bonus_due_earning);
         userid= FirebaseAuth.getInstance().getUid();
 
         normalfunc= new Normalfunc(context);
@@ -212,9 +214,9 @@ public class ProfileFragment extends Fragment {
                             if (users.getThumb()!=null){
                                 if(!users.getThumb().isEmpty() && !users.getThumb().equals("none")){
 
-                                    Glide.with(context).load(users.getThumb()).error(R.drawable.error_icon).into(propic);
+                                    Glide.with(context).load(users.getThumb()).fitCenter().error(R.drawable.error_icon).into(propic);
 
-                                    propic.setRotation(90f);
+                                    //propic.setRotation(90f);
                                 }
 
 
@@ -244,6 +246,8 @@ public class ProfileFragment extends Fragment {
 
                         tearning.setText(String.valueOf(fPayments.getTotal_earning()));
                         dearning.setText(String.valueOf(fPayments.getDue_earning()));
+                        bonusearning.setText(String.valueOf(fPayments.getBonus_earning()));
+                        dbonusearing.setText(String.valueOf(fPayments.getDue_bonus_earning()));
                         tref.setText(String.valueOf(fPayments.getTotal_referral()));
                         dref.setText(String.valueOf(fPayments.getDue_referral()));
                         tmeeting.setText(String.valueOf(fPayments.getTotal_meeting()));

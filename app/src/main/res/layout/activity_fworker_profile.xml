@@ -151,7 +151,7 @@
         <EditText
             android:id="@+id/fworker_address_housenmbr"
             android:layout_width="100dp"
-            android:layout_height="38dp"
+            android:layout_height="45dp"
             android:layout_below="@id/housetxt"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
@@ -164,7 +164,7 @@
         <EditText
             android:id="@+id/fworker_address_roadletter"
             android:layout_width="100dp"
-            android:layout_height="38dp"
+            android:layout_height="45dp"
             android:layout_below="@id/housetxt"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"

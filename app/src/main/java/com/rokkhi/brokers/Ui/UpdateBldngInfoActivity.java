@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -193,7 +194,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     flat_floor.setText(String.valueOf(fBuildings.getFlatperfloor()));
                     house_address.setText(fBuildings.getB_address());
                     flat_format.setText(fBuildings.getFlatformat());
-                    Glide.with(UpdateBldngInfoActivity.this).load(fBuildings.getB_imageUrl().get(0)).fitCenter().placeholder(R.drawable.building).into(houseImage);
+
+                    Glide.with(UpdateBldngInfoActivity.this).load(fBuildings.getB_imageUrl()).placeholder(R.drawable.building).into(houseImage);
 
 
                     String status=fBuildings.getStatus().toString();
@@ -333,6 +335,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     }
 
     public void showMessageAlertDialogue(){
+
         AlertDialog.Builder alert = new AlertDialog.Builder(UpdateBldngInfoActivity.this);
         View view = getLayoutInflater().inflate(R.layout.status_done_layout, null);
 
