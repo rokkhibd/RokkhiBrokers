@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,7 +52,7 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
     IntentIntegrator qrScan;
     TextView txt;
     FusedLocationProviderClient client;
-    String late, lang;
+    Double late, lang;
     private AirLocation airLocation;
     Double lat,lng;
 
@@ -146,8 +148,8 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
 
                 if (location != null) {
 
-                    late = String.valueOf(location.getLatitude());
-                    lang = String.valueOf(location.getLongitude());
+                    late = location.getLatitude();
+                    lang = location.getLongitude();
                 }
 
             }
@@ -168,13 +170,26 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
                     Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
                 }else {
 
-
                     String string=result.getContents().toString();
 
-                    String[] parts=string.split("-");
-                    build_id=parts[0];
-                    guard_id=parts[1];
-                    saveScandataToDB();
+                    if (string.length()!=41){
+                        Toast.makeText(this, "QR code is not valid", Toast.LENGTH_SHORT).show();
+                    }else {
+                        String[] parts=string.split("-");
+
+                        build_id=parts[0];
+                        guard_id=parts[1];
+
+                        Log.e("TAG","build_id: "+build_id);
+                        Log.e("TAG","guard_id: "+guard_id);
+
+                        saveScandataToDB();
+
+                    }
+
+
+                    //saveScandataToDB();
+
                 }
             }
         }

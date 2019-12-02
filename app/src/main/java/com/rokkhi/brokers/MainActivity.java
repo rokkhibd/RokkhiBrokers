@@ -157,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profile_rel.startAnimation(mainPageAnim);
         guard_rel.startAnimation(mainPageAnim);
 
+        //gotoFworkerActivty();
+
         checkuserExistence();
 
         logout.setOnClickListener(new View.OnClickListener() {

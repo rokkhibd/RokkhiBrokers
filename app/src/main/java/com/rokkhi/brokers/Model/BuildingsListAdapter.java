@@ -75,7 +75,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                         holder.build_address.setText(fb.getB_address());
                         holder.build_name.setText(fb.getHousename());
                         holder.build_status.setText(fb.getStatus());
-                        holder.build_lastVisit.setText(Normalfunc.convertDate(fb.getFollowupdate()));
+                        holder.build_lastVisit.setText(Normalfunc.convertDate(fb.getCreated_at()));
                     }
                 }
             }
@@ -114,6 +114,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
             build_address=itemView.findViewById(R.id.myhome_frag_bldngAddress);
             build_status=itemView.findViewById(R.id.myhome_frag_bldngstatus);
             build_lastVisit=itemView.findViewById(R.id.myhome_frag_bldngvisitdate);
+
             item_list_id=itemView.findViewById(R.id.item_list_id);
             itemView.setOnClickListener(this);
 

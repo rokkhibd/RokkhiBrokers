@@ -5,9 +5,11 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,7 +31,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -73,11 +78,16 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import mumayank.com.airlocationlibrary.AirLocation;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class AddBuildingActivity extends AppCompatActivity {
 
     AllStringValues allStringValues;
     ArrayAdapter<String> adapter;
+    private AirLocation airLocation;
+    FusedLocationProviderClient client;
 
     ProgressDialog progressDialog;
     ProgressBar progressBar;
@@ -110,6 +120,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     String areaListCode, roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, status, flatformat, districtValue, downloadImageUri, totalCode;
 
     String wholeAddress, currentDate;
+    Double lat,lan;
 
     ImageView visitCal, followpCal, statusMenu, flatfrmtMenu, district_Menu, designationMenu;
 
@@ -145,9 +156,11 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         docref_FWorkersBuildings = db.collection(getString(R.string.col_fWorkerBuilding)).document();
 
-        //addbldngRef = FirebaseStorage.getInstance().getReference().child("fbldngs_photo");
         addbldngRef = FirebaseStorage.getInstance().getReference()
                 .child("fBuildings/" + currentUserID + "/pic");
+
+        client = LocationServices.getFusedLocationProviderClient(this);
+        getTheLatLang();
 
         fbPeople = new FBPeople();
         fBuildings = new FBuildings();
@@ -194,6 +207,19 @@ public class AddBuildingActivity extends AppCompatActivity {
         designationMenu = findViewById(R.id.choosePeopleMenu);
 
         allStringValues = new AllStringValues();
+
+        airLocation = new AirLocation(this, true, true, new AirLocation.Callbacks() {
+            @Override
+            public void onSuccess(Location location) {
+               // lat = location.getLatitude();
+                //lng = location.getLongitude();
+            }
+
+            @Override
+            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+                // do something
+            }
+        });
 
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.status);
@@ -417,13 +443,13 @@ public class AddBuildingActivity extends AppCompatActivity {
                                 checkTrainOrNot();
                             }else {
 
-                                if (b_area.length() == 0) {
+                                if (b_area.getText().toString().isEmpty()) {
                                     b_area.setError("Insert the area name");
-                                } else if (b_roadnumber.length() == 0) {
+                                } else if (b_roadnumber.getText().toString().isEmpty()) {
                                     b_roadnumber.setError("Insert the road number");
-                                } else if (b_block.length() == 0) {
+                                } else if (b_block.getText().toString().isEmpty()) {
                                     b_block.setError("Insert the block number");
-                                } else if (b_district.length() == 0) {
+                                } else if (b_district.getText().toString().isEmpty()) {
                                     b_block.setError("Insert the District number");
                                 } else {
 
@@ -895,19 +921,19 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     public void saveBuildingDataInDB() throws ParseException {
 
-        if (b_totalfloor.length() == 0) {
+        if (b_totalfloor.getText().toString().isEmpty()) {
             b_totalfloor.setError("Insert total floor");
             b_totalfloor.requestFocus();
-        } if (b_floorperflat.length() == 0) {
+        } if (b_floorperflat.getText().toString().isEmpty()) {
             b_floorperflat.setError("Insert number of floor per flat");
             b_floorperflat.requestFocus();
-        }  if (b_totalguard.length() == 0) {
+        }  if (b_totalguard.getText().toString().isEmpty()) {
             b_totalguard.setError("Insert the number of guards");
             b_totalguard.requestFocus();
-        }  if (b_flatfrmt.length() == 0) {
+        }  if (b_flatfrmt.getText().toString().isEmpty()) {
             b_flatfrmt.setError("Insert the flat format");
             b_flatfrmt.requestFocus();
-        }  if (b_name.length() == 0) {
+        }  if (b_name.getText().toString().isEmpty()) {
             b_name.setError("Insert the house name");
             b_name.requestFocus();
         } else {
@@ -962,7 +988,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             Log.d("TAG", "saveBuildingDataInDB: "+date2);
 
             fBuildings = new FBuildings(build_id, wholeAddress, totalCode, houseNmbr, road, districtValue, area, flatformat,
-                    flatperFloor, date2, housename, totlflr, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), status, "Pending", imageurl, code_array, 0, 0);
+                    flatperFloor, date2, housename, totlflr, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), status, "Pending", imageurl, code_array, lat, lan);
 
             WriteBatch batch=db.batch();
 
@@ -1317,4 +1343,43 @@ public class AddBuildingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        airLocation.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void getTheLatLang() {
+
+        if (ActivityCompat.checkSelfPermission(AddBuildingActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+        client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+
+                if (location != null) {
+
+                     lat = location.getLatitude();
+                     lan = location.getLongitude();
+
+
+                    Log.e("TAG","lat:"+lat);
+                    Log.e("TAG","lat:"+lan);
+
+                }
+
+            }
+        });
+
+    }
 }

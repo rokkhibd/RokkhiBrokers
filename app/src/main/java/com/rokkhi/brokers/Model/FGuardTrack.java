@@ -9,8 +9,8 @@ public class FGuardTrack {
     private String build_id="none";
     private String doc_id="none";
     private String guard_id="none";
-    private String latitude="none";
-    private String longitude="none";
+    private Double latitude=0.0;
+    private Double longitude=0.0;
     private String status="none";
 
 
@@ -19,7 +19,7 @@ public class FGuardTrack {
     }
 
 
-    public FGuardTrack(String user_id, Date timeStart, Date timeEnd, String build_id, String doc_id, String guard_id, String latitude, String longitude,String status) {
+    public FGuardTrack(String user_id, Date timeStart, Date timeEnd, String build_id, String doc_id, String guard_id, Double latitude, Double longitude,String status) {
         this.user_id = user_id;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
@@ -79,19 +79,19 @@ public class FGuardTrack {
         this.guard_id = guard_id;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

@@ -24,8 +24,8 @@ public class FBuildings implements Serializable {
     private String active;
     private ArrayList<String> b_imageUrl;
     private ArrayList<String> b_array;
-    private int latitude=0;
-    private int longitude=0;
+    private Double latitude=0.0;
+    private Double longitude=0.0;
 
 
 
@@ -33,7 +33,7 @@ public class FBuildings implements Serializable {
     }
 
 
-    public FBuildings(String build_id, String b_address, String b_code, String b_houseno, String b_roadno, String b_district, String b_area, String flatformat, int flatperfloor, Date followupdate, String housename, int totalfloor, Date created_at, Date updated_at, String status, String active, ArrayList<String> b_imageUrl, ArrayList<String> b_array, int latitude, int longitude) {
+    public FBuildings(String build_id, String b_address, String b_code, String b_houseno, String b_roadno, String b_district, String b_area, String flatformat, int flatperfloor, Date followupdate, String housename, int totalfloor, Date created_at, Date updated_at, String status, String active, ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude, Double longitude) {
         this.build_id = build_id;
         this.b_address = b_address;
         this.b_code = b_code;
@@ -201,19 +201,19 @@ public class FBuildings implements Serializable {
         this.b_array = b_array;
     }
 
-    public int getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 }

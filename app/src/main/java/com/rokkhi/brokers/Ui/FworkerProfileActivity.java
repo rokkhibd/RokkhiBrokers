@@ -59,6 +59,7 @@ import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 import com.vansuita.pickimage.listeners.IPickResult;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -297,6 +298,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
                 if (pickedImageUri == null) {
 
                     saveAllDataToFirestore();
+
 
                 } else {
 
@@ -811,6 +813,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         List<String> atoken = fWorkers.getAtoken();
         List<String> itoken = fWorkers.getItoken();
 
+
         fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
 
         db.collection("fWorkers").document(userId)
@@ -850,6 +853,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         String[] tagArray = totalString.split("\\s*,\\s*");
 
         List<String> u_array = Arrays.asList(tagArray);
+
 
         users = new Users(fname, downloadImageUri, downloadImageUri, userId, date, date, fw_gender, fw_mail, fphone, u_array);
 
