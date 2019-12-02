@@ -371,7 +371,7 @@
                   android:layout_height="45dp"/>
 
               <EditText
-
+                  android:visibility="gone"
                   android:focusableInTouchMode="false"
                   android:paddingLeft="5dp"
                   android:id="@+id/bldng_edit_buildingspeople"
@@ -385,6 +385,7 @@
                   android:layout_height="45dp"/>
 
               <EditText
+                  android:visibility="gone"
 
                   android:id="@+id/bldng_edit_theirname"
                   android:layout_below="@id/bldng_edit_buildingspeople"
@@ -398,6 +399,7 @@
                   android:layout_height="45dp"/>
 
               <EditText
+                  android:visibility="gone"
 
                   android:inputType="number"
                   android:id="@+id/bldng_edit_theirnumber"
@@ -413,6 +415,8 @@
 
 
               <Button
+                  android:visibility="gone"
+
                   android:layout_marginTop="15dp"
                   android:layout_marginLeft="20dp"
                   android:layout_marginRight="20dp"
@@ -524,10 +528,82 @@
                   android:layout_marginBottom="10dp"
                   android:background="@drawable/round_edittext"
                   android:backgroundTint="@color/orange"
-                  android:text="Add Information"
+                  android:text="Done"
                   android:textAllCaps="false"
                   android:layout_width="match_parent"
                   android:layout_height="38dp"/>
+
+
+              <TextView
+                  android:id="@+id/bldng_contact"
+                  android:textColor="@color/lightorange"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginRight="20dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginBottom="10dp"
+                  android:layout_below="@+id/addblgnInfoBtn"
+                  android:text="Building Contact"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+
+              <EditText
+
+                  android:focusableInTouchMode="false"
+                  android:paddingLeft="5dp"
+                  android:id="@+id/bldng_edit_buildingspeoples"
+                  android:layout_below="@id/bldng_contact"
+                  android:hint="Designation"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/round_edittext2"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp"/>
+
+              <EditText
+
+                  android:id="@+id/bldng_edit_theirnames"
+                  android:layout_below="@id/bldng_edit_buildingspeoples"
+                  android:hint="name"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/round_edittext2"
+                  android:paddingLeft="5dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp"/>
+
+              <EditText
+
+                  android:inputType="number"
+                  android:id="@+id/bldng_edit_theirnumbers"
+                  android:layout_below="@id/bldng_edit_theirnames"
+                  android:hint="number"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/round_edittext2"
+                  android:paddingLeft="5dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp"/>
+
+              <Button
+                  android:layout_marginBottom="10dp"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:textColor="@color/White"
+                  android:layout_below="@id/bldng_edit_theirnumbers"
+                  android:id="@+id/bldng_edit_numberSaves"
+                  android:textAllCaps="false"
+                  android:text="Add Contacts"
+                  android:background="@drawable/round_edittext"
+                  android:backgroundTint="@color/orange"
+                  android:layout_width="match_parent"
+                  android:layout_height="38dp"
+                  />
+
+
 
               <com.github.ybq.android.spinkit.SpinKitView
                   xmlns:app="http://schemas.android.com/apk/res-auto"

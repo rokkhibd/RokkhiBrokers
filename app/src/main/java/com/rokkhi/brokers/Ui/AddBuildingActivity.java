@@ -159,8 +159,8 @@ public class AddBuildingActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.housecheck_layout);
         progressBar = findViewById(R.id.progressbar);
 
-        b_peoplesName = findViewById(R.id.bldng_edit_theirname);
-        b_peopleNumber = findViewById(R.id.bldng_edit_theirnumber);
+        b_peoplesName = findViewById(R.id.bldng_edit_theirnames);
+        b_peopleNumber = findViewById(R.id.bldng_edit_theirnumbers);
         b_area = findViewById(R.id.bldng_edit_area);
         b_roadnumber = findViewById(R.id.bldng_edit_road);
         b_block = findViewById(R.id.bldng_edit_block);
@@ -178,13 +178,13 @@ public class AddBuildingActivity extends AppCompatActivity {
         b_status = findViewById(R.id.bldng_edit_status);
         b_lat = findViewById(R.id.bldng_edit_lat);
         b_long = findViewById(R.id.bldng_edit_long);
-        people_we_talk = findViewById(R.id.bldng_edit_buildingspeople);
+        people_we_talk = findViewById(R.id.bldng_edit_buildingspeoples);
 
         tapCode = findViewById(R.id.tap_bcode);
         circleImageView = findViewById(R.id.building_photo);
         addInfoButton = findViewById(R.id.addblgnInfoBtn);
         checkHouseBtn = findViewById(R.id.bldng_button_housecheck);
-        saveNumberBtn = findViewById(R.id.bldng_edit_numberSave);
+        saveNumberBtn = findViewById(R.id.bldng_edit_numberSaves);
 
         visitCal = findViewById(R.id.visitcalimg);
         followpCal = findViewById(R.id.followingcalimg);

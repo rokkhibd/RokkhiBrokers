@@ -13,6 +13,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int RC_SIGN_IN = 12773;
     AuthUI.IdpConfig phoneConfigWithDefaultNumber;
 
+    Animation mainPageAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +148,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         payment_rel.setOnClickListener(this);
         notice_rel.setOnClickListener(this);
         guard_rel.setOnClickListener(this);
+
+        //Set animation
+        mainPageAnim= AnimationUtils.loadAnimation(this,R.anim.main_page);
+        buldng_rel.startAnimation(mainPageAnim);
+        payment_rel.startAnimation(mainPageAnim);
+        notice_rel.startAnimation(mainPageAnim);
+        profile_rel.startAnimation(mainPageAnim);
+        guard_rel.startAnimation(mainPageAnim);
 
         checkuserExistence();
 

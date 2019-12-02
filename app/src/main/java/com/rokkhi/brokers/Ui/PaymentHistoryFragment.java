@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -41,6 +42,8 @@ public class PaymentHistoryFragment extends Fragment {
     ProgressDialog progressDialog;
     PaymentListAdapter paymentListAdapter;
     Context context;
+    String currentUserID;
+    FirebaseAuth mAuth;
 
     public PaymentHistoryFragment() {
         // Required empty public constructor
@@ -59,6 +62,8 @@ public class PaymentHistoryFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.paymentHistoryRecyclerViewID);
         firebaseFirestore = FirebaseFirestore.getInstance();
+        mAuth=FirebaseAuth.getInstance();
+
         paymentHistoryList = new ArrayList<>();
         progressDialog = new ProgressDialog(view.getContext());
         context = view.getContext();
@@ -79,7 +84,9 @@ public class PaymentHistoryFragment extends Fragment {
         progressDialog.show();
 
 
-        firebaseFirestore.collection(getString(R.string.col_fpaymentHistory)).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        currentUserID=mAuth.getCurrentUser().getUid();
+
+        firebaseFirestore.collection(getString(R.string.col_fpaymentHistory)).whereEqualTo("f_uid",currentUserID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

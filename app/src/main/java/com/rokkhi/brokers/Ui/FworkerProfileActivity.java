@@ -661,16 +661,20 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             spinKitProgressBar.setVisibility(View.GONE);
             return;
         } else if (TextUtils.isEmpty(f_nid.getText().toString())) {
-            f_nid.setError("Insert You'r NID Number");
+            f_nid.setError("Insert Your NID Number");
             f_nid.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (!f_mail.getText().toString().isEmpty() && !normalfunc.isValidEmail(f_mail.getText().toString())) {
-
+        }else if (TextUtils.isEmpty(f_bkash.getText().toString())) {
+            f_bkash.setError("Insert Your Bkash Number");
+            f_bkash.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        else if (f_mail.getText().toString().isEmpty() && normalfunc.isValidEmail(f_mail.getText().toString())) {
             f_mail.setError("Insert Valid E-mail");
             f_mail.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
-
             return;
         } else {
             String fw_name = f_name.getText().toString();
@@ -816,7 +820,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             f_nid.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (!f_mail.getText().toString().isEmpty() && !normalfunc.isValidEmail(f_mail.getText().toString())) {
+        } else if (f_mail.getText().toString().isEmpty() && normalfunc.isValidEmail(f_mail.getText().toString())) {
 
             f_mail.setError("Insert Valid E-mail");
             f_mail.requestFocus();

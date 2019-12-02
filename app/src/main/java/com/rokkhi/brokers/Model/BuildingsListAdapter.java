@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,11 +67,15 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                 if(task.isSuccessful()){
                     DocumentSnapshot documentSnapshot= task.getResult();
                     if(documentSnapshot.exists()){
+
                         FBuildings fb= documentSnapshot.toObject(FBuildings.class);
-                        holder.build_address.setText("Building Address: "+fb.getB_address());
-                        holder.build_name.setText("Building Name: "+fb.getHousename());
-                        holder.build_status.setText("Current Status: "+fb.getStatus());
-                        holder.build_lastVisit.setText("Visit Date: "+ Normalfunc.convertDate(fb.getFollowupdate()));
+
+                        holder.item_list_id.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_anim));
+
+                        holder.build_address.setText(fb.getB_address());
+                        holder.build_name.setText(fb.getHousename());
+                        holder.build_status.setText(fb.getStatus());
+                        holder.build_lastVisit.setText(Normalfunc.convertDate(fb.getFollowupdate()));
                     }
                 }
             }
@@ -99,6 +105,8 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
     public class BuildingViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView build_name,build_address,build_status,build_lastVisit;
+        CardView item_list_id;
+
         public BuildingViewholder(@NonNull final View itemView) {
             super(itemView);
 
@@ -106,7 +114,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
             build_address=itemView.findViewById(R.id.myhome_frag_bldngAddress);
             build_status=itemView.findViewById(R.id.myhome_frag_bldngstatus);
             build_lastVisit=itemView.findViewById(R.id.myhome_frag_bldngvisitdate);
-
+            item_list_id=itemView.findViewById(R.id.item_list_id);
             itemView.setOnClickListener(this);
 
         }

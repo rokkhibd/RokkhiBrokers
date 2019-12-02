@@ -195,7 +195,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     house_address.setText(fBuildings.getB_address());
                     flat_format.setText(fBuildings.getFlatformat());
 
-                    Glide.with(UpdateBldngInfoActivity.this).load(fBuildings.getB_imageUrl()).placeholder(R.drawable.building).into(houseImage);
+                    Glide.with(UpdateBldngInfoActivity.this).load(fBuildings.getB_imageUrl()).fitCenter().placeholder(R.drawable.building).into(houseImage);
 
 
                     String status=fBuildings.getStatus().toString();

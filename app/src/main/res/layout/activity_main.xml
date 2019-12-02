@@ -133,7 +133,6 @@
 
 
                 <RelativeLayout
-
                     android:layout_width="0dp"
                     android:id="@+id/buildngs_relative"
                     android:layout_height="wrap_content"
