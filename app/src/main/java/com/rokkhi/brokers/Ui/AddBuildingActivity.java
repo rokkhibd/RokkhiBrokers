@@ -287,12 +287,12 @@ public class AddBuildingActivity extends AppCompatActivity {
             }
         });
 
-        b_district.setOnClickListener(new View.OnClickListener() {
+        /*b_district.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDistrict();
             }
-        });
+        });*/
 
         people_we_talk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -365,16 +365,20 @@ public class AddBuildingActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 areaList.clear();
 
-                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+               if (queryDocumentSnapshots!=null){
+                   for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-                    String area_eng = documentSnapshot.getString("english");
-                    String area_ban = documentSnapshot.getString("bangla");
-                    Long area_code = documentSnapshot.getLong("code");
-                    areaCodeList.add(area_code);
+                       String area_eng = documentSnapshot.getString("english");
+                       String area_ban = documentSnapshot.getString("bangla");
+                       Long area_code = documentSnapshot.getLong("code");
+                       areaCodeList.add(area_code);
 
-                    areaList.add(area_eng + "(" + area_ban + ")");
+                       areaList.add(area_eng + "(" + area_ban + ")");
 
-                }
+                   }
+               }
+
+
                // Toast.makeText(AddBuildingActivity.this, "Loaded Area", Toast.LENGTH_SHORT).show();
                 b_area.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -387,7 +391,37 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             }
         });
-        //Get Area Data End
+        //Get District Data
+        db.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                districtList.clear();
+
+                if (queryDocumentSnapshots!=null){
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+                        String area_district = documentSnapshot.getString("english");
+                        //String area_ban = documentSnapshot.getString("bangla");
+                        Long district_code = documentSnapshot.getLong("code");
+                        districtCodeList.add(district_code);
+
+                        Log.e("xxxx", area_district);
+                        Log.e("xxxx", district_code.toString());
+                        districtList.add(area_district);
+
+
+                    }
+                }
+
+                b_district.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDistrict(districtList);
+                    }
+                });
+            }
+        });
+
 
 
         b_roadnumber.setOnClickListener(new View.OnClickListener() {
@@ -562,6 +596,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, areaList);
         adapter.notifyDataSetChanged();
         areaListView.setAdapter(adapter);
+
         ColorDrawable color = new ColorDrawable(this.getResources().getColor(R.color.lightorange));
         areaListView.setDivider(color);
         areaListView.setDividerHeight(1);
@@ -1001,7 +1036,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    gotoMyHomeActvity();
+                    //gotoMyHomeActvity();
                     progressBar.setVisibility(View.GONE);
 
                 }
@@ -1033,6 +1068,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     private void gotoMyHomeActvity() {
         Intent intent = new Intent(AddBuildingActivity.this, MyHomeActivity.class);
         startActivity(intent);
+        finish();
 
     }
 
@@ -1178,7 +1214,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     }
 
-    public void showDistrict() {
+    public void showDistrict(List<String> districtList) {
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
@@ -1186,7 +1222,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         districtListView = rowList.findViewById(R.id.listview);
         districtEdit = rowList.findViewById(R.id.search_edit);
 
-        db.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        /*db.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 districtList.clear();
@@ -1212,7 +1248,12 @@ public class AddBuildingActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
+
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, districtList);
+        //customListAdapter=new CustomListAdapter(AddBuildingActivity.this,areaList);
+        adapter.notifyDataSetChanged();
+        districtListView.setAdapter(adapter);
 
         ColorDrawable color = new ColorDrawable(this.getResources().getColor(R.color.lightorange));
         districtListView.setDivider(color);
@@ -1381,5 +1422,12 @@ public class AddBuildingActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        gotoMyHomeActvity();
     }
 }

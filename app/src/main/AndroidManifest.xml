@@ -19,15 +19,16 @@
         android:roundIcon="@drawable/rokkhi_borker"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ui.FworkerProfileActivity"></activity>
+        <activity android:name=".Ui.UserTotalBuildingsActivity"></activity>
+        <activity android:name=".Ui.FworkerProfileActivity" />
         <activity android:name=".Ui.EditProfileActivity" />
         <activity android:name=".Ui.GuardTrackListActivity" />
         <activity android:name=".Ui.ProfileActivity" />
         <activity android:name=".Ui.NoticeActivity" />
         <activity android:name=".Ui.PaymentHistoryActivity" />
         <activity android:name=".Ui.MyHomeActivity" />
-        <activity android:name=".Ui.AddBuildingActivity"/>
-        <activity android:name=".Ui.UpdateBldngInfoActivity"/>
+        <activity android:name=".Ui.AddBuildingActivity" />
+        <activity android:name=".Ui.UpdateBldngInfoActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

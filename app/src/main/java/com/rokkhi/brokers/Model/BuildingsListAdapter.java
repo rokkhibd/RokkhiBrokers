@@ -70,7 +70,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
 
                         FBuildings fb= documentSnapshot.toObject(FBuildings.class);
 
-                        holder.item_list_id.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_anim));
+                        //holder.item_list_id.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_anim));
 
                         holder.build_address.setText(fb.getB_address());
                         holder.build_name.setText(fb.getHousename());

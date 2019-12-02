@@ -217,6 +217,8 @@ public class EditProfileActivity extends AppCompatActivity implements IPickResul
         mdate = myCalendar.getTime();
     }
 
+
+
     public void setPic(PickResult r){
         propic.setImageBitmap(null);
 

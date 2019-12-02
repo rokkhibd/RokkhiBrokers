@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     ImageView logout,edit;
     CircleImageView propic;
@@ -190,6 +191,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        RelativeLayout totalBuildingRef;
+        totalBuildingRef=view.findViewById(R.id.totalbuildingrel);
+        totalBuildingRef.setOnClickListener(this);
+
     }
 
     private static final String TAG = "ProfileFragment";
@@ -261,5 +266,22 @@ public class ProfileFragment extends Fragment {
                 });
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId()==R.id.totalbuildingrel){
+            showusersAllBuildings();
+
+        }else if (v.getId()==R.id.due_buildingrel){
+
+        }else if (v.getId()==R.id.active_buildingrel){
+
+        }
+    }
+
+    private void showusersAllBuildings() {
+        Intent intent=new Intent(getContext(),UserTotalBuildingsActivity.class);
+        startActivity(intent);
     }
 }

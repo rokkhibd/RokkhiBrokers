@@ -83,6 +83,9 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     String userPhoneNumber, currentDate;
     Date date;
 
+    DatePickerDialog.OnDateSetListener datedialog;
+    Calendar myCalendar;
+
     CustomListAdapter customListAdapter;
 
     ImageView areaMenu, genderMenu, dobCal, joinDateCal;
@@ -114,6 +117,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     Bitmap bitmap;
     Uri pickedImageUri;
 
+
     ProgressBar progressBar, spinKitProgressBar;
 
     Users users;
@@ -130,6 +134,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         context = FworkerProfileActivity.this;
+        myCalendar=Calendar.getInstance();
         normalfunc = new Normalfunc(context);
         // storageRef = FirebaseStorage.getInstance().getReference().child("fworkers_photo");
 
@@ -384,6 +389,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
                 Date dateBirthday = Calendar.getInstance().getTime();
 
                 AllStringValues.showCalendar(FworkerProfileActivity.this, f_dob);
+
             }
         });
 
@@ -814,6 +820,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         List<String> itoken = fWorkers.getItoken();
 
 
+
         fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
 
         db.collection("fWorkers").document(userId)
@@ -825,7 +832,11 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
                         if (task.isSuccessful()) {
                             spinKitProgressBar.setVisibility(View.GONE);
                             Toast.makeText(FworkerProfileActivity.this, "Data saved!!", Toast.LENGTH_SHORT).show();
-                            saveDataToUserCollection();
+                            try {
+                                saveDataToUserCollection();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -839,7 +850,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
     }
 
-    public void saveDataToUserCollection() {
+    public void saveDataToUserCollection() throws ParseException {
         String fname = f_name.getText().toString();
         String fphone = f_phone.getText().toString();
         String fw_gender = f_gender.getText().toString();
@@ -855,7 +866,12 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         List<String> u_array = Arrays.asList(tagArray);
 
 
-        users = new Users(fname, downloadImageUri, downloadImageUri, userId, date, date, fw_gender, fw_mail, fphone, u_array);
+        String date1 = f_dob.getText().toString();
+
+        Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+
+
+        users = new Users(fname, downloadImageUri, downloadImageUri, userId, date2, date, fw_gender, fw_mail, fphone, u_array);
 
         db.collection("users").document(userId).set(users).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

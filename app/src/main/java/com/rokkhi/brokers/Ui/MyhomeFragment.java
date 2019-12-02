@@ -269,6 +269,7 @@ public class MyhomeFragment extends Fragment {
                             buildingsListAdapter.setHasStableIds(true);
                             recyclerView.setAdapter(buildingsListAdapter);
                             recyclerView.setAdapter(buildingsListAdapter);
+
                             int xx=task.getResult().size();
                             if(xx>0)lastVisible = task.getResult().getDocuments().get(xx - 1);
                             loadmoredata();
