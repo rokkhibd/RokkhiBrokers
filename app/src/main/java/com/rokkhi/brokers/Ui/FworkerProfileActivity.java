@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,10 +36,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -190,9 +193,74 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         joinDateCal = findViewById(R.id.calendar_joining);
         circleImageView = findViewById(R.id.fworker_photo);
 
+        //check the valid phone Number
+        f_refId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e("TAG", "afterTextChanged: "+s );
+                Log.e("TAG", "afterTextChanged: "+normalfunc.makephone14(s.toString()) );
+
+                if (s.length()==11){
+
+                    FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+
+                    firebaseFirestore.collection(getString(R.string.col_fWorkers))
+                            .whereEqualTo("fw_phone",normalfunc.makephone14(s.toString()))
+                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.getResult().isEmpty()){
+
+                                f_refId.setError("Enter Valid Number");
+                                f_refId.requestFocus();
+                                progressBar.setVisibility(View.GONE);
+                                return;
+                            }
+
+                            if (task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                    Log.e("TAG", document.getId() + " => " + document.getString("fw_phone"));
+
+                                }
+                            }else {
+                                f_refId.setError("Enter Valid Number");
+                                f_refId.requestFocus();
+                                progressBar.setVisibility(View.GONE);
+                                return;
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            f_refId.setError("Enter Valid Number");
+                            f_refId.requestFocus();
+                            progressBar.setVisibility(View.GONE);
+                            return;
+                        }
+                    });
+
+
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.gender);
-
 
 
         db.collection(getString(R.string.col_area)).addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -200,14 +268,13 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 areaList.clear();
 
-                if (queryDocumentSnapshots!=null){
+                if (queryDocumentSnapshots != null) {
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
                         String area_eng = documentSnapshot.getString("english");
                         String area_ban = documentSnapshot.getString("bangla");
 
                         areaList.add(area_eng + "(" + area_ban + ")");
-
 
 
                     }
@@ -222,6 +289,8 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         saveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 spinKitProgressBar.setVisibility(View.VISIBLE);
 
 
@@ -353,7 +422,6 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             }
         });
     }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.getnumber_txt) {
@@ -645,88 +713,125 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     public void saveAllDataToFirestore() {
 
 
-        if (f_name.length() == 0) {
+        if (f_name.getText().length() == 0) {
             f_name.setError("Insert your name");
             f_name.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (f_area.length() == 0) {
+        }
+        if (f_area.length() == 0) {
             f_area.setError("Insert your area name");
             f_area.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (f_phone.length() == 0) {
+        }
+        if (f_road.length() == 0) {
+            f_road.setError("Insert your Road Number");
+            f_road.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_block.length() == 0) {
+            f_block.setError("Insert your Block Number");
+            f_block.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_houseno.length() == 0) {
+            f_houseno.setError("Insert your House Number");
+            f_houseno.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_roadletter.length() == 0) {
+            f_roadletter.setError("Insert your House Block");
+            f_roadletter.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_phone.length() == 0) {
             f_phone.setError("Insert your mobile number");
             f_phone.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (TextUtils.isEmpty(f_nid.getText().toString())) {
+        }
+
+        if (f_refId.getText().toString().isEmpty()) {
+            f_refId.requestFocus();
+            f_refId.setError("Enter Referral Number");
+
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+
+        }
+
+        if (!normalfunc.isvalidphone(f_refId.getText().toString())) {
+            f_refId.requestFocus();
+            f_refId.setError("Enter Valid Number");
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+
+        }
+
+        if (TextUtils.isEmpty(f_nid.getText().toString())) {
             f_nid.setError("Insert Your NID Number");
             f_nid.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        }else if (TextUtils.isEmpty(f_bkash.getText().toString())) {
+        }
+        if (TextUtils.isEmpty(f_bkash.getText().toString())) {
             f_bkash.setError("Insert Your Bkash Number");
             f_bkash.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
         }
-        else if (f_mail.getText().toString().isEmpty() && normalfunc.isValidEmail(f_mail.getText().toString())) {
+
+        if (f_mail.getText().toString().isEmpty() || !normalfunc.isValidEmail(f_mail.getText().toString())) {
             f_mail.setError("Insert Valid E-mail");
             f_mail.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else {
-            String fw_name = f_name.getText().toString();
-            String fw_area = f_area.getText().toString();
-            String fw_road = f_road.getText().toString();
-            String fw_block = f_block.getText().toString();
-            String fw_housenmbr = f_houseno.getText().toString();
-            String fw_houseletter = f_roadletter.getText().toString();
-            String fphone = Normalfunc.makephone14(f_phone.getText().toString());
-            String fw_bkash = Normalfunc.makephone14(f_bkash.getText().toString());
-            String fw_nogod = "";
-
-            //String phone=add88withNumb(fphone);
-            //normalfunc.checklengthEmptyOrNot(f_nid,f_phone,f_mail,f_refId);
-
-            List<String> u_array = normalfunc.splitchar(fphone);
-
-            String fw_nid = f_nid.getText().toString();
-            String fw_dob = f_dob.getText().toString();
-            String fw_uni = f_uni.getText().toString();
-            String fw_joindate = f_joindate.getText().toString();
-            String fw_mail = f_mail.getText().toString();
-            String fw_gender = f_gender.getText().toString();
-            String fw_address = fw_area + " " + fw_road + fw_block + " " + fw_housenmbr + fw_houseletter;
-
-
-            List<String> fw_phone = normalfunc.splitstring(fphone);
-            List<String> atoken = fWorkers.getAtoken();
-            List<String> itoken = fWorkers.getItoken();
-
-            fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
-
-            db.collection("fWorkers").document(userId)
-                    .set(fWorkers)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            if (task.isSuccessful()) {
-                                spinKitProgressBar.setVisibility(View.GONE);
-                                Toast.makeText(FworkerProfileActivity.this, "Data saved!!", Toast.LENGTH_SHORT).show();
-                                saveDataToUserCollection();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(FworkerProfileActivity.this, "Error!!" + e, Toast.LENGTH_SHORT).show();
-                }
-            });
         }
+
+
+        String fw_area = f_area.getText().toString();
+        String fw_road = f_road.getText().toString();
+        String fw_block = f_block.getText().toString();
+        String fw_housenmbr = f_houseno.getText().toString();
+        String fw_houseletter = f_roadletter.getText().toString();
+        String fphone = normalfunc.makephone14(f_phone.getText().toString());
+
+        List<String> u_array = normalfunc.splitchar(fphone);
+
+        String fw_nid = f_nid.getText().toString();
+        String fw_uni = f_uni.getText().toString();
+        String fw_address = fw_area + " " + fw_road + fw_block + " " + fw_housenmbr + fw_houseletter;
+
+
+        List<String> atoken = fWorkers.getAtoken();
+        List<String> itoken = fWorkers.getItoken();
+
+        fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
+
+        db.collection("fWorkers").document(userId)
+                .set(fWorkers)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            spinKitProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(FworkerProfileActivity.this, "Data saved!!", Toast.LENGTH_SHORT).show();
+                            saveDataToUserCollection();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(FworkerProfileActivity.this, "Error!!" + e, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
@@ -734,7 +839,6 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     public void saveDataToUserCollection() {
         String fname = f_name.getText().toString();
         String fphone = f_phone.getText().toString();
-        String fw_dob = f_dob.getText().toString();
         String fw_gender = f_gender.getText().toString();
         String fw_mail = f_mail.getText().toString();
 
@@ -799,35 +903,138 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     }
 
     public void saveImageToStorage() {
-
+/*
         if (f_name.length() == 0) {
             f_name.setError("Insert your name");
             f_name.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (f_area.length() == 0) {
+        }
+        if (f_area.length() == 0) {
             f_area.setError("Insert your area name");
             f_area.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (f_phone.length() == 0) {
+        }
+        if (f_phone.length() == 0) {
             f_phone.setError("Insert your mobile number");
             f_phone.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (TextUtils.isEmpty(f_nid.getText().toString())) {
+        }
+
+
+        if (f_refId.getText().toString().isEmpty()) {
+            f_refId.requestFocus();
+            f_refId.setError("Enter Referral Number");
+            return;
+
+        }
+
+        if (!normalfunc.isvalidphone(f_refId.getText().toString())) {
+            f_refId.requestFocus();
+            f_refId.setError("Enter Valid Number");
+            return;
+
+        }
+
+
+         if (TextUtils.isEmpty(f_nid.getText().toString())) {
             f_nid.setError("Insert You'r NID Number");
             f_nid.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
-        } else if (f_mail.getText().toString().isEmpty() && normalfunc.isValidEmail(f_mail.getText().toString())) {
+        }
+
+         if (f_mail.getText().toString().isEmpty() && normalfunc.isValidEmail(f_mail.getText().toString())) {
 
             f_mail.setError("Insert Valid E-mail");
             f_mail.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
 
             return;
+        }*/
+
+        if (f_name.getText().toString().isEmpty()) {
+            f_name.setError("Insert your name");
+            f_name.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
         }
+        if (f_area.getText().toString().isEmpty()) {
+            f_area.setError("Insert your area name");
+            f_area.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_road.getText().toString().isEmpty()) {
+            f_road.setError("Insert your Road Number");
+            f_road.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_block.getText().toString().isEmpty()) {
+            f_block.setError("Insert your Block Number");
+            f_block.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_houseno.getText().toString().isEmpty()) {
+            f_houseno.setError("Insert your House Number");
+            f_houseno.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_roadletter.getText().toString().isEmpty()) {
+            f_roadletter.setError("Insert your House Block");
+            f_roadletter.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (f_phone.getText().toString().isEmpty()) {
+            f_phone.setError("Insert your mobile number");
+            f_phone.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        if (f_refId.getText().toString().isEmpty()) {
+            f_refId.requestFocus();
+            f_refId.setError("Enter Referral Number");
+
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+
+        }
+
+        if (!normalfunc.isvalidphone(f_refId.getText().toString())) {
+            f_refId.requestFocus();
+            f_refId.setError("Enter Valid Number");
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+
+        }
+
+        if (TextUtils.isEmpty(f_nid.getText().toString())) {
+            f_nid.setError("Insert Your NID Number");
+            f_nid.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+        if (TextUtils.isEmpty(f_bkash.getText().toString())) {
+            f_bkash.setError("Insert Your Bkash Number");
+            f_bkash.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        if (f_mail.getText().toString().isEmpty() || !normalfunc.isValidEmail(f_mail.getText().toString())) {
+            f_mail.setError("Insert Valid E-mail");
+            f_mail.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+
 
         final UploadTask uploadTask = storageRef.putFile(pickedImageUri);
 

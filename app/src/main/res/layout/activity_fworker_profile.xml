@@ -72,6 +72,7 @@
             android:layout_below="@id/clickphototxt"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="25dp"
+            android:maxLines="1"
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="Name *"
@@ -183,6 +184,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
+            android:maxLines="1"
             android:background="@drawable/round_edittext2"
             android:hint="Phone number"
             android:paddingLeft="5dp" />
@@ -212,6 +214,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="Referral code"
+            android:maxLines="1"
             android:inputType="number"
             android:paddingLeft="5dp" />
 
@@ -240,6 +243,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="N.I.D *"
+            android:maxLines="1"
             android:inputType="number"
             android:paddingLeft="5dp" />
 
@@ -255,6 +259,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="Bkash acc"
+            android:maxLines="1"
             android:inputType="number"
             android:paddingLeft="5dp" />
 
@@ -297,6 +302,7 @@
             android:layout_marginTop="15dp"
             android:paddingRight="10dp"
             android:text="Get number"
+            android:maxLines="1"
             android:textColor="@color/lightorange"
             android:textStyle="bold" />
 
@@ -312,6 +318,7 @@
             android:background="@drawable/round_edittext2"
             android:focusableInTouchMode="false"
             android:hint="date of birth *"
+            android:maxLines="1"
             android:inputType="number"
             android:paddingLeft="5dp" />
 
@@ -333,6 +340,7 @@
             android:layout_below="@id/fworker_dob_edit"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
+            android:maxLines="1"
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="univesity/college"
@@ -348,6 +356,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="mail id"
+            android:maxLines="1"
             android:inputType="textEmailAddress"
             android:paddingLeft="5dp" />
 
@@ -361,6 +370,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/round_edittext2"
             android:hint="joining date"
+            android:maxLines="1"
             android:paddingLeft="5dp"
             android:visibility="gone" />
 

@@ -265,7 +265,7 @@ public class Normalfunc {
         return true;
     }
 
-    public static String makephone14(String phoneno) {
+    public String makephone14(String phoneno) {
         if (isvalidphone14(phoneno)) return phoneno;
         if (isvalidphone11(phoneno)) return "+88" + phoneno;
         else return "error";
