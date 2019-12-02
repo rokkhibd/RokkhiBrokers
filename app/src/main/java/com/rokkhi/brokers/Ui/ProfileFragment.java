@@ -219,7 +219,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                             if (users.getThumb()!=null){
                                 if(!users.getThumb().isEmpty() && !users.getThumb().equals("none")){
 
-                                    Glide.with(context).load(users.getThumb()).fitCenter().error(R.drawable.error_icon).into(propic);
+                                    Glide.with(getContext()).load(users.getThumb()).fitCenter().error(R.drawable.error_icon).into(propic);
 
                                     //propic.setRotation(90f);
                                 }
