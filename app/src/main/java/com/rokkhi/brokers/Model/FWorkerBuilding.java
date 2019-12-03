@@ -14,6 +14,7 @@ public class FWorkerBuilding {
     private Date updated_at=new Date();
     private String b_code="none";
 
+
     public FWorkerBuilding() {
     }
 

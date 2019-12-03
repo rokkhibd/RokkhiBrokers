@@ -120,6 +120,8 @@ public class AddBuildingActivity extends AppCompatActivity {
     String areaListCode, roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, status, flatformat, districtValue, downloadImageUri, totalCode;
 
     String wholeAddress, currentDate;
+
+    String followUp_id,meetingPending_id,meetingRejected_id,meetingCancelled_id;
     Double lat,lan;
 
     ImageView visitCal, followpCal, statusMenu, flatfrmtMenu, district_Menu, designationMenu;
@@ -981,6 +983,8 @@ public class AddBuildingActivity extends AppCompatActivity {
             districtValue = b_district.getText().toString();
             status = b_status.getText().toString();
 
+
+
             String theWholeAddress = area + " " + road +""+block +" "+ houseNmbr +""+ housefrmt + " " + districtValue;
 
             wholeAddress = theWholeAddress;
@@ -1037,6 +1041,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     //gotoMyHomeActvity();
+                    Toast.makeText(AddBuildingActivity.this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
 
                 }
@@ -1291,12 +1296,18 @@ public class AddBuildingActivity extends AppCompatActivity {
             public void onEvent(@androidx.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @androidx.annotation.Nullable FirebaseFirestoreException e) {
                 statusList.clear();
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+
                     String status = documentSnapshot.getString("status_type");
+                    String bstatus_id=documentSnapshot.getString("starus_id");
+
+
                     //statusList.add(status);
                     //Ignore Done status
-                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done")){
+                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done") &&!status.equalsIgnoreCase("Meeting Rejected")){
                         statusList.add(status);
                     }
+
 
                 }
 

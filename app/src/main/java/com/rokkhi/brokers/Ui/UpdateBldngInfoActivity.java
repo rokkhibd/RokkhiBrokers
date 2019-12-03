@@ -50,6 +50,7 @@ import com.rokkhi.brokers.Model.FBuildings;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
 
+import com.squareup.picasso.Picasso;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
@@ -117,11 +118,13 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         getBuildingsInformation();
 
+
         storageRef = FirebaseStorage.getInstance().getReference()
                 .child("fBuildings/" + userId + "/pic");
 
         fbPeople = new FBPeople();
         fbPeopleList = new ArrayList<>();
+
 
         house_name = findViewById(R.id.update_bldng_houseName);
         houseImage = findViewById(R.id.update_bldng_image);
@@ -195,17 +198,20 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     house_address.setText(fBuildings.getB_address());
                     flat_format.setText(fBuildings.getFlatformat());
 
-                    Glide.with(UpdateBldngInfoActivity.this).load(fBuildings.getB_imageUrl()).fitCenter().placeholder(R.drawable.building).into(houseImage);
+                    Log.e("TAG","IMAGE:"+fBuildings.getB_imageUrl());
+                    Log.e("TAG","bcode:"+fBuildings.getB_code());
 
+                    Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl()).placeholder(R.drawable.building).fitCenter().into(houseImage);
 
                     String status=fBuildings.getStatus().toString();
 
                     if (status.equalsIgnoreCase("Building Active")){
                         updateInfo_Button.setVisibility(View.GONE);
-                        //Toast.makeText(UpdateBldngInfoActivity.this, "You can not update the building Info", Toast.LENGTH_SHORT).show();
-                        showMessageAlertDialogue();
 
+                        showMessageAlertDialogue();
                     }
+
+                    getTheContactNumbers();
 
                 }
             }
@@ -455,6 +461,34 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
             }
         });
 
+    }
+
+
+
+    public void getTheContactNumbers(){
+
+        Log.e("TAG","b_code->"+fBuildings.getB_code());
+
+        db.collection(getString(R.string.col_fBbuildingContacts)).whereEqualTo("b_code",fBuildings.getB_code()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot doc:task.getResult()){
+                        FBPeople fbPeople=doc.toObject(FBPeople.class);
+
+
+                        String designation=fbPeople.getDesignation();
+                        String number=fbPeople.getNumber();
+
+                        Log.e("TAG","desig:"+designation);
+                        Log.e("TAG","number:"+number);
+
+
+
+                    }
+                }
+            }
+        });
     }
 
 

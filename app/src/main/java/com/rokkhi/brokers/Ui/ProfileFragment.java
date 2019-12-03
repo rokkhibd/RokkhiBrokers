@@ -221,7 +221,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
                                     Glide.with(getContext()).load(users.getThumb()).fitCenter().error(R.drawable.error_icon).into(propic);
 
-                                    //propic.setRotation(90f);
                                 }
 
 
