@@ -8,10 +8,12 @@ import java.util.List;
 
 public class Users {
 
+
     private String name="none";
     private String thumb="none";
     private String pic="none";
     private String user_id="none"; //auto id
+
     private Date bday=new Date();
     private Date joindate=new Date();
     private String gender="none";
@@ -27,6 +29,7 @@ public class Users {
         this.thumb = thumb;
         this.pic = pic;
         this.user_id = user_id;
+
         this.bday = bday;
         this.joindate = joindate;
         this.gender = gender;
@@ -34,6 +37,8 @@ public class Users {
         this.phone = phone;
         this.u_array = u_array;
     }
+
+
 
     public String getName() {
         return name;

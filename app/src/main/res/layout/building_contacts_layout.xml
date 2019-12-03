@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="240dp">
 
 
     <LinearLayout
@@ -142,6 +142,68 @@
 
             <ImageView
                 android:id="@+id/guard_call_img"
+                android:src="@drawable/call_one"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin5"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/bpeople_desig_owner"
+                android:textColor="@color/lightorange"
+                android:textSize="15sp"
+                android:text="Designation ->"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/bpeople_name_owner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin6"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:textColor="@color/lightorange"
+                android:textSize="15sp"
+                android:text="Phone Number ->"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+
+                android:id="@+id/bpeople_phone_owner"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+            <ImageView
+                android:id="@+id/owner_call_img"
                 android:src="@drawable/call_one"
                 android:layout_width="20dp"
                 android:layout_height="20dp"/>

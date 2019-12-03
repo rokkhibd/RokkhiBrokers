@@ -801,7 +801,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             return;
         }
 
-
+        String fw_name=f_name.getText().toString();
         String fw_area = f_area.getText().toString();
         String fw_road = f_road.getText().toString();
         String fw_block = f_block.getText().toString();
@@ -821,7 +821,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
 
 
-        fWorkers = new FWorkers(userId, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
+        fWorkers = new FWorkers(userId,fw_name, fw_nid, fphone, fw_uni, fw_address, date, date, false, u_array, atoken, itoken);
 
         db.collection("fWorkers").document(userId)
                 .set(fWorkers)
@@ -855,9 +855,9 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         String fphone = f_phone.getText().toString();
         String fw_gender = f_gender.getText().toString();
         String fw_mail = f_mail.getText().toString();
+        String phone=normalfunc.makephone14(fphone);
 
 
-        // String phone=add88withNumb(fphone);
         List<String> fw_name = normalfunc.splitstring(fname);
 
         String totalString = fw_mail + "," + fphone + "," + fw_name;
@@ -871,9 +871,9 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
 
 
-        users = new Users(fname, downloadImageUri, downloadImageUri, userId, date2, date, fw_gender, fw_mail, fphone, u_array);
+        users = new Users(fname, downloadImageUri, downloadImageUri, userId, date2, date, fw_gender, fw_mail, phone, u_array);
 
-        db.collection("users").document(userId).set(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+        db.collection(getString(R.string.col_users)).document(userId).set(users).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -896,8 +896,8 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     public void savePaymentData() {
 
         String ref_id = f_refId.getText().toString();
-        String fw_phone = f_phone.getText().toString();
-        String fw_bkash = f_bkash.getText().toString();
+        String fw_phone = normalfunc.makephone14(f_phone.getText().toString());
+        String fw_bkash = normalfunc.makephone14(f_bkash.getText().toString());
         String fw_nogod = "";
 
         fPayments = new FPayments(userId, "", fw_phone, 0, 0, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.rokkhi.brokers.Model.FPayments;
+import com.rokkhi.brokers.Model.FWorkers;
 import com.rokkhi.brokers.Model.Users;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
@@ -48,7 +50,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     ImageView logout,edit;
     CircleImageView propic;
     TextView name,mailid,joiningDate;
-    Button bkashno;
+    Button bkashno,nidno;
     TextView tearning,dearning,tref,dref,tmeeting,dmeeting,tbuilding,dbuilding,abuilding,bonusearning,dbonusearing;
     FirebaseFirestore firebaseFirestore;
 
@@ -57,6 +59,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     Normalfunc normalfunc;
     String userid="none";
     String bkashnumber="none";
+    String nid="none";
+    FWorkers fWorkers;
 
     private long mLastClickTime = 0;
 
@@ -86,7 +90,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         name=view.findViewById(R.id.username);
         mailid=view.findViewById(R.id.mail);
         joiningDate=view.findViewById(R.id.joinDate);
+
         bkashno=view.findViewById(R.id.bkash_no);
+        nidno=view.findViewById(R.id.nid_no);
+
         tearning=view.findViewById(R.id.total_earning);
         dearning=view.findViewById(R.id.due_earning);
         tref=view.findViewById(R.id.total_referal);
@@ -99,6 +106,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         bonusearning=view.findViewById(R.id.bonus_earning);
         dbonusearing=view.findViewById(R.id.bonus_due_earning);
         userid= FirebaseAuth.getInstance().getUid();
+
 
         normalfunc= new Normalfunc(context);
         showCurrentUserInfo();
@@ -191,6 +199,82 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        nidno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
+
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setCancelable(false);
+                LayoutInflater inflater = getLayoutInflater();
+                View convertView = (View) inflater.inflate(R.layout.confirm_nid, null);
+                EditText input= convertView.findViewById(R.id.nid_input);
+                Button done = convertView.findViewById(R.id.nid_done);
+                Button cancel = convertView.findViewById(R.id.nid_cancel);
+                ProgressBar progressBar= convertView.findViewById(R.id.nid_pro);
+
+                if(!nid.equals("none"))input.setText(fWorkers.getFw_nid());
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                            return;
+                        }
+                        mLastClickTime = SystemClock.elapsedRealtime();
+
+                        input.setError(null);
+                        // Store values at the time of the login attempt.
+                        final String nidtext = input.getText().toString();
+                        boolean cancel = false;
+                        View focusView = null;
+
+
+                        if (TextUtils.isEmpty(nidtext)) {
+                            input.setError(getString(R.string.error_field_required));
+                            focusView = input;
+                            cancel = true;
+
+                        }
+
+                        if (cancel) {
+                            Log.d(TAG, "onClick: yyy1 ");
+                            // There was an error; don't attempt login and focus the first
+                            // form field with an error.
+                            focusView.requestFocus();
+                            //progressBar.setVisibility(View.GONE);
+                        } else {
+                            Log.d(TAG, "onClick: yyy4");
+                            //String bkashtext2=normalfunc.makephone14(bkashtext);
+                            progressBar.setVisibility(View.VISIBLE);
+                            Map<String,Object>mm=new HashMap<>();
+                            mm.put("fw_nid",nidtext);
+                            firebaseFirestore.collection(getString(R.string.col_fWorkers))
+                                    .document(userid).set(mm, SetOptions.merge())
+                                    .addOnCompleteListener(task -> {
+                                        if(task.isSuccessful()){
+                                            Log.d(TAG, "onClick: yyy3 ");
+                                            progressBar.setVisibility(View.GONE);
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+                alertDialog.setView(convertView);
+                alertDialog.show();
+
+            }
+        });
+
         RelativeLayout totalBuildingRef;
         totalBuildingRef=view.findViewById(R.id.totalbuildingrel);
         totalBuildingRef.setOnClickListener(this);
@@ -246,7 +330,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 //                            TextView tearning,dearning,tref,dref,tmeeting,dmeeting,tbuilding,dbuilding,abuilding;
                         FPayments fPayments= documentSnapshot.toObject(FPayments.class);
                         bkashnumber=fPayments.getBkash_no();
-                        bkashno.setText(normalfunc.makephone11(bkashnumber));
+                        bkashno.setText("Bkash ->  "+normalfunc.makephone11(bkashnumber));
 
                         tearning.setText(String.valueOf(fPayments.getTotal_earning()));
                         dearning.setText(String.valueOf(fPayments.getDue_earning()));
@@ -263,6 +347,24 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
                 });
+
+        firebaseFirestore.collection(getString(R.string.col_fWorkers)).document(userId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                if (documentSnapshot!=null && documentSnapshot.exists()){
+                    FWorkers fWorkers= documentSnapshot.toObject(FWorkers.class);
+
+
+                    nidno.setText("NID -> "+fWorkers.getFw_nid());
+
+                }
+            }
+        });
 
 
     }

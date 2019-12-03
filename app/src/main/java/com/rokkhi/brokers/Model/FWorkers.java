@@ -7,6 +7,7 @@ import java.util.List;
 public class FWorkers {
 
     private String user_id="none";
+    private String fw_name="none";
     private String fw_nid="none";
     private String fw_phone="none";
     private String fw_university="none";
@@ -23,8 +24,9 @@ public class FWorkers {
 
     }
 
-    public FWorkers(String user_id, String fw_nid, String fw_phone, String fw_university, String fw_address, Date created_at, Date updated_at, boolean trained, List<String> u_array, List<String> atoken, List<String> itoken) {
+    public FWorkers(String user_id, String fw_name,String fw_nid, String fw_phone, String fw_university, String fw_address, Date created_at, Date updated_at, boolean trained, List<String> u_array, List<String> atoken, List<String> itoken) {
         this.user_id = user_id;
+        this.fw_name=fw_name;
         this.fw_nid = fw_nid;
         this.fw_phone = fw_phone;
         this.fw_university = fw_university;
@@ -35,6 +37,15 @@ public class FWorkers {
         this.u_array = u_array;
         this.atoken = atoken;
         this.itoken = itoken;
+    }
+
+
+    public String getFw_name() {
+        return fw_name;
+    }
+
+    public void setFw_name(String fw_name) {
+        this.fw_name = fw_name;
     }
 
     public String getUser_id() {

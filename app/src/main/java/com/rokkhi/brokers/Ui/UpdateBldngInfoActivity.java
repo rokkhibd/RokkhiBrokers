@@ -26,6 +26,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -201,7 +203,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     Log.e("TAG","IMAGE:"+fBuildings.getB_imageUrl());
                     Log.e("TAG","bcode:"+fBuildings.getB_code());
 
-                    Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl()).placeholder(R.drawable.building).fitCenter().into(houseImage);
+                    Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl()).
+                            error(R.drawable.building).fitCenter().into(houseImage);
 
                     String status=fBuildings.getStatus().toString();
 
@@ -211,7 +214,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                         showMessageAlertDialogue();
                     }
 
-                    getTheContactNumbers();
+                    //getTheContactNumbers();
 
                 }
             }

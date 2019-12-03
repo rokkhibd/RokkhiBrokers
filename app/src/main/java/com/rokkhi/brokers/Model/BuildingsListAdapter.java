@@ -147,18 +147,28 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                     LinearLayout lin2=view.findViewById(R.id.lin2);
                     LinearLayout lin3=view.findViewById(R.id.lin3);
                     LinearLayout lin4=view.findViewById(R.id.lin4);
+                    LinearLayout lin5=view.findViewById(R.id.lin5);
+                    LinearLayout lin6=view.findViewById(R.id.lin6);
+
 
                     TextView nodatatxt=view.findViewById(R.id.notdatatxt);
+
                     TextView managerName = view.findViewById(R.id.bpeople_name_manager);
                     TextView managerDesig = view.findViewById(R.id.bpeople_desig_manager);
                     TextView managerNumber = view.findViewById(R.id.bpeople_phone_manager);
 
                     ImageView managerImg = view.findViewById(R.id.manager_call_img);
                     ImageView guardImg = view.findViewById(R.id.guard_call_img);
+                    ImageView ownerImg=view.findViewById(R.id.owner_call_img);
 
                     TextView guardName = view.findViewById(R.id.bpeople_name_guard);
                     TextView guardDesig = view.findViewById(R.id.bpeople_desig_guard);
                     TextView guardNumber = view.findViewById(R.id.bpeople_phone_guard);
+
+
+                    TextView ownerName = view.findViewById(R.id.bpeople_name_owner);
+                    TextView ownerDesig = view.findViewById(R.id.bpeople_desig_owner);
+                    TextView ownerNumber = view.findViewById(R.id.bpeople_phone_owner);
 
 
                     firebaseFirestore.collection(context.getString(R.string.col_fBbuildingContacts)).whereEqualTo("b_code", fBuildings.getB_code()).get()
@@ -230,12 +240,41 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                                                         }
                                                     }
                                                 });
-                                            }else {
+                                            }else if (designation.equalsIgnoreCase("Owner")){
+                                                ownerDesig.setText("Owner");
+                                                ownerName.setText(fbPeople.getName());
+                                                ownerNumber.setText(fbPeople.getNumber());
+
+
+                                                ownerImg.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        String number = fbPeople.getNumber();
+
+                                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+
+                                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                            if (context.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+
+                                                                context.startActivity(intent);
+                                                                return;
+                                                            }else {
+                                                                requestPermission(context);
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            }
+
+                                            else {
                                                 progress.setVisibility(View.GONE);
                                                 lin1.setVisibility(View.GONE);
                                                 lin2.setVisibility(View.GONE);
                                                 lin3.setVisibility(View.GONE);
                                                 lin4.setVisibility(View.GONE);
+                                                lin5.setVisibility(View.GONE);
+                                                lin6.setVisibility(View.GONE);
+
                                                 nodatatxt.setVisibility(View.VISIBLE);
 
                                             }
