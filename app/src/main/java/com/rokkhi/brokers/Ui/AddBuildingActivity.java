@@ -119,7 +119,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     String areaListCode, roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, status, flatformat, districtValue, downloadImageUri, totalCode;
 
-    String wholeAddress, currentDate;
+    String wholeAddress, currentDate,status_id;
 
     String followUp_id,meetingPending_id,meetingRejected_id,meetingCancelled_id;
     Double lat,lan;
@@ -132,7 +132,10 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     int areaCodePos;
     int districtCodePos;
+    int statusCodePos;
+
     List<Long> areaCodeList;
+    List<String> statusIdList;
 
     List<Long> districtCodeList;
 
@@ -148,8 +151,11 @@ public class AddBuildingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_building);
+
         areaCodeList = new ArrayList<>();
         districtCodeList = new ArrayList<>();
+        statusIdList=new ArrayList<>();
+
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -225,13 +231,10 @@ public class AddBuildingActivity extends AppCompatActivity {
 
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.status);
-        //b_status.setAdapter(adapter);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allStringValues.flatformat);
-        //b_flatfrmt.setAdapter(adapter);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allStringValues.district);
-        //b_district.setAdapter(adapter);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allStringValues.designation);
 
@@ -981,7 +984,9 @@ public class AddBuildingActivity extends AppCompatActivity {
             String housefrmt = b_housefrmt.getText().toString();
             String flatformat = b_flatfrmt.getText().toString();
             districtValue = b_district.getText().toString();
-            status = b_status.getText().toString();
+            //status = b_status.getText().toString();
+            status_id=statusIdList.get(statusCodePos);
+
 
 
 
@@ -1018,7 +1023,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             String fWorkersDocID = docref_FWorkersBuildings.getId();
 
-            FWorkerBuilding fWorkerBuilding=new FWorkerBuilding(build_id,fWorkersDocID, currentUserID,status,date,date,totalCode);
+            FWorkerBuilding fWorkerBuilding=new FWorkerBuilding(build_id,fWorkersDocID, currentUserID,status_id,date,date,totalCode);
 
 //            normalfunc.getTimestampFromDate(date);
             String date1 = b_follwing.getText().toString();
@@ -1027,7 +1032,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             Log.d("TAG", "saveBuildingDataInDB: "+date2);
 
             fBuildings = new FBuildings(build_id, wholeAddress, totalCode, houseNmbr, road, districtValue, area, flatformat,
-                    flatperFloor, date2, housename, totlflr, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), status, "Pending", imageurl, code_array, lat, lan);
+                    flatperFloor, date2, housename, totlflr, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), status_id, "Pending", imageurl, code_array, lat, lan);
 
             WriteBatch batch=db.batch();
 
@@ -1299,19 +1304,25 @@ public class AddBuildingActivity extends AppCompatActivity {
 
 
                     String status = documentSnapshot.getString("status_type");
-                    String bstatus_id=documentSnapshot.getString("starus_id");
+                    String bstatus_id=documentSnapshot.getString("status_id");
 
 
                     //statusList.add(status);
                     //Ignore Done status
-                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done") &&!status.equalsIgnoreCase("Meeting Rejected")){
+                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done")
+                            &&!status.equalsIgnoreCase("Meeting Rejected")){
+
                         statusList.add(status);
+                        statusIdList.add(bstatus_id);
+
                     }
 
 
                 }
 
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, statusList);
+
+
 
                 adapter.notifyDataSetChanged();
                 statusListView.setAdapter(adapter);
@@ -1332,6 +1343,9 @@ public class AddBuildingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String bstatus = String.valueOf(parent.getItemAtPosition(position));
+
+                statusCodePos=position;
+
                 b_status.setText(bstatus);
                 dialog.dismiss();
             }

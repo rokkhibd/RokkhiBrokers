@@ -20,7 +20,7 @@ public class FBuildings implements Serializable {
     private int totalfloor=0;
     private Date created_at=new Date();
     private Date updated_at=new Date();
-    private String status="none";
+    private String status_id="none";
     private String active;
     private ArrayList<String> b_imageUrl;
     private ArrayList<String> b_array;
@@ -33,7 +33,7 @@ public class FBuildings implements Serializable {
     }
 
 
-    public FBuildings(String build_id, String b_address, String b_code, String b_houseno, String b_roadno, String b_district, String b_area, String flatformat, int flatperfloor, Date followupdate, String housename, int totalfloor, Date created_at, Date updated_at, String status, String active, ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude, Double longitude) {
+    public FBuildings(String build_id, String b_address, String b_code, String b_houseno, String b_roadno, String b_district, String b_area, String flatformat, int flatperfloor, Date followupdate, String housename, int totalfloor, Date created_at, Date updated_at, String status_id, String active, ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude, Double longitude) {
         this.build_id = build_id;
         this.b_address = b_address;
         this.b_code = b_code;
@@ -48,7 +48,7 @@ public class FBuildings implements Serializable {
         this.totalfloor = totalfloor;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.status = status;
+        this.status_id = status_id;
         this.active = active;
         this.b_imageUrl = b_imageUrl;
         this.b_array = b_array;
@@ -170,11 +170,11 @@ public class FBuildings implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return status_id;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String status_id) {
+        this.status_id = status_id;
     }
 
     public String getActive() {

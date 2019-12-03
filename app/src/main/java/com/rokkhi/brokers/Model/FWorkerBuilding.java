@@ -9,7 +9,7 @@ public class FWorkerBuilding {
     private String build_id="none"; //docid
     private String doc_id="none"; //docid
     private String f_uid="none";
-    private String status="none";
+    private String status_id="none";
     private Date created_at=new Date();
     private Date updated_at=new Date();
     private String b_code="none";
@@ -22,7 +22,7 @@ public class FWorkerBuilding {
         this.build_id = build_id;
         this.doc_id = doc_id;
         this.f_uid = f_uid;
-        this.status = status;
+        this.status_id = status_id;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.b_code = b_code;
@@ -53,11 +53,11 @@ public class FWorkerBuilding {
     }
 
     public String getStatus() {
-        return status;
+        return status_id;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String status_id) {
+        this.status_id = status_id;
     }
 
     public Date getCreated_at() {

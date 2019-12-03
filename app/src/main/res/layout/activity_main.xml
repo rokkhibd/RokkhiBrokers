@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="No flat found"
+                    android:text="Phone Number"
                     android:textColor="@color/grey_2000"
                     android:textStyle="italic"
                     app:layout_constraintStart_toEndOf="@+id/propic"
