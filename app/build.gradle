@@ -72,4 +72,6 @@ dependencies {
     implementation 'com.m1f:updatechecker:1.1.3'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
+
 }

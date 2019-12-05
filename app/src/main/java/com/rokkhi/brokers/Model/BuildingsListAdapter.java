@@ -92,7 +92,18 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
 
                         holder.build_address.setText(fb.getB_address());
                         holder.build_name.setText(fb.getHousename());
-                        holder.build_status.setText(fb.getStatus());
+
+                        if (fb.getStatus_id().equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")){
+                            holder.build_status.setText("Followup");
+                        }if (fb.getStatus_id().equalsIgnoreCase("rUyWv6FLEgZ0EIB6aNNP")){
+                            holder.build_status.setText("Meeting Pending");
+                        }if (fb.getStatus_id().equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")){
+                            holder.build_status.setText("Cancelled");
+                        }
+
+                        //holder.build_status.setText(fb.getStatus_id());
+
+
                         holder.build_lastVisit.setText(Normalfunc.convertDate(fb.getCreated_at()));
                     }
                 }

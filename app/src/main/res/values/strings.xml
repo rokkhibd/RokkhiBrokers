@@ -28,7 +28,7 @@
     <string name="col_fBbuildingContacts">fBbuildingContacts</string>
     <string name="col_logoutsession">logoutsession</string>
     <string name="col_loginsession">loginsession</string>
-    <string name="col_buildingstatus">buildingStatus</string>
+    <string name="col_buildingstatus">fBuildingStatus</string>
     <string name="col_fNotification">fNotification</string>
     <string name="col_fPeopleType">fPeopleType</string>
     <string name="col_GuardTrainerTrack">guardTrainerTrack</string>

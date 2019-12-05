@@ -63,6 +63,7 @@ import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
 import com.rokkhi.brokers.Utils.StringAdapter;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
@@ -251,11 +252,12 @@ public class AddBuildingActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 if (pickedImageUri == null) {
-                    try {
-                        saveBuildingDataInDB();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+
+
+                    FancyToast.makeText(context,"Capture a Building Image",FancyToast.LENGTH_LONG, FancyToast.ERROR,false).show();
+                    //saveBuildingDataInDB();
+                    progressBar.setVisibility(View.GONE);
+
                 } else {
                     saveImageToStorage();
                 }
@@ -268,6 +270,8 @@ public class AddBuildingActivity extends AppCompatActivity {
         saveNumberBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                saveNumberBtn.setVisibility(View.INVISIBLE);
 
                 createBuildingsContactInfo();
 
@@ -555,7 +559,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                     if (task.getResult().size() > 0) {
                         for (DocumentSnapshot documentSnapshot : task.getResult()) {
                             FBuildings fBuildings = documentSnapshot.toObject(FBuildings.class);
-                            String status = fBuildings.getStatus();
+                            String status = fBuildings.getStatus_id();
 
                             if (status.equalsIgnoreCase("Building Active")) {
                                 shoeAlertforPendingHouse();
@@ -1124,7 +1128,11 @@ public class AddBuildingActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
 
                     if (task.isSuccessful()) {
-                        Toast.makeText(AddBuildingActivity.this, "number saved successfully", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(AddBuildingActivity.this, "number saved successfully", Toast.LENGTH_SHORT).show();
+
+                        FancyToast.makeText(AddBuildingActivity.this,"number saved successfully",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
+                        saveNumberBtn.setVisibility(View.VISIBLE);
                     }
                 }
             });

@@ -101,7 +101,10 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     EditText statusEdit;
     ProgressDialog progressDialog;
     List<String> statusList = new ArrayList<>();
+    List<String> statusIdList;
+
     String builidID;
+    int statusCodePos;
 
 
     @Override
@@ -126,7 +129,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         fbPeople = new FBPeople();
         fbPeopleList = new ArrayList<>();
-
+        statusIdList=new ArrayList<>();
 
         house_name = findViewById(R.id.update_bldng_houseName);
         houseImage = findViewById(R.id.update_bldng_image);
@@ -194,7 +197,17 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 if (task.isSuccessful()){
                     fBuildings = task.getResult().toObject(FBuildings.class);
                     house_name.setText(fBuildings.getHousename());
-                    building_status.setText(fBuildings.getStatus());
+
+                    if (fBuildings.getStatus_id().equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")){
+                        building_status.setText("Followup");
+                    }if (fBuildings.getStatus_id().equalsIgnoreCase("rUyWv6FLEgZ0EIB6aNNP")){
+                        building_status.setText("Meeting Pending");
+                    }if (fBuildings.getStatus_id().equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")){
+                        building_status.setText("Cancelled");
+                    }
+
+
+                    //building_status.setText(fBuildings.getStatus_id());
                     total_floor.setText(String.valueOf(fBuildings.getTotalfloor()));
                     flat_floor.setText(String.valueOf(fBuildings.getFlatperfloor()));
                     house_address.setText(fBuildings.getB_address());
@@ -206,9 +219,9 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl()).
                             error(R.drawable.building).fitCenter().into(houseImage);
 
-                    String status=fBuildings.getStatus().toString();
+                    String status=fBuildings.getStatus_id().toString();
 
-                    if (status.equalsIgnoreCase("Building Active")){
+                    if (status.equalsIgnoreCase("lACNetniNe4gjp6nBvWP")){
                         updateInfo_Button.setVisibility(View.GONE);
 
                         showMessageAlertDialogue();
@@ -242,7 +255,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         } else if (v.getId() == R.id.update_bldng_followupdate) {
             AllStringValues.showCalendar(this, followup_date);
         } else if (v.getId() == R.id.update_bldng_houseName) {
-            house_name.setFocusableInTouchMode(true);
+           // house_name.setFocusableInTouchMode(true);
         } else if (v.getId() == R.id.update_bldng_bldngStatus) {
             showBuildingStatus();
         }
@@ -263,10 +276,12 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 statusList.clear();
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     String status = documentSnapshot.getString("status_type");
+                    String bstatus_id=documentSnapshot.getString("status_id");
                     //statusList.add(status);
 
-                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done")){
+                    if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done")&& !status.equalsIgnoreCase("Meeting rejected")){
                         statusList.add(status);
+                        statusIdList.add(bstatus_id);
                     }
 
 
@@ -294,6 +309,9 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String b_status = String.valueOf(parent.getItemAtPosition(position));
+
+                statusCodePos = position;
+
                 building_status.setText(b_status);
                 dialog.dismiss();
             }
@@ -303,7 +321,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     private void updateBuildingInfo() {
 
         WriteBatch batch = db.batch();
-        String update_bstatus = building_status.getText().toString();
+        String update_bstatus = statusIdList.get(statusCodePos);
         String update_address = house_address.getText().toString();
         String update_houseName = house_name.getText().toString();
         String update_followdate=followup_date.getText().toString();

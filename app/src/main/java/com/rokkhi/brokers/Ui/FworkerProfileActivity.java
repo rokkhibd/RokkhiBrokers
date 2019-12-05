@@ -54,6 +54,7 @@ import com.rokkhi.brokers.Model.FWorkers;
 import com.rokkhi.brokers.Model.Users;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
@@ -302,10 +303,14 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
                 if (pickedImageUri == null) {
 
-                    saveAllDataToFirestore();
+                    //saveAllDataToFirestore();
+                    //Toast.makeText(context, "Select Your Profile picture...", Toast.LENGTH_SHORT).show();
 
+                    FancyToast.makeText(context,"Select Your Profile picture",FancyToast.LENGTH_LONG, FancyToast.ERROR,false).show();
 
-                } else {
+                    spinKitProgressBar.setVisibility(View.GONE);
+
+                }  else {
 
                     saveImageToStorage();
 
@@ -900,9 +905,9 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         String fw_bkash = normalfunc.makephone14(f_bkash.getText().toString());
         String fw_nogod = "";
 
-        fPayments = new FPayments(userId, "", fw_phone, 0, 0, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
+        fPayments = new FPayments(userId, ref_id, fw_phone, 0, 0, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
 
-        db.collection("fPayment").document(userId).set(fPayments).addOnCompleteListener(new OnCompleteListener<Void>() {
+        db.collection(getString(R.string.col_fPayment)).document(userId).set(fPayments).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -923,57 +928,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
     }
 
     public void saveImageToStorage() {
-/*
-        if (f_name.length() == 0) {
-            f_name.setError("Insert your name");
-            f_name.requestFocus();
-            spinKitProgressBar.setVisibility(View.GONE);
-            return;
-        }
-        if (f_area.length() == 0) {
-            f_area.setError("Insert your area name");
-            f_area.requestFocus();
-            spinKitProgressBar.setVisibility(View.GONE);
-            return;
-        }
-        if (f_phone.length() == 0) {
-            f_phone.setError("Insert your mobile number");
-            f_phone.requestFocus();
-            spinKitProgressBar.setVisibility(View.GONE);
-            return;
-        }
 
-
-        if (f_refId.getText().toString().isEmpty()) {
-            f_refId.requestFocus();
-            f_refId.setError("Enter Referral Number");
-            return;
-
-        }
-
-        if (!normalfunc.isvalidphone(f_refId.getText().toString())) {
-            f_refId.requestFocus();
-            f_refId.setError("Enter Valid Number");
-            return;
-
-        }
-
-
-         if (TextUtils.isEmpty(f_nid.getText().toString())) {
-            f_nid.setError("Insert You'r NID Number");
-            f_nid.requestFocus();
-            spinKitProgressBar.setVisibility(View.GONE);
-            return;
-        }
-
-         if (f_mail.getText().toString().isEmpty() && normalfunc.isValidEmail(f_mail.getText().toString())) {
-
-            f_mail.setError("Insert Valid E-mail");
-            f_mail.requestFocus();
-            spinKitProgressBar.setVisibility(View.GONE);
-
-            return;
-        }*/
 
         if (f_name.getText().toString().isEmpty()) {
             f_name.setError("Insert your name");
