@@ -104,6 +104,9 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                         }if (fb.getStatus_id().equalsIgnoreCase("lACNetniNe4gjp6nBvWP")){
                             holder.build_status.setText("Building Active");
                         }
+                        /*if (fb.getStatus_id().equalsIgnoreCase("lACNetniNe4gjp6nBvWP")){
+                            holder.build_status.setText("Building Active");
+                        }*/
 
                         //holder.build_status.setText(fb.getStatus_id());
 
