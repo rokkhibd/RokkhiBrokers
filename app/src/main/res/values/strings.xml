@@ -24,6 +24,8 @@
     <string name="col_fWorkers">fWorkers</string>
     <string name="col_fPayment">fPayment</string>
     <string name="col_fpaymentHistory">paymentHistory</string>
+    <string name="col_fPaymentType">fPaymentType</string>
+
     <string name="col_fWorkerBuilding">fWorkerBuilding</string>
     <string name="col_fBbuildingContacts">fBbuildingContacts</string>
     <string name="col_logoutsession">logoutsession</string>

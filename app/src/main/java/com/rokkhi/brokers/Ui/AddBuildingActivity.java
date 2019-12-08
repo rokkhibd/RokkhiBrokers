@@ -561,19 +561,22 @@ public class AddBuildingActivity extends AppCompatActivity {
                             FBuildings fBuildings = documentSnapshot.toObject(FBuildings.class);
                             String status = fBuildings.getStatus_id();
 
-                            if (status.equalsIgnoreCase("Building Active")) {
+                            if(status.equalsIgnoreCase("lACNetniNe4gjp6nBvWP")) {
                                 shoeAlertforPendingHouse();
-                            } if (status.equalsIgnoreCase("Meeting Pending")) {
+                            }else if (status.equalsIgnoreCase("rUyWv6FLEgZ0EIB6aNNP")) {
                                 shoeAlertforPendingHouse();
-                            } if (status.equalsIgnoreCase("Cancelled")){
-                                shoeAlertforhouseNotfound();
-                            } if (status.equalsIgnoreCase("Followup")){
+                            }else if (status.equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")){
                                 shoeAlertforPendingHouse();
-                            } if (status.equalsIgnoreCase("Meeting Done")){
+                            }else if (status.equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")){
                                 shoeAlertforPendingHouse();
-                            }if (status.equalsIgnoreCase("Meeting Rejected")){
+                            }else if (status.equalsIgnoreCase("qj3AJDoo5e58TYzZZ9lE")){
                                 shoeAlertforPendingHouse();
-                            }
+                            }else if (status.equalsIgnoreCase("cQ7jmazM2pAoMWtL213L")){
+                                shoeAlertforPendingHouse();
+                            }/*else {
+                               // shoeAlertforhouseNotfound();
+                               // progressDialog.dismiss();
+                            }*/
                             progressDialog.dismiss();
                         }
                     } else {
@@ -1050,7 +1053,10 @@ public class AddBuildingActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     //gotoMyHomeActvity();
-                    Toast.makeText(AddBuildingActivity.this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(AddBuildingActivity.this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(context,"Data Saved Successfully",FancyToast.LENGTH_LONG, FancyToast.SUCCESS,false).show();
+
+
                     progressBar.setVisibility(View.GONE);
 
                 }

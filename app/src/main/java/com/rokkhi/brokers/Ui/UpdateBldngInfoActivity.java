@@ -103,7 +103,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     List<String> statusList = new ArrayList<>();
     List<String> statusIdList;
 
-    String builidID;
+    String builidID,doc_id;
     int statusCodePos;
 
 
@@ -115,6 +115,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         fBuildings = new FBuildings();
         builidID = getIntent().getStringExtra("buildingID");
+        doc_id=getIntent().getStringExtra("doc_id");
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -328,6 +330,22 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         ArrayList<String> b_array = new ArrayList<>(normalfunc.splitchar(update_houseName));
 
+
+        DocumentReference docRef2 = db.collection(getString(R.string.col_fWorkerBuilding)).document(doc_id);
+
+        //batch.update(docRef2,"status_id",update_bstatus);
+
+        Map<String,Object> map2=new HashMap<>();
+        map2.put("status_id",update_bstatus);
+
+        docRef2.set(map2,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+
+
         DocumentReference docRef = db.collection(getString(R.string.col_fBuildings)).document(fBuildings.getBuild_id());
 
         Map<String, Object> map = new HashMap<>();
@@ -335,7 +353,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         map.put("housename", update_houseName);
         map.put("b_array", b_array);
         map.put("updated_at", date);
-        map.put("status",update_bstatus);
+        map.put("status_id",update_bstatus);
 
         docRef.set(map, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -449,13 +467,29 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         ArrayList<String> imageurl = new ArrayList<String>();
         imageurl.add(downloadImageUri);
 
+
+        DocumentReference docRef2 = db.collection(getString(R.string.col_fWorkerBuilding)).document(doc_id);
+
+        //batch.update(docRef2,"status_id",update_bstatus);
+
+        Map<String,Object> map2=new HashMap<>();
+        map2.put("status_id",update_bstatus);
+
+        docRef2.set(map2,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+
+
         DocumentReference docRef = db.collection(getString(R.string.col_fBuildings)).document(fBuildings.getBuild_id());
 
         Map<String, Object> map = new HashMap<>();
         map.put("b_address", update_address);
         map.put("housename", update_houseName);
         map.put("b_array", b_array);
-        map.put("status", update_bstatus);
+        map.put("status_id", update_bstatus);
         map.put("updated_at", date);
 
 

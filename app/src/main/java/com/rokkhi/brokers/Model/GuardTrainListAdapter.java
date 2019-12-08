@@ -1,7 +1,10 @@
 package com.rokkhi.brokers.Model;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +43,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import mumayank.com.airlocationlibrary.AirLocation;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAdapter.GuardTrainViewHolder> {
 
     Context context;
@@ -45,6 +56,13 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
     FGuardTrack fGuardTrack;
     FirebaseAuth mAuth;
     Normalfunc normalfunc;
+
+    FusedLocationProviderClient client;
+
+    Double endlate,endlang;
+
+    private AirLocation airLocation;
+
 
     public GuardTrainListAdapter(Context context, List<FGuardTrack> fGuardTrackList) {
         this.context = context;
@@ -60,7 +78,21 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
         GuardTrainViewHolder bv=new GuardTrainViewHolder(v);
         firebaseFirestore= FirebaseFirestore.getInstance();
         mAuth= FirebaseAuth.getInstance();
+        client = LocationServices.getFusedLocationProviderClient(context);
 
+
+        airLocation = new AirLocation((Activity) context, true, true, new AirLocation.Callbacks() {
+            @Override
+            public void onSuccess(Location location) {
+                //  lat = location.getLatitude();
+                // lng = location.getLongitude();
+            }
+
+            @Override
+            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+                // do something
+            }
+        });
 
         return bv;
     }
@@ -80,13 +112,14 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
         holder.startButton.setText(sdf.format(cal.getTime()));
 
 
-        Date date2=fGuardTrack.getTimeEnd();
+        /*Date date2=fGuardTrack.getTimeEnd();
         Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(date2);
+        cal2.setTime(date2);*/
 
         String myFormat2 = "MMM d , hh:mm a "; //In which you need put here
         SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2);
-        holder.endButton.setText(sdf2.format(cal2.getTime()));
+
+       // holder.endButton.setText(sdf2.format(cal2.getTime()));
 
 
         firebaseFirestore.collection(context.getString(R.string.col_guards)).document(fGuardTrack.getGuard_id()).get()
@@ -165,6 +198,8 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
             @Override
             public void onClick(View v) {
 
+                getTheLatLang();
+
                 FirebaseUser firebaseUser=mAuth.getCurrentUser();
                 String userId=firebaseUser.getUid();
 
@@ -198,6 +233,8 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
 
                                 Map<String,Object> map=new HashMap<>();
                                 map.put("timeEnd",date);
+                                map.put("endlatitude",endlate);
+                                map.put("endlongitude",endlang);
 
                                 docRef.set(map, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -224,6 +261,28 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
             @Override
             public void onClick(View v) {
                 alertDialog1.dismiss();
+            }
+        });
+    }
+
+    public void getTheLatLang(){
+        if (ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+        client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+
+                if (location != null) {
+
+                    endlate = location.getLatitude();
+                    endlang = location.getLongitude();
+
+
+                }
+
             }
         });
     }

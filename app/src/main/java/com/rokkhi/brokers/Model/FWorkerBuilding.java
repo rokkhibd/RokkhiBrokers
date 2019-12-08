@@ -52,11 +52,11 @@ public class FWorkerBuilding {
         this.f_uid = f_uid;
     }
 
-    public String getStatus() {
+    public String getStatus_id() {
         return status_id;
     }
 
-    public void setStatus(String status_id) {
+    public void setStatus_id(String status_id) {
         this.status_id = status_id;
     }
 

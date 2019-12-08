@@ -108,6 +108,7 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
 
         fab.setOnClickListener(this);
         qrScan=new IntentIntegrator(this);
+        qrScan.setOrientationLocked(false);
         qrScan.setBeepEnabled(false);
         qrScan.setPrompt("Put your Camera infront of a QR code");
 

@@ -99,6 +99,10 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                             holder.build_status.setText("Meeting Pending");
                         }if (fb.getStatus_id().equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")){
                             holder.build_status.setText("Cancelled");
+                        }if (fb.getStatus_id().equalsIgnoreCase("cQ7jmazM2pAoMWtL213L")){
+                            holder.build_status.setText("Meeting rejected");
+                        }if (fb.getStatus_id().equalsIgnoreCase("lACNetniNe4gjp6nBvWP")){
+                            holder.build_status.setText("Building Active");
                         }
 
                         //holder.build_status.setText(fb.getStatus_id());
@@ -322,6 +326,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
             FWorkerBuilding fBuildings=fBuildingsList.get(getAdapterPosition());
             Intent intent=new Intent(v.getContext(), UpdateBldngInfoActivity.class);
             intent.putExtra("buildingID", fBuildings.getBuild_id());
+            intent.putExtra("doc_id",fBuildings.getDoc_id());
             v.getContext().startActivity(intent);
             
 
