@@ -26,8 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,7 +50,6 @@ import com.rokkhi.brokers.Model.FBuildings;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
 
-import com.squareup.picasso.Picasso;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
@@ -140,7 +137,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         flat_floor = findViewById(R.id.update_bldng_flatpfloor);
         house_address = findViewById(R.id.update_bldng_houseAddress);
         flat_format = findViewById(R.id.update_bldng_flatformat);
-        caretaker_number = findViewById(R.id.bldng_edit_caretakernmbr);
+//        caretaker_number = findViewById(R.id.bldng_edit_caretakernmbr);
         followup_date = findViewById(R.id.update_bldng_followupdate);
         update_bldngImage = findViewById(R.id.update_bldng_image);
 
@@ -384,7 +381,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         AlertDialog.Builder alert = new AlertDialog.Builder(UpdateBldngInfoActivity.this);
         View view = getLayoutInflater().inflate(R.layout.status_done_layout, null);
 
-        Button btn = view.findViewById(R.id.btn);
+        Button btn = view.findViewById(R.id.houseVisitedAlertBtn);
         TextView txt = view.findViewById(R.id.txt);
         alert.setView(view);
 

@@ -1,7 +1,6 @@
 package com.rokkhi.brokers.Ui;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +39,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -87,66 +85,46 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     AllStringValues allStringValues;
     ArrayAdapter<String> adapter;
-    private AirLocation airLocation;
     FusedLocationProviderClient client;
-
     ProgressDialog progressDialog;
     ProgressBar progressBar;
-
     RelativeLayout relativeLayout;
-    FirebaseFirestore db;
+    FirebaseFirestore firebaseFirestore;
     FirebaseAuth mAuth;
-
     StorageReference addbldngRef;
     String currentUserID;
-
     ListView roadNumberList, blockList, houseNoList, areaListView, peopleWeTalkList, districtListView;
     EditText roadNumberEdit, blockEdit, houseNoEdit, areaEdit, districtEdit;
-
     Bitmap bitmap;
     Uri pickedImageUri;
     List<String> areaList = new ArrayList<>();
     List<String> districtList = new ArrayList<>();
     DocumentReference docref_FBuildings;
     DocumentReference docref_FWorkersBuildings;
-
-    Normalfunc normalfunc = new Normalfunc();
-
+    Normalfunc normalfunc;
     CircleImageView circleImageView;
-    EditText b_status, b_name, b_totalfloor, b_floorperflat, b_totalguard, b_lat, b_long, b_area, b_roadnumber, b_block, b_housenmbr, b_housefrmt,
-            b_visit, b_follwing, b_code, b_peoplesName, b_peopleNumber, people_we_talk, b_district;
-
-    Button saveBtn, tapCode, addInfoButton, checkHouseBtn, saveNumberBtn;
-
-    String areaListCode, roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, status, flatformat, districtValue, downloadImageUri, totalCode;
-
-    String wholeAddress, currentDate,status_id;
-
-    String followUp_id,meetingPending_id,meetingRejected_id,meetingCancelled_id;
-    Double lat,lan;
-
-    ImageView visitCal, followpCal, statusMenu, flatfrmtMenu, district_Menu, designationMenu;
-
-    DatePickerDialog datePickerDialog;
-
+    EditText b_status, b_name, b_totalfloor, b_floorperflat, b_totalguard, areaNameET, roadName, roadNumberET, houseNumberET,
+            b_visit, b_follwing, b_code, b_peoplesName, b_peopleNumber, people_we_talk, districtNameET;
+    Button tapCode, addInfoButton, checkHouseBtn, saveNumberBtn;
+    String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode;
+    String wholeAddress, currentDate, status_id;
+    Double lat, lan;
+    ImageView visitCal, followpCal, statusMenu, flatfrmtMenu, /*district_Menu*/
+            designationMenu;
     EditText b_flatfrmt;
-
     int areaCodePos;
     int districtCodePos;
     int statusCodePos;
-
     List<Long> areaCodeList;
     List<String> statusIdList;
-
     List<Long> districtCodeList;
-
     FBPeople fbPeople;
     FBuildings fBuildings;
-
-    String doc_id = "";
     Date date;
     ArrayList<String> types;
     Context context;
+    Query buildingsQuery;
+    private AirLocation airLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,15 +133,16 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         areaCodeList = new ArrayList<>();
         districtCodeList = new ArrayList<>();
-        statusIdList=new ArrayList<>();
+        statusIdList = new ArrayList<>();
+        normalfunc = new Normalfunc();
 
-        db = FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        docref_FBuildings = db.collection(getString(R.string.col_fBuildings)).document();
+        docref_FBuildings = firebaseFirestore.collection(getString(R.string.col_fBuildings)).document();
 
-        docref_FWorkersBuildings = db.collection(getString(R.string.col_fWorkerBuilding)).document();
+        docref_FWorkersBuildings = firebaseFirestore.collection(getString(R.string.col_fWorkerBuilding)).document();
 
         addbldngRef = FirebaseStorage.getInstance().getReference()
                 .child("fBuildings/" + currentUserID + "/pic");
@@ -175,7 +154,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         fBuildings = new FBuildings();
 
         date = Calendar.getInstance().getTime();
-        context= AddBuildingActivity.this;
+        context = AddBuildingActivity.this;
         progressDialog = new ProgressDialog(this);
 
         relativeLayout = findViewById(R.id.housecheck_layout);
@@ -183,13 +162,14 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         b_peoplesName = findViewById(R.id.bldng_edit_theirnames);
         b_peopleNumber = findViewById(R.id.bldng_edit_theirnumbers);
-        b_area = findViewById(R.id.bldng_edit_area);
-        b_roadnumber = findViewById(R.id.bldng_edit_road);
-        b_block = findViewById(R.id.bldng_edit_block);
-        b_housenmbr = findViewById(R.id.bldng_edit_house);
-        b_housefrmt = findViewById(R.id.bldng_edit_houseformat);
-        b_district = findViewById(R.id.bldng_edit_disctrict);
-        b_name = findViewById(R.id.bldng_edit_husename);
+
+        districtNameET = findViewById(R.id.district);
+        areaNameET = findViewById(R.id.area);
+        roadNumberET = findViewById(R.id.roadNumber);
+        roadName = findViewById(R.id.road_Name);
+        houseNumberET = findViewById(R.id.houseNumber);
+
+
         b_floorperflat = findViewById(R.id.bldng_edit_totalflt);
         b_totalfloor = findViewById(R.id.bldng_edit_totalfloor);
         b_totalguard = findViewById(R.id.bldng_edit_totalguard);
@@ -198,29 +178,30 @@ public class AddBuildingActivity extends AppCompatActivity {
         b_follwing = findViewById(R.id.bldng_edit_followingdate);
         b_code = findViewById(R.id.bldng_edit_bcode);
         b_status = findViewById(R.id.bldng_edit_status);
-        b_lat = findViewById(R.id.bldng_edit_lat);
-        b_long = findViewById(R.id.bldng_edit_long);
+        b_name = findViewById(R.id.bldng_edit_husename);
+       /* b_lat = findViewById(R.id.bldng_edit_lat);
+        b_long = findViewById(R.id.bldng_edit_long);*/
         people_we_talk = findViewById(R.id.bldng_edit_buildingspeoples);
 
         tapCode = findViewById(R.id.tap_bcode);
         circleImageView = findViewById(R.id.building_photo);
         addInfoButton = findViewById(R.id.addblgnInfoBtn);
-        checkHouseBtn = findViewById(R.id.bldng_button_housecheck);
+        checkHouseBtn = findViewById(R.id.check_button);
         saveNumberBtn = findViewById(R.id.bldng_edit_numberSaves);
 
         visitCal = findViewById(R.id.visitcalimg);
         followpCal = findViewById(R.id.followingcalimg);
         statusMenu = findViewById(R.id.statusMenu);
         flatfrmtMenu = findViewById(R.id.flatformatMenu);
-        district_Menu = findViewById(R.id.districtMenu);
-        designationMenu = findViewById(R.id.choosePeopleMenu);
+//        district_Menu = findViewById(R.id.districtMenu);
+//        designationMenu = findViewById(R.id.choosePeopleMenu);
 
         allStringValues = new AllStringValues();
 
         airLocation = new AirLocation(this, true, true, new AirLocation.Callbacks() {
             @Override
             public void onSuccess(Location location) {
-               // lat = location.getLatitude();
+                // lat = location.getLatitude();
                 //lng = location.getLongitude();
             }
 
@@ -254,14 +235,13 @@ public class AddBuildingActivity extends AppCompatActivity {
                 if (pickedImageUri == null) {
 
 
-                    FancyToast.makeText(context,"Capture a Building Image",FancyToast.LENGTH_LONG, FancyToast.ERROR,false).show();
+                    FancyToast.makeText(context, "Capture a Building Image", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     //saveBuildingDataInDB();
                     progressBar.setVisibility(View.GONE);
 
                 } else {
                     saveImageToStorage();
                 }
-
 
 
             }
@@ -296,12 +276,6 @@ public class AddBuildingActivity extends AppCompatActivity {
             }
         });
 
-        /*b_district.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDistrict();
-            }
-        });*/
 
         people_we_talk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,14 +303,6 @@ public class AddBuildingActivity extends AppCompatActivity {
             }
         });
 
-        district_Menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //b_district.showDropDown();
-
-
-            }
-        });
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -369,27 +335,25 @@ public class AddBuildingActivity extends AppCompatActivity {
         });
 
         //get Area Data List
-        db.collection("area").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("area").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 areaList.clear();
 
-               if (queryDocumentSnapshots!=null){
-                   for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-                       String area_eng = documentSnapshot.getString("english");
-                       String area_ban = documentSnapshot.getString("bangla");
-                       Long area_code = documentSnapshot.getLong("code");
-                       areaCodeList.add(area_code);
+                        String area_eng = documentSnapshot.getString("english");
+                        String area_ban = documentSnapshot.getString("bangla");
+                        Long area_code = documentSnapshot.getLong("code");
+                        areaCodeList.add(area_code);
 
-                       areaList.add(area_eng + "(" + area_ban + ")");
+                        areaList.add(area_eng + "(" + area_ban + ")");
 
-                   }
-               }
+                    }
+                }
 
-
-               // Toast.makeText(AddBuildingActivity.this, "Loaded Area", Toast.LENGTH_SHORT).show();
-                b_area.setOnClickListener(new View.OnClickListener() {
+                areaNameET.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showAllAreasAlert(areaList);
@@ -401,12 +365,12 @@ public class AddBuildingActivity extends AppCompatActivity {
             }
         });
         //Get District Data
-        db.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 districtList.clear();
 
-                if (queryDocumentSnapshots!=null){
+                if (queryDocumentSnapshots != null) {
                     for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
                         String area_district = documentSnapshot.getString("english");
@@ -422,7 +386,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                     }
                 }
 
-                b_district.setOnClickListener(new View.OnClickListener() {
+                districtNameET.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showDistrict(districtList);
@@ -432,109 +396,189 @@ public class AddBuildingActivity extends AppCompatActivity {
         });
 
 
-
-        b_roadnumber.setOnClickListener(new View.OnClickListener() {
+      /*  roadNumberET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAvailableRoads();
 
             }
-        });
+        });*/
 
-        b_block.setOnClickListener(new View.OnClickListener() {
+   /*     b_block.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAvailableBlock();
                 //showAddressAlert(Arrays.asList(allStringValues.block_numbers),b_block);
             }
-        });
-
-        b_housenmbr.setOnClickListener(new View.OnClickListener() {
+        });*/
+/*
+        houseNumberET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shoAvailableHouseNumner();
 
-                //showAddressAlert(Arrays.asList(allStringValues.road_no),b_housenmbr);
+                //showAddressAlert(Arrays.asList(allStringValues.road_no),houseNumberET);
             }
-        });
+        });*/
 
-        b_housefrmt.setOnClickListener(new View.OnClickListener() {
+   /*     b_housefrmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 showAvailableHouseFormat();
                 //showAddressAlert(Arrays.asList(allStringValues.block_numbers),b_housefrmt);
             }
-        });
+        });*/
 
         checkHouseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                db.collection(getString(R.string.col_fWorkers)).document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
-                            DocumentSnapshot doc=task.getResult();
+                firebaseFirestore.collection(getString(R.string.col_fWorkers)).document(currentUserID)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
 
-                            FWorkers fWorkers=task.getResult().toObject(FWorkers.class);
+                                    FWorkers fWorkers = task.getResult().toObject(FWorkers.class);
 
-                            boolean train=fWorkers.isTrained();
+                                    boolean train = fWorkers.isTrained();
 
-                            //Check if the guard is trained or not while adding building
-                            if (train==false){
-                                checkTrainOrNot();
-                            }else {
+                                    //Check if the guard is trained or not while adding building
+                                    if (train == false) {
+                                        checkTrainOrNot();
+                                    } else {
+                                        if (districtNameET.getText().toString().isEmpty()) {
+                                            districtNameET.setError("Insert the District number");
+                                            districtNameET.requestFocus();
+                                            return;
 
-                                if (b_area.getText().toString().isEmpty()) {
-                                    b_area.setError("Insert the area name");
-                                } else if (b_roadnumber.getText().toString().isEmpty()) {
-                                    b_roadnumber.setError("Insert the road number");
-                                } else if (b_block.getText().toString().isEmpty()) {
-                                    b_block.setError("Insert the block number");
-                                } else if (b_district.getText().toString().isEmpty()) {
-                                    b_block.setError("Insert the District number");
-                                } else {
+                                        } else if (areaNameET.getText().toString().isEmpty()) {
+                                            areaNameET.setError("Insert the area name");
+                                            areaNameET.requestFocus();
 
-                                    String area = b_area.getText().toString();
-                                    String road = b_roadnumber.getText().toString();
-                                    String block = b_block.getText().toString();
-                                    String houseNmbr = b_housenmbr.getText().toString();
-                                    String housefrmt = b_housefrmt.getText().toString();
-                                    districtValue = b_district.getText().toString();
+                                            return;
 
+                                        } else if (roadNumberET.getText().toString().isEmpty()) {
+                                            roadNumberET.setError("Insert the road number");
+                                            areaNameET.requestFocus();
+                                            return;
 
-                                    String theWholeAddress = area + " " + road + block + " " + houseNmbr + housefrmt + " " + districtValue;
+                                        } else if (houseNumberET.getText().toString().isEmpty()) {
+                                            houseNumberET.setError("Insert the House number");
+                                            houseNumberET.requestFocus();
+                                            return;
 
-                                    wholeAddress = theWholeAddress;
+                                        }
 
-                                    districtValue = String.valueOf(1);
-
-                                    //Toast.makeText(AddBuildingActivity.this, districtValue, Toast.LENGTH_SHORT).show();
-
-                                    totalCode = areaCodeList.get(areaCodePos) + "*" + roadListCode + "*" + blockListCode + "*" + houseListCode + "*" + housefrmntListCode + "*" + districtCodeList.get(districtCodePos);
-
-                                    // Toast.makeText(AddBuildingActivity.this, "" + totalCode, Toast.LENGTH_SHORT).show();
+                                        String roadNumberST = roadNumberET.getText().toString().replaceAll("\\s+", "");
+                                        String areaCode = areaCodeList.get(areaCodePos).toString();
+                                        String houseNumberST = houseNumberET.getText().toString().replaceAll("\\s+", "");
 
 
-                                    totalHouseCode = areaListCode + "" + roadListCode + "" + blockListCode + "" + houseListCode + "" + housefrmntListCode + "" + districtValue;
+                                        Log.e("TAG", "onComplete: district code = " + districtCodeList.get(districtCodePos));
+                                        Log.e("TAG", "onComplete: area code = " + areaCode);
+                                        Log.e("TAG", "onComplete: roadNumberST code = " + roadNumberST);
+                                        Log.e("TAG", "onComplete: houseNumberST code = " + houseNumberST);
 
-                                    //b_code.setText(totalHouseCode);
-                                    checkTheHouseAvailability(totalCode);
+
+                                        CollectionReference buildref = firebaseFirestore.collection(getString(R.string.col_fBuildings));
+
+
+                                        buildingsQuery = buildref.whereEqualTo("b_area", areaCode)
+                                                .whereEqualTo("b_roadno", roadNumberST)
+                                                .whereEqualTo("b_houseno", houseNumberST);
+
+                                        buildingsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                                                if (task.isSuccessful()) {
+
+                                                    Toast.makeText(AddBuildingActivity.this, "" + task.getResult().size(), Toast.LENGTH_SHORT).show();
+
+                                                    //if get this Building
+                                                    if (task.getResult().size() > 0) {
+
+                                                        for (DocumentSnapshot snapshot : task.getResult()) {
+
+                                                            fBuildings = snapshot.toObject(FBuildings.class);
+                                                            Log.e("TAG", "onComplete: " + fBuildings.getB_code());
+
+                                                            String status = fBuildings.getStatus_id();
+                                                            Log.e("TAG", "onComplete: Building status = " + status);
+
+                                                            Intent intent = new Intent(AddBuildingActivity.this, MapActivity.class);
+                                                            intent.putExtra("fbuildings", fBuildings);
+
+/*
+                                                            startActivity(new Intent(AddBuildingActivity.this,MapActivity.class)
+                                                            .putExtra("fbuildings",fBuildings));*/
+
+                                                            startActivity(intent);
+
+
+
+
+                                                          /*  //Building Active
+                                                            if (status.equalsIgnoreCase("lACNetniNe4gjp6nBvWP")) {
+                                                                shoeAlertforPendingHouse();
+                                                            } //meeting pending
+                                                            else if (status.equalsIgnoreCase("rUyWv6FLEgZ0EIB6aNNP")) {
+                                                                shoeAlertforPendingHouse();
+                                                            }//meeting canceled
+                                                            else if (status.equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")) {
+                                                                shoeAlertforPendingHouse();
+                                                            }//flow up
+                                                            else if (status.equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")) {
+                                                                shoeAlertforPendingHouse();
+                                                            } //meeting done
+                                                            else if (status.equalsIgnoreCase("qj3AJDoo5e58TYzZZ9lE")) {
+                                                                shoeAlertforPendingHouse();
+                                                            }//meeting rejected
+                                                            else if (status.equalsIgnoreCase("cQ7jmazM2pAoMWtL213L")) {
+                                                                shoeAlertforPendingHouse();
+                                                            }*/
+                                                        }
+
+                                                        if (task.getResult().isEmpty()) {
+
+                                                            //if Buildings Not Found in f_buildings
+                                                            Toast.makeText(context, "No Building Found", Toast.LENGTH_SHORT).show();
+                                                            progressBar.setVisibility(View.GONE);
+
+                                                            shoeAlertforhouseNotfound();
+                                                        }
+
+
+                                                    } else {
+
+                                                        //if Buildings Not Found in f_buildings
+//                        Toast.makeText(context, "No Building Found", Toast.LENGTH_SHORT).show();
+                                                        progressBar.setVisibility(View.GONE);
+                                                        shoeAlertforhouseNotfound();
+                                                    }
+
+                                                } else {
+
+                                                    progressBar.setVisibility(View.GONE);
+                                                }
+                                            }
+                                        });
+
+
+                                    }
+
+
                                 }
-
-
                             }
-                        }
-                    }
-                });
-
-
+                        });
 
 
             }
         });
-
 
 
     }
@@ -548,7 +592,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         progressDialog.show();
 
         CollectionReference buildRef;
-        buildRef = db.collection(getString(R.string.col_fBuildings));
+        buildRef = firebaseFirestore.collection(getString(R.string.col_fBuildings));
 
         Query buildingsQuery = buildRef.whereEqualTo("b_code", s);
         buildingsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -561,17 +605,17 @@ public class AddBuildingActivity extends AppCompatActivity {
                             FBuildings fBuildings = documentSnapshot.toObject(FBuildings.class);
                             String status = fBuildings.getStatus_id();
 
-                            if(status.equalsIgnoreCase("lACNetniNe4gjp6nBvWP")) {
+                            if (status.equalsIgnoreCase("lACNetniNe4gjp6nBvWP")) {
                                 shoeAlertforPendingHouse();
-                            }else if (status.equalsIgnoreCase("rUyWv6FLEgZ0EIB6aNNP")) {
+                            } else if (status.equalsIgnoreCase("rUyWv6FLEgZ0EIB6aNNP")) {
                                 shoeAlertforPendingHouse();
-                            }else if (status.equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")){
+                            } else if (status.equalsIgnoreCase("MWI1MTIe8Xv3Ls8Asa2X")) {
                                 shoeAlertforPendingHouse();
-                            }else if (status.equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")){
+                            } else if (status.equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")) {
                                 shoeAlertforPendingHouse();
-                            }else if (status.equalsIgnoreCase("qj3AJDoo5e58TYzZZ9lE")){
+                            } else if (status.equalsIgnoreCase("qj3AJDoo5e58TYzZZ9lE")) {
                                 shoeAlertforPendingHouse();
-                            }else if (status.equalsIgnoreCase("cQ7jmazM2pAoMWtL213L")){
+                            } else if (status.equalsIgnoreCase("cQ7jmazM2pAoMWtL213L")) {
                                 shoeAlertforPendingHouse();
                             }/*else {
                                // shoeAlertforhouseNotfound();
@@ -641,7 +685,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                 String areatxt = String.valueOf(parent.getItemAtPosition(position));
                 areaCodePos = position;
 
-                b_area.setText(areatxt);
+                areaNameET.setText(areatxt);
                 dialog.dismiss();
 
 
@@ -736,12 +780,12 @@ public class AddBuildingActivity extends AppCompatActivity {
                 String roadno = String.valueOf(parent.getItemAtPosition(position));
 
                 if (roadno.equals("None")) {
-                    b_roadnumber.setText("0");
+                    roadNumberET.setText("0");
                     roadListCode = "0";
                     //  Toast.makeText(AddBuildingActivity.this, roadListCode, Toast.LENGTH_SHORT).show();
                 } else {
                     roadListCode = roadno;
-                    b_roadnumber.setText(roadno);
+                    roadNumberET.setText(roadno);
                     // Toast.makeText(AddBuildingActivity.this, roadListCode, Toast.LENGTH_SHORT).show();
                 }
 
@@ -793,12 +837,12 @@ public class AddBuildingActivity extends AppCompatActivity {
                 String blockno = String.valueOf(parent.getItemAtPosition(position));
 
                 if (blockno.equals("None")) {
-                    b_block.setText("0");
+//                    b_block.setText("0");
                     blockListCode = "0";
                     //  Toast.makeText(AddBuildingActivity.this, blockListCode, Toast.LENGTH_SHORT).show();
                 } else {
 
-                    b_block.setText(blockno);
+//                    b_block.setText(blockno);
                     blockListCode = String.valueOf(position);
                     // Toast.makeText(AddBuildingActivity.this, blockListCode, Toast.LENGTH_SHORT).show();
                 }
@@ -852,12 +896,12 @@ public class AddBuildingActivity extends AppCompatActivity {
 
 
                 if (houseno.equals("None")) {
-                    b_housenmbr.setText("0");
+                    houseNumberET.setText("0");
                     houseListCode = "0";
 
                 } else {
                     houseListCode = houseno;
-                    b_housenmbr.setText(houseno);
+                    houseNumberET.setText(houseno);
                 }
 
                 dialog.dismiss();
@@ -899,7 +943,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             }
         });
-
+/*
         blockList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -919,7 +963,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                 dialog.dismiss();
 
             }
-        });
+        });*/
     }
 
     public void saveImageToStorage() {
@@ -971,37 +1015,40 @@ public class AddBuildingActivity extends AppCompatActivity {
         if (b_totalfloor.getText().toString().isEmpty()) {
             b_totalfloor.setError("Insert total floor");
             b_totalfloor.requestFocus();
-        } if (b_floorperflat.getText().toString().isEmpty()) {
+        }
+        if (b_floorperflat.getText().toString().isEmpty()) {
             b_floorperflat.setError("Insert number of floor per flat");
             b_floorperflat.requestFocus();
-        }  if (b_totalguard.getText().toString().isEmpty()) {
+        }
+        if (b_totalguard.getText().toString().isEmpty()) {
             b_totalguard.setError("Insert the number of guards");
             b_totalguard.requestFocus();
-        }  if (b_flatfrmt.getText().toString().isEmpty()) {
+        }
+        if (b_flatfrmt.getText().toString().isEmpty()) {
             b_flatfrmt.setError("Insert the flat format");
             b_flatfrmt.requestFocus();
-        }  if (b_name.getText().toString().isEmpty()) {
+        }
+        if (b_name.getText().toString().isEmpty()) {
             b_name.setError("Insert the house name");
             b_name.requestFocus();
         } else {
-            String area = b_area.getText().toString();
-            String road = b_roadnumber.getText().toString();
-            String block = b_block.getText().toString();
-            String houseNmbr = b_housenmbr.getText().toString();
-            String housefrmt = b_housefrmt.getText().toString();
+            String area = areaNameET.getText().toString();
+            String road = roadNumberET.getText().toString();
+            String roadNameSt=roadName.getText().toString();
+//            String block = b_block.getText().toString();
+            String houseNmbr = houseNumberET.getText().toString();
+//            String housefrmt = b_housefrmt.getText().toString();
             String flatformat = b_flatfrmt.getText().toString();
-            districtValue = b_district.getText().toString();
             //status = b_status.getText().toString();
-            status_id=statusIdList.get(statusCodePos);
+            status_id = statusIdList.get(statusCodePos);
 
 
-
-
-            String theWholeAddress = area + " " + road +""+block +" "+ houseNmbr +""+ housefrmt + " " + districtValue;
+            String theWholeAddress = area + " " + road + " " + houseNmbr + " " + districtCodeList.get(districtCodePos).toString();
 
             wholeAddress = theWholeAddress;
 
-            districtValue = String.valueOf(1);
+            districtValue = districtCodeList.get(districtCodePos).toString();
+
             totalHouseCode = areaCodeList.get(areaCodePos) + "" + roadListCode + "" + blockListCode + "" + houseListCode + "" + housefrmntListCode + "" + districtValue;
 
             String housename = b_name.getText().toString();
@@ -1023,6 +1070,8 @@ public class AddBuildingActivity extends AppCompatActivity {
             code_array.add(totalHouseCode);
 
 
+            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "*" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "");
+
             ArrayList<String> imageurl = new ArrayList<String>();
             imageurl.add(downloadImageUri);
 
@@ -1030,56 +1079,80 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             String fWorkersDocID = docref_FWorkersBuildings.getId();
 
-            FWorkerBuilding fWorkerBuilding=new FWorkerBuilding(build_id,fWorkersDocID, currentUserID,status_id,date,date,totalCode);
+            Log.e("TAG", "saveBuildingDataInDB: build_id 1  = " + build_id);
+            Log.e("TAG", "saveBuildingDataInDB: fWorkersDocID doc_ID 1  = " + fWorkersDocID);
+            Log.e("TAG", "saveBuildingDataInDB: currentUserID f_UID 1  = " + currentUserID);
+            Log.e("TAG", "saveBuildingDataInDB: status_id 1  = " + status_id);
+            Log.e("TAG", "saveBuildingDataInDB: created date 1  = " + date);
+            Log.e("TAG", "saveBuildingDataInDB: update date 1  = " + date);
+            Log.e("TAG", "saveBuildingDataInDB: totalCode b_code 1  = " + totalCode);
+
+            FWorkerBuilding fWorkerBuilding = new FWorkerBuilding(build_id,
+                    fWorkersDocID,
+                    currentUserID,
+                    status_id, date,
+                    date,
+                    totalCode);
 
 //            normalfunc.getTimestampFromDate(date);
             String date1 = b_follwing.getText().toString();
 
-            Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
-            Log.d("TAG", "saveBuildingDataInDB: "+date2);
-
-            fBuildings = new FBuildings(build_id, wholeAddress, totalCode, houseNmbr, road, districtValue, area, flatformat,
-                    flatperFloor, date2, housename, totlflr, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), status_id, "Pending", imageurl, code_array, lat, lan);
-
-            WriteBatch batch=db.batch();
+            Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+            Log.d("TAG", "saveBuildingDataInDB: " + date2);
 
 
-            DocumentReference fbuildingsReferance= db.collection(getString(R.string.col_fBuildings)).document(build_id);
-            batch.set(fbuildingsReferance,fBuildings);
+            Log.e("TAG", "saveBuildingDataInDB: build_id = " + build_id);
+            Log.e("TAG", "saveBuildingDataInDB: wholeAddress =  " + wholeAddress);
+            Log.e("TAG", "saveBuildingDataInDB: totalCode =  " + totalCode);
+            Log.e("TAG", "saveBuildingDataInDB: houseNmbr =  " + houseNmbr);
+            Log.e("TAG", "saveBuildingDataInDB: road Number =  " + road);
+            Log.e("TAG", "saveBuildingDataInDB: districtValue =  " + districtValue);
+            Log.e("TAG", "saveBuildingDataInDB: area =  " + areaCodeList.get(areaCodePos).toString());
+            Log.e("TAG", "saveBuildingDataInDB: flatformat =  " + flatformat);
+            Log.e("TAG", "saveBuildingDataInDB: flatperFloor =  " + flatperFloor);
+            Log.e("TAG", "saveBuildingDataInDB: date2 =  " + date2);
+            Log.e("TAG", "saveBuildingDataInDB: housename =  " + housename);
+            Log.e("TAG", "saveBuildingDataInDB: totlflr =  " + totlflr);
+            Log.e("TAG", "saveBuildingDataInDB: right time =  " + Calendar.getInstance().getTime());
+            Log.e("TAG", "saveBuildingDataInDB: status_id =  " + status_id);
+            Log.e("TAG", "saveBuildingDataInDB: imageurl =  " + imageurl);
+            Log.e("TAG", "saveBuildingDataInDB: code_array =  " + code_array);
+            Log.e("TAG", "saveBuildingDataInDB: lat =  " + lat);
+            Log.e("TAG", "saveBuildingDataInDB: lan =  " + lan);
 
-            DocumentReference fWorkersBuildingsReferance=db.collection(getString(R.string.col_fWorkerBuilding)).document(fWorkersDocID);
-            batch.set(fWorkersBuildingsReferance,fWorkerBuilding);
+            fBuildings = new FBuildings(build_id,
+                    wholeAddress, totalCode,
+                    houseNmbr, road, districtValue,
+                    areaCodeList.get(areaCodePos).toString(),
+                    flatformat,
+                    flatperFloor, date2, housename,
+                    totlflr, Calendar.getInstance().getTime(),
+                    Calendar.getInstance().getTime(),
+                    status_id,
+                    "Pending", imageurl, code_array,
+                    lat, lan,roadNameSt);
+
+            WriteBatch batch = firebaseFirestore.batch();
+
+
+            DocumentReference fbuildingsReferance = firebaseFirestore.collection(getString(R.string.col_fBuildings)).document(build_id);
+            batch.set(fbuildingsReferance, fBuildings);
+
+            DocumentReference fWorkersBuildingsReferance = firebaseFirestore.collection(getString(R.string.col_fWorkerBuilding)).document(fWorkersDocID);
+            batch.set(fWorkersBuildingsReferance, fWorkerBuilding);
             batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    //gotoMyHomeActvity();
-                  //  Toast.makeText(AddBuildingActivity.this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
-                    FancyToast.makeText(context,"Data Saved Successfully",FancyToast.LENGTH_LONG, FancyToast.SUCCESS,false).show();
 
+                    FancyToast.makeText(context, "Data Saved Successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 
                     progressBar.setVisibility(View.GONE);
+
 
                 }
             });
 
 
-           /* db.collection(getString(R.string.col_fBuildings)).document(build_id).set(fBuildings).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                    progressBar.setVisibility(View.GONE);
-                    if (task.isSuccessful()) {
-
-                        gotoMyHomeActvity();
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(AddBuildingActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });*/
         }
 
 
@@ -1100,18 +1173,18 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     public void createBuildingsContactInfo() {
 
-        if(people_we_talk.length()==0){
+        if (people_we_talk.length() == 0) {
             people_we_talk.setError("Insert the People your are talking");
             people_we_talk.requestFocus();
         }
-        if(b_peoplesName.length()==0){
+        if (b_peoplesName.length() == 0) {
             b_peoplesName.setError("Insert the name");
             b_peoplesName.requestFocus();
         }
-        if (b_peopleNumber.getText().toString().length()<=10){
+        if (b_peopleNumber.getText().toString().length() <= 10) {
             b_peopleNumber.setError("Insert the valid mobile number");
             b_peopleNumber.requestFocus();
-        }else {
+        } else {
             String design_type = people_we_talk.getText().toString();
             String design_name = b_peoplesName.getText().toString();
             String design_number = b_peopleNumber.getText().toString();
@@ -1128,7 +1201,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             fbPeople = new FBPeople(totalCode, design_type, doc_id, design_name, numbers);
 
-            db.collection(getString(R.string.col_fBbuildingContacts)).document(design_number + totalHouseCode)
+            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(design_number + totalHouseCode)
                     .set(fbPeople).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -1136,7 +1209,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         //Toast.makeText(AddBuildingActivity.this, "number saved successfully", Toast.LENGTH_SHORT).show();
 
-                        FancyToast.makeText(AddBuildingActivity.this,"number saved successfully",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+                        FancyToast.makeText(AddBuildingActivity.this, "number saved successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 
                         saveNumberBtn.setVisibility(View.VISIBLE);
                     }
@@ -1146,11 +1219,12 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     }
 
+    //house not Visited yet
     public void shoeAlertforhouseNotfound() {
         AlertDialog.Builder alert = new AlertDialog.Builder(AddBuildingActivity.this);
         View view = getLayoutInflater().inflate(R.layout.house_not_found, null);
 
-        Button btn = view.findViewById(R.id.btn);
+        Button btn = view.findViewById(R.id.houseVisitedAlertBtn);
         alert.setView(view);
 
         final AlertDialog alertDialog1 = alert.create();
@@ -1169,11 +1243,12 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     }
 
+    //house already Visited
     public void shoeAlertforPendingHouse() {
         AlertDialog.Builder alert = new AlertDialog.Builder(AddBuildingActivity.this);
         View view = getLayoutInflater().inflate(R.layout.house_status_pending, null);
 
-        Button btn = view.findViewById(R.id.btn);
+        Button houseVisitedAlertBtn = view.findViewById(R.id.houseVisitedAlertBtn);
         TextView txt = view.findViewById(R.id.txt);
         alert.setView(view);
 
@@ -1181,7 +1256,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         alertDialog1.setCanceledOnTouchOutside(true);
         alertDialog1.show();
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        houseVisitedAlertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -1199,7 +1274,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         peopleWeTalkList = rowList.findViewById(R.id.listview);
         areaEdit = rowList.findViewById(R.id.search_edit);
 
-        db.collection(getString(R.string.col_fPeopleType)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection(getString(R.string.col_fPeopleType)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 areaList.clear();
@@ -1246,7 +1321,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         districtListView = rowList.findViewById(R.id.listview);
         districtEdit = rowList.findViewById(R.id.search_edit);
 
-        /*db.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        /*firebaseFirestore.collection(getString(R.string.col_district)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 districtList.clear();
@@ -1294,7 +1369,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                 String distrct_code = String.valueOf(parent.getItemAtPosition(position));
 
                 districtCodePos = position;
-                b_district.setText(distrct_code);
+                districtNameET.setText(distrct_code);
                 dialog.dismiss();
             }
         });
@@ -1310,7 +1385,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         ArrayList<String> statusList = new ArrayList<>();
 
-        db.collection(getString(R.string.col_buildingstatus)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection(getString(R.string.col_buildingstatus)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@androidx.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @androidx.annotation.Nullable FirebaseFirestoreException e) {
                 statusList.clear();
@@ -1318,13 +1393,13 @@ public class AddBuildingActivity extends AppCompatActivity {
 
 
                     String status = documentSnapshot.getString("status_type");
-                    String bstatus_id=documentSnapshot.getString("status_id");
+                    String bstatus_id = documentSnapshot.getString("status_id");
 
 
                     //statusList.add(status);
                     //Ignore Done status
                     if (!status.equalsIgnoreCase("Building Active") && !status.equalsIgnoreCase("Meeting Done")
-                            &&!status.equalsIgnoreCase("Meeting Rejected")){
+                            && !status.equalsIgnoreCase("Meeting Rejected")) {
 
                         statusList.add(status);
                         statusIdList.add(bstatus_id);
@@ -1335,7 +1410,6 @@ public class AddBuildingActivity extends AppCompatActivity {
                 }
 
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, statusList);
-
 
 
                 adapter.notifyDataSetChanged();
@@ -1358,7 +1432,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String bstatus = String.valueOf(parent.getItemAtPosition(position));
 
-                statusCodePos=position;
+                statusCodePos = position;
 
                 b_status.setText(bstatus);
                 dialog.dismiss();
@@ -1373,9 +1447,9 @@ public class AddBuildingActivity extends AppCompatActivity {
         types.add("101");
 
 
-        final StringAdapter stringAdapter=new StringAdapter(types,context);
-       // adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, types);
-        final AlertDialog alertDialog=new AlertDialog.Builder(context).create();
+        final StringAdapter stringAdapter = new StringAdapter(types, context);
+        // adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, types);
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         LayoutInflater inflater = getLayoutInflater();
 
         View convertView = (View) inflater.inflate(R.layout.custom_list, null);
@@ -1399,11 +1473,11 @@ public class AddBuildingActivity extends AppCompatActivity {
         });
     }
 
-    public void checkTrainOrNot(){
+    public void checkTrainOrNot() {
         AlertDialog.Builder alert = new AlertDialog.Builder(AddBuildingActivity.this);
         View view = getLayoutInflater().inflate(R.layout.trained_untrained_layout, null);
 
-        Button btn = view.findViewById(R.id.btn);
+        Button btn = view.findViewById(R.id.houseVisitedAlertBtn);
         TextView txt = view.findViewById(R.id.txt);
         alert.setView(view);
 
@@ -1416,7 +1490,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 alertDialog1.dismiss();
-                Intent intent=new Intent(AddBuildingActivity.this,MyHomeActivity.class);
+                Intent intent = new Intent(AddBuildingActivity.this, MyHomeActivity.class);
                 startActivity(intent);
                 //relativeLayout.setVisibility(View.GO);
             }
@@ -1449,12 +1523,12 @@ public class AddBuildingActivity extends AppCompatActivity {
 
                 if (location != null) {
 
-                     lat = location.getLatitude();
-                     lan = location.getLongitude();
+                    lat = location.getLatitude();
+                    lan = location.getLongitude();
 
 
-                    Log.e("TAG","lat:"+lat);
-                    Log.e("TAG","lat:"+lan);
+                    Log.e("TAG", "lat:" + lat);
+                    Log.e("TAG", "lat:" + lan);
 
                 }
 
@@ -1468,5 +1542,10 @@ public class AddBuildingActivity extends AppCompatActivity {
         super.onBackPressed();
 
         gotoMyHomeActvity();
+    }
+
+    public void noNumberFound(View view) {
+
+        roadNumberET.setText("0");
     }
 }

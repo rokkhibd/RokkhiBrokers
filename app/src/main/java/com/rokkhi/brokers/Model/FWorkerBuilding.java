@@ -28,6 +28,8 @@ public class FWorkerBuilding {
         this.b_code = b_code;
     }
 
+
+
     public String getBuild_id() {
         return build_id;
     }

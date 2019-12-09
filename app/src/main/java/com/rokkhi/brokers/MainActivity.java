@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean signoutstate=false;
     String utoken="";
 
-    String eke;
-
     SharedPreferences.Editor editor;
     SharedPreferences sharedPref;
 
@@ -92,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context=this;
 
         //update Checker start
 

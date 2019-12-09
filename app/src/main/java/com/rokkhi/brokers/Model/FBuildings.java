@@ -26,13 +26,14 @@ public class FBuildings implements Serializable {
     private ArrayList<String> b_array;
     private Double latitude=0.0;
     private Double longitude=0.0;
+    private String b_roadName ="none";
 
 
 
     public FBuildings() {
     }
 
-
+/*
     public FBuildings(String build_id, String b_address, String b_code, String b_houseno, String b_roadno, String b_district, String b_area, String flatformat, int flatperfloor, Date followupdate, String housename, int totalfloor, Date created_at, Date updated_at, String status_id, String active, ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude, Double longitude) {
         this.build_id = build_id;
         this.b_address = b_address;
@@ -54,8 +55,45 @@ public class FBuildings implements Serializable {
         this.b_array = b_array;
         this.latitude = latitude;
         this.longitude = longitude;
+    }*/
+//road Name
+    public FBuildings(
+            String build_id, String b_address, String b_code, String b_houseno,
+            String b_roadno, String b_district, String b_area, String flatformat,
+            int flatperfloor, Date followupdate, String housename, int totalfloor,
+            Date created_at, Date updated_at, String status_id, String active,
+            ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude,
+            Double longitude,String b_roadName) {
+        this.build_id = build_id;
+        this.b_address = b_address;
+        this.b_code = b_code;
+        this.b_houseno = b_houseno;
+        this.b_roadno = b_roadno;
+        this.b_district = b_district;
+        this.b_area = b_area;
+        this.flatformat = flatformat;
+        this.flatperfloor = flatperfloor;
+        this.followupdate = followupdate;
+        this.housename = housename;
+        this.totalfloor = totalfloor;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.status_id = status_id;
+        this.active = active;
+        this.b_imageUrl = b_imageUrl;
+        this.b_array = b_array;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.b_roadName = b_roadName;
     }
 
+    public String getB_roadName() {
+        return b_roadName;
+    }
+
+    public void setB_roadName(String b_roadName) {
+        this.b_roadName = b_roadName;
+    }
 
     public String getBuild_id() {
         return build_id;

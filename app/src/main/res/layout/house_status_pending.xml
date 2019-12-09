@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/houseVisitedAlertBtn"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="90dp"
         android:background="@drawable/round_edittext2"
