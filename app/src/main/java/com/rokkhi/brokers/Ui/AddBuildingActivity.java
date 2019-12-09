@@ -109,7 +109,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode;
     String wholeAddress, currentDate, status_id;
     Double lat, lan;
-    ImageView visitCal, followpCal, statusMenu, flatfrmtMenu, /*district_Menu*/
+    ImageView visitCal, statusMenu, flatfrmtMenu, /*district_Menu*/
             designationMenu;
     EditText b_flatfrmt;
     int areaCodePos;
@@ -125,6 +125,8 @@ public class AddBuildingActivity extends AppCompatActivity {
     Context context;
     Query buildingsQuery;
     private AirLocation airLocation;
+    LinearLayout contactlayout;
+    LinearLayout buildinginfoLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +170,8 @@ public class AddBuildingActivity extends AppCompatActivity {
         roadNumberET = findViewById(R.id.roadNumber);
         roadName = findViewById(R.id.road_Name);
         houseNumberET = findViewById(R.id.houseNumber);
+        contactlayout=findViewById(R.id.contactlayout);
+        buildinginfoLayout=findViewById(R.id.buildinginfoLayout);
 
 
         b_floorperflat = findViewById(R.id.bldng_edit_totalflt);
@@ -190,7 +194,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         saveNumberBtn = findViewById(R.id.bldng_edit_numberSaves);
 
         visitCal = findViewById(R.id.visitcalimg);
-        followpCal = findViewById(R.id.followingcalimg);
+
         statusMenu = findViewById(R.id.statusMenu);
         flatfrmtMenu = findViewById(R.id.flatformatMenu);
 //        district_Menu = findViewById(R.id.districtMenu);
@@ -1120,17 +1124,27 @@ public class AddBuildingActivity extends AppCompatActivity {
             Log.e("TAG", "saveBuildingDataInDB: lat =  " + lat);
             Log.e("TAG", "saveBuildingDataInDB: lan =  " + lan);
 
-            fBuildings = new FBuildings(build_id,
-                    wholeAddress, totalCode,
-                    houseNmbr, road, districtValue,
+            fBuildings = new FBuildings(
+                    build_id,
+                    wholeAddress,
+                    totalCode,
+                    houseNmbr.replaceAll("\\s",""),
+                    road.replaceAll("\\s",""),
+                    districtValue,
                     areaCodeList.get(areaCodePos).toString(),
                     flatformat,
-                    flatperFloor, date2, housename,
-                    totlflr, Calendar.getInstance().getTime(),
+                    flatperFloor,
+                    date2,
+                    housename,
+                    totlflr,
+                    Calendar.getInstance().getTime(),
                     Calendar.getInstance().getTime(),
                     status_id,
-                    "Pending", imageurl, code_array,
-                    lat, lan,roadNameSt);
+                    "Pending",
+                    imageurl,
+                    code_array,
+                    lat, lan,
+                    roadNameSt);
 
             WriteBatch batch = firebaseFirestore.batch();
 
@@ -1143,6 +1157,9 @@ public class AddBuildingActivity extends AppCompatActivity {
             batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+
+                    buildinginfoLayout.setVisibility(View.GONE);
+                    contactlayout.setVisibility(View.VISIBLE);
 
                     FancyToast.makeText(context, "Data Saved Successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 
@@ -1190,18 +1207,23 @@ public class AddBuildingActivity extends AppCompatActivity {
             String design_number = b_peopleNumber.getText().toString();
             String numbers = add88withNumb(design_number);
 
-            totalCode = areaCodeList.get(areaCodePos) + "*" + roadListCode + "*" + blockListCode + "*" + houseListCode + "*" + housefrmntListCode + "*" + districtValue;
-            totalHouseCode = areaCodeList.get(areaCodePos) + "" + roadListCode + "" + blockListCode + "" + houseListCode + "" + housefrmntListCode + "" + districtValue;
+//            totalCode = areaCodeList.get(areaCodePos) + "*" + roadListCode + "*" + blockListCode + "*" + houseListCode + "*" + housefrmntListCode + "*" + districtValue;
+//            totalHouseCode = areaCodeList.get(areaCodePos) + "" + roadListCode + "" + blockListCode + "" + houseListCode + "" + housefrmntListCode + "" + districtValue;
 
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
             String strDate = mdformat.format(calendar.getTime());
 
-            String doc_id = design_number + totalHouseCode;
 
+
+            String extaCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "");
+
+            String doc_id = design_number + extaCode;
             fbPeople = new FBPeople(totalCode, design_type, doc_id, design_name, numbers);
 
-            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(design_number + totalHouseCode)
+
+
+            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(doc_id)
                     .set(fbPeople).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

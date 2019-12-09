@@ -215,497 +215,355 @@
 
             </LinearLayout>
 
-
-            <!--Address Section END-->
-            <!--     <TextView
-                     android:textColor="@color/lightorange"
-                     android:text="Address *"
-                     android:layout_marginTop="15dp"
-                     android:layout_marginLeft="20dp"
-                     android:layout_marginRight="20dp"
-                     android:id="@+id/addresstxt"
-                     android:layout_below="@id/relwhere"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
-
-
-                 <EditText
-                     android:focusableInTouchMode="false"
-                     android:paddingLeft="5dp"
-                     android:hint="area"
-                     android:layout_marginTop="10dp"
-                     android:layout_marginLeft="20dp"
-                     android:layout_marginRight="10dp"
-                     android:id="@+id/bldng_edit_area"
-                     android:layout_below="@id/addresstxt"
-                     android:background="@drawable/round_edittext2"
-                     android:layout_width="185dp"
-                     android:layout_height="45dp"/>
-
-                 <EditText
-                     android:focusableInTouchMode="false"
-                     android:paddingLeft="5dp"
-                     android:hint="road"
-                     android:inputType="number"
-                     android:layout_marginTop="10dp"
-                     android:layout_marginRight="10dp"
-                     android:id="@+id/bldng_edit_road"
-                     android:layout_below="@id/addresstxt"
-                     android:layout_toRightOf="@id/bldng_edit_area"
-                     android:background="@drawable/round_edittext2"
-                     android:layout_width="70dp"
-                     android:layout_height="45dp"/>
-
-                 <EditText
-                     android:focusableInTouchMode="false"
-                     android:id="@+id/bldng_edit_block"
-                     android:paddingLeft="5dp"
-                     android:hint="block"
-                     android:layout_marginTop="10dp"
-                     android:background="@drawable/round_edittext2"
-                     android:layout_toRightOf="@id/bldng_edit_road"
-                     android:layout_below="@id/addresstxt"
-                     android:layout_width="70dp"
-                     android:layout_height="45dp"/>
-
-
-                 <TextView
-
-                     android:textColor="@color/lightorange"
-                     android:layout_marginTop="15dp"
-                     android:layout_marginLeft="20dp"
-                     android:layout_marginRight="20dp"
-                     android:id="@+id/housetxt"
-                     android:text="House *"
-                     android:layout_below="@id/bldng_edit_area"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
-
-
-                 <EditText
-                     android:focusableInTouchMode="false"
-                     android:inputType="number"
-                     android:paddingLeft="5dp"
-                     android:hint="number"
-                     android:id="@+id/bldng_edit_house"
-                     android:layout_marginTop="10dp"
-                     android:layout_marginLeft="20dp"
-                     android:layout_marginRight="20dp"
-                     android:background="@drawable/round_edittext2"
-                     android:layout_below="@id/housetxt"
-                     android:layout_width="100dp"
-                     android:layout_height="45dp"/>
-
-                 <ImageView
-                     android:visibility="gone"
-                     android:id="@+id/number"
-                     android:src="@drawable/menudown"
-                     android:layout_alignTop="@id/bldng_edit_house"
-                     android:layout_alignBottom="@id/bldng_edit_house"
-                     android:layout_alignRight="@id/bldng_edit_house"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
-
-                 <EditText
-                     android:focusableInTouchMode="false"
-                     android:paddingLeft="5dp"
-                     android:hint="house block"
-                     android:id="@+id/bldng_edit_houseformat"
-                     android:layout_toRightOf="@id/bldng_edit_house"
-                     android:layout_marginTop="10dp"
-                     android:layout_marginLeft="0dp"
-                     android:layout_marginRight="20dp"
-                     android:background="@drawable/round_edittext2"
-                     android:layout_below="@id/housetxt"
-                     android:layout_width="100dp"
-                     android:layout_height="45dp"/>
-
-                 <EditText
-                     android:focusableInTouchMode="false"
-                     android:id="@+id/bldng_edit_disctrict"
-                     android:layout_toRightOf="@+id/bldng_edit_houseformat"
-                     android:paddingLeft="5dp"
-                     android:hint="district"
-                     android:background="@drawable/round_edittext2"
-                     android:layout_marginTop="10dp"
-                     android:layout_marginLeft="0dp"
-                     android:layout_marginRight="20dp"
-                     android:layout_below="@+id/housetxt"
-                     android:layout_width="150dp"
-                     android:layout_height="45dp"/>
-
-                 <ImageView
-                     android:visibility="gone"
-                     android:id="@+id/districtMenu"
-                     android:src="@drawable/menudown"
-                     android:layout_alignTop="@id/bldng_edit_disctrict"
-                     android:layout_alignBottom="@id/bldng_edit_disctrict"
-                     android:layout_alignRight="@id/bldng_edit_disctrict"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
-
-
-                 <Button
-                     android:textAllCaps="false"
-                     android:visibility="visible"
-                     android:id="@+id/bldng_button_housecheck"
-                     android:textColor="@color/white"
-                     android:text="Check The House"
-                     android:background="@drawable/round_edittext"
-                     android:backgroundTint="@color/orange"
-
-                     android:layout_marginTop="15dp"
-                     android:layout_marginLeft="20dp"
-                     android:layout_marginRight="20dp"
-                     android:layout_below="@id/bldng_edit_house"
-                     android:layout_width="match_parent"
-                     android:layout_height="38dp"/>
-
-                 -->
-
-
             <RelativeLayout
                 android:id="@+id/housecheck_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/relwhere"
+                android:layout_marginBottom="50sp"
                 android:visibility="gone">
 
-                <EditText
-                    android:id="@+id/bldng_edit_husename"
+
+                <LinearLayout
+                    android:id="@+id/buildinginfoLayout"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="house name"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingLeft="5dp" />
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/bldng_edit_husename"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="house name"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingLeft="5dp" />
 
 
-                <EditText
-                    android:id="@+id/bldng_edit_bcode"
-                    android:layout_width="250dp"
-                    android:layout_height="38dp"
-                    android:layout_below="@id/bldng_edit_husename"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="code"
-                    android:paddingLeft="5dp"
-                    android:visibility="gone" />
+                    <EditText
+                        android:id="@+id/bldng_edit_bcode"
+                        android:layout_width="250dp"
+                        android:layout_height="38dp"
+                        android:layout_below="@id/bldng_edit_husename"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="code"
+                        android:paddingLeft="5dp"
+                        android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/tap_bcode"
-                    android:layout_width="100dp"
-                    android:layout_height="38dp"
-                    android:layout_below="@id/bldng_edit_husename"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_toRightOf="@id/bldng_edit_bcode"
-                    android:background="@drawable/round_button"
-                    android:text="tap for code"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:visibility="gone" />
+                    <Button
+                        android:id="@+id/tap_bcode"
+                        android:layout_width="100dp"
+                        android:layout_height="38dp"
+                        android:layout_below="@id/bldng_edit_husename"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@id/bldng_edit_bcode"
+                        android:background="@drawable/round_button"
+                        android:text="tap for code"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
 
 
-                <EditText
-                    android:id="@+id/bldng_edit_totalflt"
+                    <EditText
+                        android:id="@+id/bldng_edit_totalflt"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_bcode"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="total flat per floor"
+                        android:inputType="number"
+                        android:paddingLeft="5dp" />
+
+                    <EditText
+                        android:id="@+id/bldng_edit_totalfloor"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_totalflt"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="total floor"
+                        android:inputType="number"
+                        android:paddingLeft="5dp" />
+
+
+                    <EditText
+                        android:id="@+id/bldng_edit_flatformat"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_totalfloor"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:focusableInTouchMode="false"
+                        android:hint="flat format"
+                        android:paddingLeft="5dp" />
+
+                    <ImageView
+                        android:id="@+id/flatformatMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/bldng_edit_flatformat"
+                        android:layout_alignRight="@id/bldng_edit_flatformat"
+                        android:layout_alignBottom="@id/bldng_edit_flatformat"
+                        android:src="@drawable/menudown"
+                        android:visibility="gone" />
+
+
+                    <EditText
+                        android:id="@+id/bldng_edit_totalguard"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_flatformat"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="total guards"
+                        android:inputType="number"
+                        android:paddingLeft="5dp" />
+
+                    <EditText
+                        android:id="@+id/bldng_edit_buildingspeople"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_totalguard"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:focusableInTouchMode="false"
+                        android:hint="peoples you are talking.."
+                        android:paddingLeft="5dp"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/bldng_edit_theirname"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_buildingspeople"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="name"
+                        android:paddingLeft="5dp"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/bldng_edit_theirnumber"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_theirname"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="number"
+                        android:inputType="number"
+                        android:paddingLeft="5dp"
+                        android:visibility="gone" />
+
+
+                    <Button
+                        android:id="@+id/bldng_edit_numberSave"
+                        android:layout_width="100dp"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_theirnumber"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext"
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:visibility="gone" />
+
+
+                    <!--  <ImageView
+
+                          android:visibility="gone"
+                          android:id="@+id/choosePeopleMenu"
+                          android:layout_alignRight="@id/bldng_edit_buildingspeople"
+                          android:layout_alignBottom="@id/bldng_edit_buildingspeople"
+                          android:layout_alignTop="@id/bldng_edit_buildingspeople"
+                          android:src="@drawable/menudown"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"/>-->
+
+                    <EditText
+                        android:id="@+id/bldng_edit_visitdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_numberSave"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:focusableInTouchMode="false"
+                        android:hint="visited date"
+                        android:paddingLeft="5dp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/visitcalimg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/bldng_edit_visitdate"
+                        android:layout_alignRight="@id/bldng_edit_visitdate"
+                        android:layout_alignBottom="@id/bldng_edit_visitdate"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/calendarlight"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/bldng_edit_followingdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_visitdate"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:focusableInTouchMode="false"
+                        android:hint="followup date"
+                        android:drawableRight="@drawable/calendarlight"
+                        android:paddingLeft="5dp" />
+
+
+
+                    <EditText
+                        android:id="@+id/bldng_edit_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_followingdate"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:focusableInTouchMode="false"
+                        android:hint="status/outcome"
+                        android:paddingLeft="5dp" />
+
+                    <ImageView
+                        android:id="@+id/statusMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/bldng_edit_status"
+                        android:layout_alignRight="@id/bldng_edit_status"
+                        android:layout_alignBottom="@id/bldng_edit_status"
+                        android:src="@drawable/menudown"
+                        android:visibility="gone" />
+
+
+                    <Button
+                        android:id="@+id/addblgnInfoBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_below="@id/bldng_edit_status"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_edittext"
+                        android:backgroundTint="@color/orange"
+                        android:text="Done"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/contactlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_bcode"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="total flat per floor"
-                    android:inputType="number"
-                    android:paddingLeft="5dp" />
-
-                <EditText
-                    android:id="@+id/bldng_edit_totalfloor"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_totalflt"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="total floor"
-                    android:inputType="number"
-                    android:paddingLeft="5dp" />
-
-
-                <EditText
-                    android:id="@+id/bldng_edit_flatformat"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_totalfloor"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:focusableInTouchMode="false"
-                    android:hint="flat format"
-                    android:paddingLeft="5dp" />
-
-                <ImageView
-                    android:id="@+id/flatformatMenu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/bldng_edit_flatformat"
-                    android:layout_alignRight="@id/bldng_edit_flatformat"
-                    android:layout_alignBottom="@id/bldng_edit_flatformat"
-                    android:src="@drawable/menudown"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    android:layout_below="@+id/buildinginfoLayout"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/bldng_contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Building Contact"
+                        android:textColor="@color/lightorange" />
 
-                <EditText
-                    android:id="@+id/bldng_edit_totalguard"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_flatformat"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="total guards"
-                    android:inputType="number"
-                    android:paddingLeft="5dp" />
+                    <EditText
 
-                <EditText
-                    android:id="@+id/bldng_edit_buildingspeople"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_totalguard"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:focusableInTouchMode="false"
-                    android:hint="peoples you are talking.."
-                    android:paddingLeft="5dp"
-                    android:visibility="gone" />
+                        android:id="@+id/bldng_edit_buildingspeoples"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_contact"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:focusableInTouchMode="false"
+                        android:hint="Designation"
+                        android:paddingLeft="5dp" />
 
-                <EditText
-                    android:id="@+id/bldng_edit_theirname"
+                    <EditText
 
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_buildingspeople"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="name"
-                    android:paddingLeft="5dp"
-                    android:visibility="gone" />
+                        android:id="@+id/bldng_edit_theirnames"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_buildingspeoples"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="name"
+                        android:paddingLeft="5dp" />
 
-                <EditText
-                    android:id="@+id/bldng_edit_theirnumber"
+                    <EditText
 
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_theirname"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="number"
-                    android:inputType="number"
-                    android:paddingLeft="5dp"
-                    android:visibility="gone" />
+                        android:id="@+id/bldng_edit_theirnumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_below="@id/bldng_edit_theirnames"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/round_edittext2"
+                        android:hint="number"
+                        android:inputType="number"
+                        android:paddingLeft="5dp" />
 
+                    <Button
+                        android:id="@+id/bldng_edit_numberSaves"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_below="@id/bldng_edit_theirnumbers"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_edittext"
+                        android:backgroundTint="@color/orange"
+                        android:text="Add Contacts"
+                        android:textAllCaps="false"
 
-                <Button
-                    android:id="@+id/bldng_edit_numberSave"
-
-                    android:layout_width="100dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_theirnumber"
-
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext"
-                    android:text="Save"
-                    android:textAllCaps="false"
-                    android:visibility="gone" />
-
-
-                <!--  <ImageView
-
-                      android:visibility="gone"
-                      android:id="@+id/choosePeopleMenu"
-                      android:layout_alignRight="@id/bldng_edit_buildingspeople"
-                      android:layout_alignBottom="@id/bldng_edit_buildingspeople"
-                      android:layout_alignTop="@id/bldng_edit_buildingspeople"
-                      android:src="@drawable/menudown"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"/>-->
-
-                <EditText
-                    android:id="@+id/bldng_edit_visitdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_numberSave"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:focusableInTouchMode="false"
-                    android:hint="visited date"
-                    android:paddingLeft="5dp"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/visitcalimg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/bldng_edit_visitdate"
-                    android:layout_alignRight="@id/bldng_edit_visitdate"
-                    android:layout_alignBottom="@id/bldng_edit_visitdate"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/calendarlight"
-                    android:visibility="gone" />
-
-                <EditText
-                    android:id="@+id/bldng_edit_followingdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_visitdate"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:focusableInTouchMode="false"
-                    android:hint="followup date"
-                    android:paddingLeft="5dp" />
-
-                <ImageView
-
-                    android:id="@+id/followingcalimg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/bldng_edit_followingdate"
-                    android:layout_alignRight="@id/bldng_edit_followingdate"
-                    android:layout_alignBottom="@id/bldng_edit_followingdate"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/calendarlight" />
-
-
-                <EditText
-                    android:id="@+id/bldng_edit_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_followingdate"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:focusableInTouchMode="false"
-                    android:hint="status/outcome"
-                    android:paddingLeft="5dp" />
-
-                <ImageView
-                    android:id="@+id/statusMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/bldng_edit_status"
-                    android:layout_alignRight="@id/bldng_edit_status"
-                    android:layout_alignBottom="@id/bldng_edit_status"
-                    android:src="@drawable/menudown"
-                    android:visibility="gone" />
-
-
-                <Button
-                    android:id="@+id/addblgnInfoBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:layout_below="@id/bldng_edit_status"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/round_edittext"
-                    android:backgroundTint="@color/orange"
-                    android:text="Done"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
-
-
-                <TextView
-                    android:id="@+id/bldng_contact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/addblgnInfoBtn"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Building Contact"
-                    android:textColor="@color/lightorange" />
-
-                <EditText
-
-                    android:id="@+id/bldng_edit_buildingspeoples"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_contact"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:focusableInTouchMode="false"
-                    android:hint="Designation"
-                    android:paddingLeft="5dp" />
-
-                <EditText
-
-                    android:id="@+id/bldng_edit_theirnames"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_buildingspeoples"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="name"
-                    android:paddingLeft="5dp" />
-
-                <EditText
-
-                    android:id="@+id/bldng_edit_theirnumbers"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/bldng_edit_theirnames"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/round_edittext2"
-                    android:hint="number"
-                    android:inputType="number"
-                    android:paddingLeft="5dp" />
-
-                <Button
-                    android:id="@+id/bldng_edit_numberSaves"
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:layout_below="@id/bldng_edit_theirnumbers"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/round_edittext"
-                    android:backgroundTint="@color/orange"
-                    android:text="Add Contacts"
-                    android:textAllCaps="false"
-                    android:textColor="@color/White" />
+                        android:textColor="@color/White" />
+                </LinearLayout>
 
 
                 <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -713,10 +571,9 @@
                     style="@style/SpinKitView.ThreeBounce"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/bldng_edit_theirnumber"
+                    android:layout_below="@+id/contactlayout"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/bldng_edit_numberSave"
                     android:visibility="gone"
                     app:SpinKit_Color="@color/colorAccent" />
 
