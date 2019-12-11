@@ -12,6 +12,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -172,8 +173,14 @@ public class AddBuildingActivity extends AppCompatActivity {
         districtNameET = findViewById(R.id.district);
         areaNameET = findViewById(R.id.area);
         roadNumberET = findViewById(R.id.roadNumber);
+
+        roadNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+
         roadName = findViewById(R.id.road_Name);
         houseNumberET = findViewById(R.id.houseNumber);
+
+        houseNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+
         contactlayout=findViewById(R.id.contactlayout);
         buildinginfoLayout=findViewById(R.id.buildinginfoLayout);
 
@@ -489,10 +496,20 @@ public class AddBuildingActivity extends AppCompatActivity {
                                         String houseNumberST = houseNumberET.getText().toString().replaceAll("\\s+", "");
 
 
+                                         roadNumberST=roadNumberST.replace(".","").replace(":","").replace("#","");
+                                        houseNumberST=houseNumberST.replace(".","").replace(":","").replace("#","");
+
+
+
+
                                         Log.e("TAG", "onComplete: district code = " + districtCodeList.get(districtCodePos));
                                         Log.e("TAG", "onComplete: area code = " + areaCode);
                                         Log.e("TAG", "onComplete: roadNumberST code = " + roadNumberST);
                                         Log.e("TAG", "onComplete: houseNumberST code = " + houseNumberST);
+                                        Log.e("TAG", "onComplete: roadwithdot::" + roadNumberST);
+                                        Log.e("TAG", "onComplete: housewithdot::" + houseNumberST);
+
+
 
 
                                         CollectionReference buildref = firebaseFirestore.collection(getString(R.string.col_fBuildings));
@@ -509,7 +526,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
                                                 if (task.isSuccessful()) {
 
-                                                    Toast.makeText(AddBuildingActivity.this, "" + task.getResult().size(), Toast.LENGTH_SHORT).show();
+                                                  //  Toast.makeText(AddBuildingActivity.this, "" + task.getResult().size(), Toast.LENGTH_SHORT).show();
 
                                                     //if get this Building
                                                     if (task.getResult().size() > 0) {
@@ -1024,6 +1041,16 @@ public class AddBuildingActivity extends AppCompatActivity {
 
     public void saveBuildingDataInDB() throws ParseException {
 
+
+        String roadNumberST = roadNumberET.getText().toString().replaceAll("\\s+", "");
+        String areaCode = areaCodeList.get(areaCodePos).toString();
+        String houseNumberST = houseNumberET.getText().toString().replaceAll("\\s+", "");
+
+
+        roadNumberST=roadNumberST.replace(".","").replace(":","").replace("#","");
+        houseNumberST=houseNumberST.replace(".","").replace(":","").replace("#","");
+
+
         if (b_totalfloor.getText().toString().isEmpty()) {
             b_totalfloor.setError("Insert total floor");
             b_totalfloor.requestFocus();
@@ -1082,7 +1109,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             code_array.add(totalHouseCode);
 
 
-            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "*" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "");
+            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberST + "*" + houseNumberST;
 
             ArrayList<String> imageurl = new ArrayList<String>();
             imageurl.add(downloadImageUri);
@@ -1229,12 +1256,13 @@ public class AddBuildingActivity extends AppCompatActivity {
             String doc_id = design_number + extaCode;
 
             String doc_id1=doc_id.replaceAll("\\/","");
+            String doc_id2=doc_id1.replace(".","").replace(":","").replace("#","");
 
-            fbPeople = new FBPeople(totalCode, design_type, doc_id1, design_name, numbers);
+            fbPeople = new FBPeople(totalCode, design_type, doc_id2, design_name, numbers);
 
 
 
-            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(doc_id1)
+            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(doc_id2)
                     .set(fbPeople).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

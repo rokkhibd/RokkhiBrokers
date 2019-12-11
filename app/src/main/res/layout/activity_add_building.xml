@@ -142,7 +142,7 @@
                             android:layout_weight="2"
                             android:background="@drawable/edittext_background_change_while_typing"
                             android:hint="RoadNumber"
-                            android:inputType="textNoSuggestions"
+                            android:inputType="textCapCharacters"
                             android:paddingLeft="20dp"
                             android:paddingTop="20dp"
                             android:paddingBottom="20dp" />
@@ -188,6 +188,7 @@
 
 
                     <EditText
+
                         android:id="@+id/houseNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -195,7 +196,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background_change_while_typing"
                         android:hint="House Number"
-                        android:inputType="textNoSuggestions"
+                        android:inputType="textCapCharacters"
                         android:padding="20dp" />
 
 
