@@ -261,6 +261,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         } else if (v.getId() == R.id.update_bldng_houseName) {
            // house_name.setFocusableInTouchMode(true);
         } else if (v.getId() == R.id.update_bldng_bldngStatus) {
+
+          //  updateInfo_Button.setVisibility(View.VISIBLE);
             showBuildingStatus();
         }
     }
@@ -317,6 +319,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 statusCodePos = position;
 
                 building_status.setText(b_status);
+                updateInfo_Button.setEnabled(true);
+
                 dialog.dismiss();
             }
         });
@@ -326,6 +330,10 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         WriteBatch batch = db.batch();
         String update_bstatus = statusIdList.get(statusCodePos);
+
+
+
+
         String update_address = house_address.getText().toString();
         String update_houseName = house_name.getText().toString();
         String update_followdate=followup_date.getText().toString();

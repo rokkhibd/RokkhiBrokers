@@ -315,7 +315,7 @@ public class EditProfileActivity extends AppCompatActivity implements IPickResul
                 final String iname = name.getText().toString();
                 final String gentertext = gender.getText().toString();
                 final String mailtext = usermail.getText().toString();
-                final String nidtext=nid.getText().toString();
+//                final String nidtext=nid.getText().toString();
 
 
                 boolean cancel = false;
@@ -344,12 +344,12 @@ public class EditProfileActivity extends AppCompatActivity implements IPickResul
                     usermail.setError(getString(R.string.fui_invalid_email_address));
                     focusView = usermail;
                     cancel = true;
-                }if (TextUtils.isEmpty(nidtext)) {
+                }/*if (TextUtils.isEmpty(nidtext)) {
                     nid.setError(getString(R.string.error_field_required));
                     focusView = nid;
                     cancel = true;
 
-                }
+                }*/
 
 
 

@@ -257,6 +257,8 @@
 
 
         <Button
+
+            android:enabled="false"
             android:layout_marginBottom="20dp"
             android:id="@+id/update_bldng_updatebtn"
             android:layout_marginLeft="20dp"
@@ -265,7 +267,8 @@
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:text="Update Information"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_edittext"
+            android:backgroundTint="@color/orange"
             android:layout_width="match_parent"
             android:layout_height="45dp"/>
 
