@@ -108,7 +108,10 @@ public class AddBuildingActivity extends AppCompatActivity {
     Button tapCode, addInfoButton, checkHouseBtn, saveNumberBtn;
     String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode;
     String wholeAddress, currentDate, status_id;
-    Double lat, lan;
+
+    Double lat=0.0;
+    Double lan=0.0;
+
     ImageView visitCal, statusMenu, flatfrmtMenu, /*district_Menu*/
             designationMenu;
     EditText b_flatfrmt;
@@ -150,6 +153,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                 .child("fBuildings/" + currentUserID + "/pic");
 
         client = LocationServices.getFusedLocationProviderClient(this);
+
         getTheLatLang();
 
         fbPeople = new FBPeople();
@@ -234,7 +238,11 @@ public class AddBuildingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+              //  buildinginfoLayout.setVisibility(View.GONE);
+
                 progressBar.setVisibility(View.VISIBLE);
+
+
 
                 if (pickedImageUri == null) {
 
@@ -1096,7 +1104,7 @@ public class AddBuildingActivity extends AppCompatActivity {
                     currentUserID,
                     status_id, date,
                     date,
-                    totalCode);
+                    totalCode,0);
 
 //            normalfunc.getTimestampFromDate(date);
             String date1 = b_follwing.getText().toString();
@@ -1219,11 +1227,14 @@ public class AddBuildingActivity extends AppCompatActivity {
             String extaCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "");
 
             String doc_id = design_number + extaCode;
-            fbPeople = new FBPeople(totalCode, design_type, doc_id, design_name, numbers);
+
+            String doc_id1=doc_id.replaceAll("\\/","");
+
+            fbPeople = new FBPeople(totalCode, design_type, doc_id1, design_name, numbers);
 
 
 
-            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(doc_id)
+            firebaseFirestore.collection(getString(R.string.col_fBbuildingContacts)).document(doc_id1)
                     .set(fbPeople).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

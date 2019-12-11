@@ -37,6 +37,8 @@ import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
 
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -178,9 +180,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         } else {
                             Log.d(TAG, "onClick: yyy2");
                             String bkashtext2=normalfunc.makephone14(bkashtext);
+
+                            Date date;
+                            date = Calendar.getInstance().getTime();
+
                             progressBar.setVisibility(View.VISIBLE);
                             Map<String,Object>mm=new HashMap<>();
                             mm.put("bkash_no",bkashtext2);
+                            mm.put("updated_at",date);
                             firebaseFirestore.collection(getString(R.string.col_fPayment))
                                     .document(userid).set(mm, SetOptions.merge())
                                     .addOnCompleteListener(task -> {
@@ -213,7 +220,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 Button cancel = convertView.findViewById(R.id.nid_cancel);
                 ProgressBar progressBar= convertView.findViewById(R.id.nid_pro);
 
-                if(!nid.equals("none"))input.setText(fWorkers.getFw_nid());
+                if(!nid.equals("none"))input.setText(nid);
 
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -254,8 +261,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                             Log.d(TAG, "onClick: yyy4");
                             //String bkashtext2=normalfunc.makephone14(bkashtext);
                             progressBar.setVisibility(View.VISIBLE);
+
+                            Date date;
+                            date = Calendar.getInstance().getTime();
+
                             Map<String,Object>mm=new HashMap<>();
                             mm.put("fw_nid",nidtext);
+                            mm.put("updated_at",date);
                             firebaseFirestore.collection(getString(R.string.col_fWorkers))
                                     .document(userid).set(mm, SetOptions.merge())
                                     .addOnCompleteListener(task -> {
@@ -275,9 +287,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        RelativeLayout totalBuildingRef;
+        RelativeLayout totalBuildingRef,dueBuildingRef,totalMeeting,dueMeeting,totalref,dueref,liveBuilding;
+
         totalBuildingRef=view.findViewById(R.id.totalbuildingrel);
+        dueBuildingRef=view.findViewById(R.id.due_buildingrel);
+        totalMeeting=view.findViewById(R.id.meetingrel);
+        dueMeeting=view.findViewById(R.id.reldue_meeting);
+        totalref=view.findViewById(R.id.total_referal_rel);
+        dueref=view.findViewById(R.id.reldue_referal);
+        liveBuilding=view.findViewById(R.id.active_buildingrel);
+
         totalBuildingRef.setOnClickListener(this);
+        dueBuildingRef.setOnClickListener(this);
+        totalMeeting.setOnClickListener(this);
+        dueMeeting.setOnClickListener(this);
+        totalref.setOnClickListener(this);
+        dueref.setOnClickListener(this);
+        liveBuilding.setOnClickListener(this);
 
     }
 
@@ -359,7 +385,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (documentSnapshot!=null && documentSnapshot.exists()){
                     FWorkers fWorkers= documentSnapshot.toObject(FWorkers.class);
 
-
                     nidno.setText("NID -> "+fWorkers.getFw_nid());
 
                 }
@@ -373,16 +398,52 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId()==R.id.totalbuildingrel){
             showusersAllBuildings();
-
         }else if (v.getId()==R.id.due_buildingrel){
-
+            showUserDueBuilding();
         }else if (v.getId()==R.id.active_buildingrel){
-
+            showUsersLiveBuilding();
+        }else if (v.getId()==R.id.meetingrel){
+            showUserTotalMeeeting();
+        }else if (v.getId()==R.id.reldue_meeting){
+            showuserDueMeeting();
+        }else if (v.getId()==R.id.total_referal_rel){
+            showTotalrefBuilding();
+        }else if (v.getId()==R.id.reldue_referal){
+            showDueRefBuildings();
         }
+    }
+
+    private void showDueRefBuildings() {
+        Intent intent=new Intent(getContext(),DuerefferalActivity.class);
+        startActivity(intent);
+    }
+
+    private void showTotalrefBuilding() {
+        Intent intent=new Intent(getContext(),TotalReferralActivity.class);
+        startActivity(intent);
+    }
+
+    private void showUserDueBuilding() {
+        Intent intent=new Intent(getContext(),UsersDueBuildingsActivity.class);
+        startActivity(intent);
     }
 
     private void showusersAllBuildings() {
         Intent intent=new Intent(getContext(),UserTotalBuildingsActivity.class);
+        startActivity(intent);
+    }
+    private void showUsersLiveBuilding() {
+        Intent intent=new Intent(getContext(),UsersLiveBuildingActivity.class);
+        startActivity(intent);
+    }
+
+    private void showUserTotalMeeeting(){
+        Intent intent=new Intent(getContext(),TotalMeetingActivity.class);
+        startActivity(intent);
+    }
+
+    private void showuserDueMeeting(){
+        Intent intent=new Intent(getContext(),DueMeetingActivity.class);
         startActivity(intent);
     }
 }

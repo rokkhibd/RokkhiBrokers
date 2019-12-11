@@ -26,6 +26,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -78,6 +81,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
     public void onBindViewHolder(@NonNull BuildingViewholder holder, int position) {
 
         FWorkerBuilding fBuildings = fBuildingsList.get(position);
+
         firebaseFirestore.collection(context.getString(R.string.col_fBuildings))
                 .document(fBuildings.getBuild_id()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -160,7 +164,11 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
                     AlertDialog.Builder alert = new AlertDialog.Builder(context);
                     View view = LayoutInflater.from(v.getContext()).inflate(R.layout.building_contacts_layout, null);
 
-                    ProgressBar progress=view.findViewById(R.id.progress);
+                    ProgressBar progress=view.findViewById(R.id.spin_kit);
+
+                    Wave wave = new Wave();
+                    progress.setIndeterminateDrawable(wave);
+
                     LinearLayout lin1=view.findViewById(R.id.lin1);
                     LinearLayout lin2=view.findViewById(R.id.lin2);
                     LinearLayout lin3=view.findViewById(R.id.lin3);
@@ -286,6 +294,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
 
                                             else {
                                                 progress.setVisibility(View.GONE);
+
                                                 lin1.setVisibility(View.GONE);
                                                 lin2.setVisibility(View.GONE);
                                                 lin3.setVisibility(View.GONE);

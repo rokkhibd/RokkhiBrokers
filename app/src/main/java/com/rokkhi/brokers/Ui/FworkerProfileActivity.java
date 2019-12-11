@@ -715,7 +715,6 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
                     f_road.setText(roadno);
                 }
 
-
                 dialog.dismiss();
             }
         });
@@ -905,7 +904,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         String fw_bkash = normalfunc.makephone14(f_bkash.getText().toString());
         String fw_nogod = "";
 
-        fPayments = new FPayments(userId, ref_id, fw_phone, 0, 0, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
+        fPayments = new FPayments(userId, normalfunc.makephone14(ref_id), fw_phone, 0, 0, 0, 0, 0, 0, 0, fw_bkash, fw_nogod, date, date, date, 0, 0, 0, 0);
 
         db.collection(getString(R.string.col_fPayment)).document(userId).set(fPayments).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -914,7 +913,10 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
 
                     stayAtMainActvity();
 
-                    Toast.makeText(FworkerProfileActivity.this, "payment data saved", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FworkerProfileActivity.this, "payment data saved", Toast.LENGTH_SHORT).show();
+
+                    FancyToast.makeText(FworkerProfileActivity.this,"payment data saved",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -1024,7 +1026,9 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(FworkerProfileActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FworkerProfileActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+
+                FancyToast.makeText(context,"Image Uploaded Successfully",FancyToast.LENGTH_LONG, FancyToast.SUCCESS,false).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override

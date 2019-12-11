@@ -178,6 +178,7 @@
         </LinearLayout>
 
         <LinearLayout
+
             android:id="@+id/lin6"
             android:layout_margin="5dp"
             android:orientation="horizontal"
@@ -213,11 +214,21 @@
 
 
         <ProgressBar
-
+            android:visibility="gone"
             android:id="@+id/progress"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.Wave"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/colorAccent" />
 
 
     </LinearLayout>

@@ -50,6 +50,7 @@ import com.rokkhi.brokers.Model.FBuildings;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
@@ -143,7 +144,11 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         //getThePeoplesInfo();
         normalfunc = new Normalfunc();
+
         date = Calendar.getInstance().getTime();
+
+        Log.e("TAG","date:"+date);
+
         updateInfo_Button = findViewById(R.id.update_bldng_updatebtn);
 
         allStringValues = new AllStringValues();
@@ -360,9 +365,18 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     progressDialog.dismiss();
                     startActivity(new Intent(UpdateBldngInfoActivity.this, MyHomeActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    Toast.makeText(UpdateBldngInfoActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                    //Toast.makeText(UpdateBldngInfoActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                    FancyToast.makeText(UpdateBldngInfoActivity.this,"Data Updated Successfully",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false);
+
+
                 } else {
-                    Toast.makeText(UpdateBldngInfoActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UpdateBldngInfoActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+
+                    FancyToast.makeText(UpdateBldngInfoActivity.this,"Failed to Update",FancyToast.LENGTH_LONG,FancyToast.ERROR,false);
+
+
                     progressDialog.dismiss();
                 }
             }
@@ -499,10 +513,13 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 if (task.isSuccessful()) {
 
                     progressDialog.dismiss();
+
+                    FancyToast.makeText(UpdateBldngInfoActivity.this,"Data Updated Successfully",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
                     startActivity(new Intent(UpdateBldngInfoActivity.this, MyHomeActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
-                    Toast.makeText(UpdateBldngInfoActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(UpdateBldngInfoActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {

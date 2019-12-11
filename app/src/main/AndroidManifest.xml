@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Ui.ReportActivity"></activity>
+        <activity android:name=".Ui.DueMeetingActivity"></activity>
+        <activity android:name=".Ui.ReportActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -51,6 +52,10 @@
         <activity android:name=".Ui.MyHomeActivity" />
         <activity android:name=".Ui.AddBuildingActivity" />
         <activity android:name=".Ui.UpdateBldngInfoActivity" />
+        <activity android:name=".Ui.DuerefferalActivity"/>
+        <activity android:name=".Ui.TotalReferralActivity"/>
+        <activity android:name=".Ui.UsersDueBuildingsActivity"/>
+        <activity android:name=".Ui.TotalMeetingActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

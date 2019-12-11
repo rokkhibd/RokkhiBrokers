@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/black"
+            android:id="@+id/ref_users_pic"
+            android:layout_margin="10dp"
+            android:layout_width="65dp"
+            android:src="@drawable/profile2"
+            android:layout_gravity="center"
+            android:layout_height="65dp"/>
+
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:textColor="@color/lightorange"
+                    android:textSize="15sp"
+                    android:layout_margin="5dp"
+                    android:text="Name:"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+
+                    android:id="@+id/ref_users_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Users name"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/lightorange"
+                    android:textSize="15sp"
+                    android:layout_margin="5dp"
+                    android:text="mail id:"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/ref_users_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="users@gmail.com"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/lightorange"
+                    android:textSize="15sp"
+                    android:layout_margin="5dp"
+                    android:text="phone:"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:id="@+id/ref_users_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="01843800428"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -13,12 +13,13 @@ public class FWorkerBuilding {
     private Date created_at=new Date();
     private Date updated_at=new Date();
     private String b_code="none";
+    private int totalMonth=0;
 
 
     public FWorkerBuilding() {
     }
 
-    public FWorkerBuilding(String build_id, String doc_id, String f_uid, String status, Date created_at, Date updated_at, String b_code) {
+    public FWorkerBuilding(String build_id, String doc_id, String f_uid, String status_id, Date created_at, Date updated_at, String b_code,int totalMonth) {
         this.build_id = build_id;
         this.doc_id = doc_id;
         this.f_uid = f_uid;
@@ -26,9 +27,16 @@ public class FWorkerBuilding {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.b_code = b_code;
+        this.totalMonth=totalMonth;
     }
 
+    public int getTotalMonth() {
+        return totalMonth;
+    }
 
+    public void setTotalMonth(int totalMonth) {
+        this.totalMonth = totalMonth;
+    }
 
     public String getBuild_id() {
         return build_id;
