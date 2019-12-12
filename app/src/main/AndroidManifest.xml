@@ -55,6 +55,7 @@
         <activity android:name=".Ui.DuerefferalActivity"/>
         <activity android:name=".Ui.TotalReferralActivity"/>
         <activity android:name=".Ui.UsersDueBuildingsActivity"/>
+        <activity android:name=".Ui.UsersLiveBuildingActivity"/>
         <activity android:name=".Ui.TotalMeetingActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>

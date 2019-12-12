@@ -247,6 +247,8 @@ public class AddBuildingActivity extends AppCompatActivity {
 
               //  buildinginfoLayout.setVisibility(View.GONE);
 
+
+
                 progressBar.setVisibility(View.VISIBLE);
 
 
@@ -254,11 +256,13 @@ public class AddBuildingActivity extends AppCompatActivity {
                 if (pickedImageUri == null) {
 
 
-                    FancyToast.makeText(context, "Capture a Building Image", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                    FancyToast.makeText(context, "Capture a Building Image", FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                     //saveBuildingDataInDB();
                     progressBar.setVisibility(View.GONE);
 
                 } else {
+
+                   // addInfoButton.setVisibility(View.GONE);
                     saveImageToStorage();
                 }
 
@@ -996,6 +1000,8 @@ public class AddBuildingActivity extends AppCompatActivity {
     }
 
     public void saveImageToStorage() {
+        addInfoButton.setVisibility(View.GONE);
+
         final UploadTask uploadTask = addbldngRef.putFile(pickedImageUri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {

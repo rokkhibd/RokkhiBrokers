@@ -22,6 +22,7 @@ import com.rokkhi.brokers.Model.LiveBuildingListAdapter;
 import com.rokkhi.brokers.R;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersLiveBuildingActivity extends AppCompatActivity {
@@ -55,6 +56,8 @@ public class UsersLiveBuildingActivity extends AppCompatActivity {
         liveBuildingRecyclerview = (RecyclerView) findViewById(R.id.live_building_recyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         liveBuildingRecyclerview.setLayoutManager(linearLayoutManager);
+
+        fWorkerBuildingList=new ArrayList<>();
 
         showLiveBuildingList();
         spinKit = (ProgressBar) findViewById(R.id.spin_kit);

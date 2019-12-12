@@ -385,7 +385,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (documentSnapshot!=null && documentSnapshot.exists()){
                     FWorkers fWorkers= documentSnapshot.toObject(FWorkers.class);
 
-                    nidno.setText("NID -> "+fWorkers.getFw_nid());
+                    nid=fWorkers.getFw_nid();
+
+                    nidno.setText("NID ->  "+nid);
 
                 }
             }
