@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        context=this;
+        context=getApplicationContext();
 
         //update Checker start
 
@@ -216,9 +216,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Log.d(TAG, "onSuccess: tttt7 "+signoutstate);
                                         //signoutstate=true;
 
-                                       // if (context!=null){
+                                        /*if (context!=null){
 
-                                            /*if (usertoken != null && !usertoken.contains(utoken)  ) {
+                                            if (usertoken != null && !usertoken.contains(utoken)  ) {
                                                 String logID= db.collection(getString(R.string.col_loginsession)).document().getId();
                                                 LogSession logSession= new LogSession(logID,userId,utoken,"FieldWork", Calendar.getInstance().getTime());
                                                 db.collection(getString(R.string.col_loginsession)).document(logID).set(logSession)
@@ -229,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                                             }
                                                         });
-                                            }*/
-                                      //  }
+                                            }
+                                       }*/
 
 
                                     }
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Users users= documentSnapshot.toObject(Users.class);
 
                     userName.setText(users.getName());
-                    userPhone.setText(users.getPhone());
+                    userPhone.setText(normalfunc.makephone11(users.getPhone()));
 
                     if (users.getThumb()!=null){
                         if(!users.getThumb().isEmpty() && !users.getThumb().equals("none")){

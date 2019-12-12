@@ -5,7 +5,7 @@ import java.util.Date;
 public class FGuardTrack {
     private String user_id="none";
     private Date timeStart=new Date();
-    private Date timeEnd=new Date();
+   // private Date timeEnd=new Date();
     private String build_id="none";
     private String doc_id="none";
     private String guard_id="none";
@@ -19,10 +19,10 @@ public class FGuardTrack {
     }
 
 
-    public FGuardTrack(String user_id, Date timeStart, Date timeEnd, String build_id, String doc_id, String guard_id, Double latitude, Double longitude,String status) {
+    public FGuardTrack(String user_id, Date timeStart, String build_id, String doc_id, String guard_id, Double latitude, Double longitude,String status) {
         this.user_id = user_id;
         this.timeStart = timeStart;
-        this.timeEnd = timeEnd;
+      //  this.timeEnd = timeEnd;
         this.build_id = build_id;
         this.doc_id = doc_id;
         this.guard_id = guard_id;
@@ -47,13 +47,13 @@ public class FGuardTrack {
         this.timeStart = timeStart;
     }
 
-    public Date getTimeEnd() {
-        return timeEnd;
-    }
+   // public Date getTimeEnd() {
+      //  return timeEnd;
+   // }
 
-    public void setTimeEnd(Date timeEnd) {
-        this.timeEnd = timeEnd;
-    }
+   // public void setTimeEnd(Date timeEnd) {
+      //  this.timeEnd = timeEnd;
+   // }
 
     public String getBuild_id() {
         return build_id;

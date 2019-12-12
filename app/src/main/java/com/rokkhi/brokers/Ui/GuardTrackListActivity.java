@@ -35,6 +35,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.rokkhi.brokers.Model.FGuardTrack;
 import com.rokkhi.brokers.Model.GuardTrainListAdapter;
 import com.rokkhi.brokers.R;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -209,7 +210,7 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
         String doc_id=doc_ref.getId();
 
 
-        fGuardTrack=new FGuardTrack(userId,date,date,build_id,doc_id,guard_id,late,lang,"In");
+        fGuardTrack=new FGuardTrack(userId,date,build_id,doc_id,guard_id,late,lang,"In");
 
 
         db.collection(getString(R.string.col_GuardTrainerTrack)).document(doc_id).set(fGuardTrack).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -217,7 +218,8 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
 
-                    Toast.makeText(GuardTrackListActivity.this, "Data Saved Done...", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(GuardTrackListActivity.this, "Data Saved Done...", Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(GuardTrackListActivity.this,"Data Saved Done",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
                     showAllScanData();
                     spinkit.setVisibility(View.GONE);
                 }

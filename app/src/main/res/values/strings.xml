@@ -39,5 +39,7 @@
     <string name="col_district">district</string>
     <string name="title_activity_map">Map</string>
     <string name="col_fReport">fReport</string>
+    <string name="col_buildings">buildings</string>
+
 
 </resources>

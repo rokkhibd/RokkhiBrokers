@@ -102,7 +102,7 @@
 
                 android:id="@+id/fworker_address_area"
                 android:layout_width="0dp"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:paddingLeft="10sp"
                 android:scrollHorizontally="true"
                 android:layout_height="50dp"

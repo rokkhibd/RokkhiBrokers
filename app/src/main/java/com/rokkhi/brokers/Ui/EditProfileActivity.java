@@ -405,7 +405,7 @@ public class EditProfileActivity extends AppCompatActivity implements IPickResul
                 if (task.isSuccessful()) {
                     if(bitmap==null){
                         dismissdialog();
-                    //    Toast.makeText(context, "Data Update successful!!", Toast.LENGTH_SHORT).show();
+                       //    Toast.makeText(context, "Data Update successful!!", Toast.LENGTH_SHORT).show();
                         FancyToast.makeText(EditProfileActivity.this,"Data Update successful!!",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
 
                     }
@@ -415,7 +415,6 @@ public class EditProfileActivity extends AppCompatActivity implements IPickResul
                 }
             }
         });
-
 
 
         if (bitmap != null) {

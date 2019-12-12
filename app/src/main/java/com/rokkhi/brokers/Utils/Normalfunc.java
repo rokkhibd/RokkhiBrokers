@@ -308,6 +308,12 @@ public class Normalfunc {
         return formattedDate;
     }
 
+    public String getDateMMMddhhmma(Date c){
+        SimpleDateFormat df = new SimpleDateFormat("MMM d , hh:mm a ", Locale.getDefault());
+        String formattedDate = df.format(c);
+        return formattedDate;
+    }
+
     public String getDateMMMdd(Date c) {
 
         SimpleDateFormat df = new SimpleDateFormat("MMM d", Locale.getDefault());

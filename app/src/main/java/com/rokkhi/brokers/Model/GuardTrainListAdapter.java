@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,8 +34,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Utils.Normalfunc;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,6 +103,8 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
     @Override
     public void onBindViewHolder(@NonNull GuardTrainViewHolder holder, int position) {
 
+        String user_id=mAuth.getCurrentUser().getUid();
+
         FGuardTrack fGuardTrack=fGuardTrackList.get(position);
 
         Date date1=fGuardTrack.getTimeStart();
@@ -146,6 +151,59 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
         });
 
 
+
+
+        firebaseFirestore.collection(context.getString(R.string.col_GuardTrainerTrack)).document(fGuardTrack.getDoc_id()).
+                get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot=task.getResult();
+
+                    if (documentSnapshot!=null && documentSnapshot.exists()){
+
+
+                        if (documentSnapshot.getData().get("timeEnd")!=null){
+
+                            Timestamp timestamp = (Timestamp) documentSnapshot.getData().get("timeEnd");
+                            Date date=timestamp.toDate();
+                            holder.endButton.setText(normalfunc.getDateMMMddhhmma(date));
+
+                        }else {
+                           // Toast.makeText(context, "No field found", Toast.LENGTH_SHORT).show();
+                        }
+
+
+
+                    }
+
+                }
+            }
+        });
+
+
+        firebaseFirestore.collection(context.getString(R.string.col_buildings)).document(fGuardTrack.getBuild_id()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+
+                            DocumentSnapshot documentSnapshot=task.getResult();
+                            if (documentSnapshot!=null && documentSnapshot.exists()){
+                                String b_name=documentSnapshot.getString("b_name");
+
+                                holder.gHouse.setText(b_name);
+
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -156,7 +214,7 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
     public class GuardTrainViewHolder extends RecyclerView.ViewHolder {
 
         ImageView guardImage;
-        TextView gName;
+        TextView gName,gHouse;
         Button startButton,endButton;
 
         public GuardTrainViewHolder(@NonNull View itemView) {
@@ -166,6 +224,7 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
             gName=itemView.findViewById(R.id.gname);
             startButton=itemView.findViewById(R.id.gtrain_start);
             endButton=itemView.findViewById(R.id.gtrain_end);
+            gHouse=itemView.findViewById(R.id.gHouse);
 
             endButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -242,7 +301,9 @@ public class GuardTrainListAdapter extends RecyclerView.Adapter<GuardTrainListAd
 
                                         if (task.isSuccessful()){
 
-                                            Toast.makeText(context, "Your training period is End!!", Toast.LENGTH_SHORT).show();
+                                           // Toast.makeText(context, "Your training period is End!!", Toast.LENGTH_SHORT).show();
+
+                                            FancyToast.makeText(context,"Your training period is End",FancyToast.LENGTH_LONG, FancyToast.DEFAULT,false).show();
 
                                         }
                                     }
