@@ -290,12 +290,9 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                         statusIdList.add(bstatus_id);
                     }
 
-
-                    //statusList.add(status);
                 }
 
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, statusList);
-                //customListAdapter=new CustomListAdapter(AddBuildingActivity.this,areaList);
                 adapter.notifyDataSetChanged();
                 statusListView.setAdapter(adapter);
 
@@ -319,6 +316,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 statusCodePos = position;
 
                 building_status.setText(b_status);
+
+
                 updateInfo_Button.setEnabled(true);
 
                 dialog.dismiss();

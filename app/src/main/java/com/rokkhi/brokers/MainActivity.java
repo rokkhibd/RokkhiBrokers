@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("Logout")
-                        .setIcon(R.drawable.logout_black)
+                        .setIcon(R.drawable.logout_image)
                         .setMessage("Are you sure you want to logout?")
                         .setNegativeButton(android.R.string.no, null)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Log.d(TAG, "onSuccess: tttt7 "+signoutstate);
                                         //signoutstate=true;
 
-                                        //if (getApplicationContext()!=null){
+                                       // if (context!=null){
 
                                             /*if (usertoken != null && !usertoken.contains(utoken)  ) {
                                                 String logID= db.collection(getString(R.string.col_loginsession)).document().getId();
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                             }
                                                         });
                                             }*/
-                                        //}
+                                      //  }
 
 
                                     }

@@ -50,9 +50,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         mapFragment.getMapAsync(this);
 
-
-         fBuildings = (FBuildings) getIntent().getSerializableExtra("fbuildings");
-//        fBuildings = (FBuildings) getIntent().getParcelableExtra("fbuildings");
+        fBuildings = (FBuildings) getIntent().getSerializableExtra("fbuildings");
 
         Log.e("TAG", "onCreate: " + fBuildings.getLatitude().toString());
         Log.e("TAG", "onCreate: " + fBuildings.getLongitude().toString());
@@ -120,12 +118,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         alert.setView(view);
 
         alert.setCancelable(false);
-
-/*
-        Picasso.get().load(fBuildings.getB_imageUrl().get(0))
-                .placeholder(R.drawable.user_placeholder_error)
-                .error(R.drawable.noimage)
-                .fit().into(imageView);*/
 
         Picasso.get().load(fBuildings.getB_imageUrl().get(0))
                 .fit()
