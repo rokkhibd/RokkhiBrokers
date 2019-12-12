@@ -175,7 +175,10 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
                     String string=result.getContents().toString();
 
                     if (string.length()!=41){
-                        Toast.makeText(this, "QR code is not valid", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(this, "QR code is not valid", Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(GuardTrackListActivity.this,"QR code is not valid",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
+
+
                     }else {
                         String[] parts=string.split("-");
 
@@ -220,6 +223,7 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
 
                    // Toast.makeText(GuardTrackListActivity.this, "Data Saved Done...", Toast.LENGTH_SHORT).show();
                     FancyToast.makeText(GuardTrackListActivity.this,"Data Saved Done",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
                     showAllScanData();
                     spinkit.setVisibility(View.GONE);
                 }
