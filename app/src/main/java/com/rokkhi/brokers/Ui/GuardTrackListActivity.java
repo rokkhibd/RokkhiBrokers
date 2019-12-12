@@ -190,6 +190,8 @@ public class GuardTrackListActivity extends AppCompatActivity implements View.On
 
                         saveScandataToDB();
 
+                        //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+
                     }
 
 
