@@ -105,10 +105,11 @@ public class AddBuildingActivity extends AppCompatActivity {
     Normalfunc normalfunc;
     CircleImageView circleImageView;
     EditText b_status, b_name, b_totalfloor, b_floorperflat, b_totalguard, areaNameET, roadName, roadNumberET, houseNumberET,
-            b_visit, b_follwing, b_code, b_peoplesName, b_peopleNumber, people_we_talk, districtNameET;
+            b_visit, b_follwing, b_code, b_peoplesName, b_peopleNumber, people_we_talk, districtNameET,blockSectorNumberET;
     Button tapCode, addInfoButton, checkHouseBtn, saveNumberBtn;
     String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode;
     String wholeAddress, currentDate, status_id;
+    String blockSectorNumberST="0";
 
     Double lat=0.0;
     Double lan=0.0;
@@ -172,13 +173,16 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         districtNameET = findViewById(R.id.district);
         areaNameET = findViewById(R.id.area);
-        roadNumberET = findViewById(R.id.roadNumber);
 
+        roadNumberET = findViewById(R.id.roadNumber);
         roadNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         roadName = findViewById(R.id.road_Name);
-        houseNumberET = findViewById(R.id.houseNumber);
 
+        blockSectorNumberET=findViewById(R.id.blockNumber);
+        blockSectorNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+
+        houseNumberET = findViewById(R.id.houseNumber);
         houseNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         contactlayout=findViewById(R.id.contactlayout);
@@ -194,6 +198,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         b_code = findViewById(R.id.bldng_edit_bcode);
         b_status = findViewById(R.id.bldng_edit_status);
         b_name = findViewById(R.id.bldng_edit_husename);
+
        /* b_lat = findViewById(R.id.bldng_edit_lat);
         b_long = findViewById(R.id.bldng_edit_long);*/
         people_we_talk = findViewById(R.id.bldng_edit_buildingspeoples);
@@ -1084,11 +1089,12 @@ public class AddBuildingActivity extends AppCompatActivity {
             String houseNmbr = houseNumberET.getText().toString();
 //            String housefrmt = b_housefrmt.getText().toString();
             String flatformat = b_flatfrmt.getText().toString();
+            blockSectorNumberST=blockSectorNumberET.getText().toString();
             //status = b_status.getText().toString();
             status_id = statusIdList.get(statusCodePos);
 
 
-            String theWholeAddress = area + " " + road + " " + houseNmbr + " " + districtCodeList.get(districtCodePos).toString();
+            String theWholeAddress = area + " " + road + " " + houseNmbr + " " +" "+ blockSectorNumberST + " "+districtCodeList.get(districtCodePos).toString();
 
             wholeAddress = theWholeAddress;
 
@@ -1115,7 +1121,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             code_array.add(totalHouseCode);
 
 
-            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberST + "*" + houseNumberST;
+            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberST + "*" + houseNumberST + "*" + blockSectorNumberST;
 
             ArrayList<String> imageurl = new ArrayList<String>();
             imageurl.add(downloadImageUri);
@@ -1246,6 +1252,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             String design_type = people_we_talk.getText().toString();
             String design_name = b_peoplesName.getText().toString();
             String design_number = b_peopleNumber.getText().toString();
+            blockSectorNumberST=blockSectorNumberET.getText().toString();
             String numbers = add88withNumb(design_number);
 
 //            totalCode = areaCodeList.get(areaCodePos) + "*" + roadListCode + "*" + blockListCode + "*" + houseListCode + "*" + housefrmntListCode + "*" + districtValue;
@@ -1257,7 +1264,8 @@ public class AddBuildingActivity extends AppCompatActivity {
 
 
 
-            String extaCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "");
+
+            String extaCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "") + blockSectorNumberST;
 
             String doc_id = design_number + extaCode;
 

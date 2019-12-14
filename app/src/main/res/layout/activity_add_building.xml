@@ -155,6 +155,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="13sp"
                             android:layout_marginBottom="8sp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/less_round_button_orange"
                             android:gravity="center"
@@ -196,6 +198,19 @@
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background_change_while_typing"
                         android:hint="House Number"
+                        android:inputType="textCapCharacters"
+                        android:padding="20dp" />
+
+
+                    <EditText
+
+                        android:id="@+id/blockNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_background_change_while_typing"
+                        android:hint="Block / Sector Number"
                         android:inputType="textCapCharacters"
                         android:padding="20dp" />
 
