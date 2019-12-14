@@ -181,6 +181,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
         blockSectorNumberET=findViewById(R.id.blockNumber);
         blockSectorNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+       // blockSectorNumberET.setText("0");
 
         houseNumberET = findViewById(R.id.houseNumber);
         houseNumberET.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
@@ -1093,6 +1094,10 @@ public class AddBuildingActivity extends AppCompatActivity {
             //status = b_status.getText().toString();
             status_id = statusIdList.get(statusCodePos);
 
+            if (blockSectorNumberST.isEmpty()){
+                blockSectorNumberST="0";
+            }
+
 
             String theWholeAddress = area + " " + road + " " + houseNmbr + " " +" "+ blockSectorNumberST + " "+districtCodeList.get(districtCodePos).toString();
 
@@ -1263,6 +1268,9 @@ public class AddBuildingActivity extends AppCompatActivity {
             String strDate = mdformat.format(calendar.getTime());
 
 
+            if (blockSectorNumberST.isEmpty()){
+                blockSectorNumberST="0";
+            }
 
 
             String extaCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberET.getText().toString().trim().replaceAll("\\s+", "") + "" + houseNumberET.getText().toString().trim().replaceAll("\\s+", "") + blockSectorNumberST;
