@@ -44,8 +44,7 @@ import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import com.rokkhi.brokers.Model.AllStringValues;
 import com.rokkhi.brokers.Model.FBPeople;
 import com.rokkhi.brokers.Model.FBuildings;
@@ -70,7 +69,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UpdateBldngInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView houseImage;
-    ImageLoader imageLoader;
+   // ImageLoader imageLoader;
 
     EditText house_name, total_guards, followup_date, total_floor, flat_floor, house_address, flat_format,
             owner_name, owner_number, careataker_name, caretaker_number;
@@ -123,8 +122,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         db = FirebaseFirestore.getInstance();
 
 
-        imageLoader=ImageLoader.getInstance();
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getBaseContext()));
+       // imageLoader=ImageLoader.getInstance();
+       // ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getBaseContext()));
 
 
         currentUser = mAuth.getCurrentUser();

@@ -107,7 +107,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     EditText b_status, b_name, b_totalfloor, b_floorperflat, b_totalguard, areaNameET, roadName, roadNumberET, houseNumberET,
             b_visit, b_follwing, b_code, b_peoplesName, b_peopleNumber, people_we_talk, districtNameET,blockSectorNumberET;
     Button tapCode, addInfoButton, checkHouseBtn, saveNumberBtn;
-    String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode;
+    String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode,totalBCode;
     String wholeAddress, currentDate, status_id;
     String blockSectorNumberST;
 
@@ -1129,7 +1129,7 @@ public class AddBuildingActivity extends AppCompatActivity {
 
             totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberST + "*" + houseNumberST + "*" + blockSectorNumberST;
 
-            String totalBCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberST + "" + houseNumberST + "" + blockSectorNumberST;
+            totalBCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberST + "" + houseNumberST + "" + blockSectorNumberST;
 
             Normalfunc normalfunc = new Normalfunc();
             ArrayList<String> code_array = new ArrayList<>(normalfunc.splitchar(area));
