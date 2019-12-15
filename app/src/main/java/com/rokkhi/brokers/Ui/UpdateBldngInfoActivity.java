@@ -341,11 +341,9 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     private void updateBuildingInfo() {
 
         WriteBatch batch = db.batch();
+
+
         String update_bstatus = statusIdList.get(statusCodePos);
-
-
-
-
         String update_address = house_address.getText().toString();
         String update_houseName = house_name.getText().toString();
         String update_followdate=followup_date.getText().toString();
@@ -354,30 +352,59 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
 
         DocumentReference docRef2 = db.collection(getString(R.string.col_fWorkerBuilding)).document(doc_id);
+        batch.update(docRef2,"status_id",update_bstatus);
 
-        //batch.update(docRef2,"status_id",update_bstatus);
+        /*Map<String,Object> map2=new HashMap<>();
+        map2.put("status_id",update_bstatus);*/
 
-        Map<String,Object> map2=new HashMap<>();
-        map2.put("status_id",update_bstatus);
-
-        docRef2.set(map2,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+        /*docRef2.set(map2,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
             }
-        });
+        });*/
 
 
         DocumentReference docRef = db.collection(getString(R.string.col_fBuildings)).document(fBuildings.getBuild_id());
+        batch.update(docRef,"status_id",update_bstatus);
 
-        Map<String, Object> map = new HashMap<>();
+        batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()) {
+                    progressDialog.dismiss();
+                    startActivity(new Intent(UpdateBldngInfoActivity.this, MyHomeActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+                    //Toast.makeText(UpdateBldngInfoActivity.this, "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                    FancyToast.makeText(UpdateBldngInfoActivity.this,"Data Updated Successfully",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
+
+                }
+
+               // FancyToast.makeText(UpdateBldngInfoActivity.this,"Data Updated Successfully",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                FancyToast.makeText(UpdateBldngInfoActivity.this,"Failed to Update",FancyToast.LENGTH_LONG,FancyToast.ERROR,false);
+            }
+        });
+
+
+        /*Map<String, Object> map = new HashMap<>();
         map.put("b_address", update_address);
         map.put("housename", update_houseName);
-        map.put("b_array", b_array);
+       // map.put("b_array", b_array);
         map.put("updated_at", date);
-        map.put("status_id",update_bstatus);
+        map.put("status_id",update_bstatus);*/
 
-        docRef.set(map, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+        /*docRef.set(map, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -406,7 +433,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                 progressDialog.dismiss();
                 Toast.makeText(UpdateBldngInfoActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 
