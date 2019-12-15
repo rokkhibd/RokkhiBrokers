@@ -44,6 +44,8 @@ import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.rokkhi.brokers.Model.AllStringValues;
 import com.rokkhi.brokers.Model.FBPeople;
 import com.rokkhi.brokers.Model.FBuildings;
@@ -68,6 +70,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UpdateBldngInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView houseImage;
+    ImageLoader imageLoader;
+
     EditText house_name, total_guards, followup_date, total_floor, flat_floor, house_address, flat_format,
             owner_name, owner_number, careataker_name, caretaker_number;
     FBuildings fBuildings;
@@ -117,6 +121,11 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+
+        imageLoader=ImageLoader.getInstance();
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getBaseContext()));
+
 
         currentUser = mAuth.getCurrentUser();
         userId = currentUser.getUid();
@@ -220,8 +229,13 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     Log.e("TAG","IMAGE:"+fBuildings.getB_imageUrl());
                     Log.e("TAG","bcode:"+fBuildings.getB_code());
 
-                    Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl()).
-                            error(R.drawable.building).fitCenter().into(houseImage);
+                    Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl().toString()).
+                           error(R.drawable.building).fitCenter().into(houseImage);
+
+                  //  imageLoader.displayImage(fBuildings.getB_imageUrl().toString(),houseImage);
+
+
+
 
                     String status=fBuildings.getStatus_id().toString();
 

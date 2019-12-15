@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.rokkhi.brokers.R;
 import com.rokkhi.brokers.Ui.AddBuildingActivity;
 import com.rokkhi.brokers.Ui.UpdateBldngInfoActivity;
@@ -50,6 +52,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
     public List<FWorkerBuilding> fBuildingsList;
     FirebaseFirestore firebaseFirestore;
     FBPeople fbPeople = new FBPeople();
+    ImageLoader imageLoader;
 
 
     public BuildingsListAdapter(List<FWorkerBuilding> fBuildingsList, Context context) {
@@ -66,8 +69,10 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
+
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_list_layout, parent, false);
         final BuildingViewholder bv = new BuildingViewholder(v);
+
 
         //TODO:Dialog initialize
 
@@ -94,8 +99,14 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
 
                         //holder.item_list_id.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_anim));
 
-                        holder.build_address.setText(fb.getB_address());
+                       // holder.build_address.setText(fb.getB_address());
                         holder.build_name.setText(fb.getHousename());
+                        holder.build_area.setText(fb.getB_areaname());
+                        holder.build_roadno.setText("R# " + fb.getB_roadno());
+                        holder.build_houseno.setText("H# " + fb.getB_houseno());
+                        holder.build_roadname.setText(fb.getB_roadName());
+                        holder.build_block.setText("Bl/Sec: " + fb.getB_blocksector());
+                        holder.build_roadname.setText(fb.getB_roadName());
 
                         if (fb.getStatus_id().equalsIgnoreCase("zD0cviZ6Zab3GbWYu7tA")){
                             holder.build_status.setText("Followup");
@@ -135,6 +146,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
         return position;
     }
 
+
     @Override
     public int getItemCount() {
         return fBuildingsList.size();
@@ -143,6 +155,7 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
     public class BuildingViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView build_name, build_address, build_status, build_lastVisit, building_contacts;
+        TextView build_area,build_houseno,build_roadno,build_roadname,build_block;
         CardView item_list_id;
 
         public BuildingViewholder(@NonNull final View itemView) {
@@ -153,6 +166,12 @@ public class BuildingsListAdapter extends RecyclerView.Adapter<BuildingsListAdap
             build_status = itemView.findViewById(R.id.myhome_frag_bldngstatus);
             build_lastVisit = itemView.findViewById(R.id.myhome_frag_bldngvisitdate);
             building_contacts = itemView.findViewById(R.id.bldng_contacts);
+            build_area=itemView.findViewById(R.id.house_area);
+            build_houseno=itemView.findViewById(R.id.house_number);
+            build_roadno=itemView.findViewById(R.id.house_road);
+            build_roadname=itemView.findViewById(R.id.house_roadname);
+            build_block=itemView.findViewById(R.id.house_blockSector);
+
 
             item_list_id = itemView.findViewById(R.id.item_list_id);
 

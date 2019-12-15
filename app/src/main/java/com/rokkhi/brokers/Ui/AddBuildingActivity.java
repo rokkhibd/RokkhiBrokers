@@ -109,7 +109,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     Button tapCode, addInfoButton, checkHouseBtn, saveNumberBtn;
     String roadListCode, blockListCode, houseListCode, housefrmntListCode, totalHouseCode, districtValue, downloadImageUri, totalCode;
     String wholeAddress, currentDate, status_id;
-    String blockSectorNumberST="0";
+    String blockSectorNumberST;
 
     Double lat=0.0;
     Double lan=0.0;
@@ -1006,6 +1006,7 @@ public class AddBuildingActivity extends AppCompatActivity {
     }
 
     public void saveImageToStorage() {
+
         addInfoButton.setVisibility(View.GONE);
 
         final UploadTask uploadTask = addbldngRef.putFile(pickedImageUri);
@@ -1059,6 +1060,7 @@ public class AddBuildingActivity extends AppCompatActivity {
         String houseNumberST = houseNumberET.getText().toString().replaceAll("\\s+", "");
 
 
+
         roadNumberST=roadNumberST.replace(".","").replace(":","").replace("#","");
         houseNumberST=houseNumberST.replace(".","").replace(":","").replace("#","");
 
@@ -1066,22 +1068,25 @@ public class AddBuildingActivity extends AppCompatActivity {
         if (b_totalfloor.getText().toString().isEmpty()) {
             b_totalfloor.setError("Insert total floor");
             b_totalfloor.requestFocus();
+            addInfoButton.setVisibility(View.VISIBLE);
         }
+
         if (b_floorperflat.getText().toString().isEmpty()) {
-            b_floorperflat.setError("Insert number of floor per flat");
+            b_floorperflat.setError("Insert number of flat per floor");
             b_floorperflat.requestFocus();
         }
-        if (b_totalguard.getText().toString().isEmpty()) {
-            b_totalguard.setError("Insert the number of guards");
-            b_totalguard.requestFocus();
-        }
-        if (b_flatfrmt.getText().toString().isEmpty()) {
-            b_flatfrmt.setError("Insert the flat format");
-            b_flatfrmt.requestFocus();
+        if (b_status.getText().toString().isEmpty()) {
+            b_status.setError("Insert the status or outcome");
+            b_status.requestFocus();
+            addInfoButton.setVisibility(View.VISIBLE);
         }
         if (b_name.getText().toString().isEmpty()) {
             b_name.setError("Insert the house name");
             b_name.requestFocus();
+            addInfoButton.setVisibility(View.VISIBLE);
+
+        }if (statusIdList.isEmpty()){
+            FancyToast.makeText(context, "Insert Your Status", FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
         } else {
             String area = areaNameET.getText().toString();
             String road = roadNumberET.getText().toString();
@@ -1092,6 +1097,9 @@ public class AddBuildingActivity extends AppCompatActivity {
             String flatformat = b_flatfrmt.getText().toString();
             blockSectorNumberST=blockSectorNumberET.getText().toString();
             //status = b_status.getText().toString();
+
+
+
             status_id = statusIdList.get(statusCodePos);
 
             if (blockSectorNumberST.isEmpty()){
@@ -1119,14 +1127,16 @@ public class AddBuildingActivity extends AppCompatActivity {
             int totlflr = Integer.parseInt(totalfloor);
 
 
+            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberST + "*" + houseNumberST + "*" + blockSectorNumberST;
+
+            String totalBCode=districtCodeList.get(districtCodePos).toString() + "" + areaCodeList.get(areaCodePos) + "" + roadNumberST + "" + houseNumberST + "" + blockSectorNumberST;
+
             Normalfunc normalfunc = new Normalfunc();
             ArrayList<String> code_array = new ArrayList<>(normalfunc.splitchar(area));
             code_array.add(road);
             code_array.add(houseNmbr);
-            code_array.add(totalHouseCode);
+            code_array.add(totalBCode);
 
-
-            totalCode = districtCodeList.get(districtCodePos).toString() + "*" + areaCodeList.get(areaCodePos) + "*" + roadNumberST + "*" + houseNumberST + "*" + blockSectorNumberST;
 
             ArrayList<String> imageurl = new ArrayList<String>();
             imageurl.add(downloadImageUri);
@@ -1154,9 +1164,8 @@ public class AddBuildingActivity extends AppCompatActivity {
             String date1 = b_follwing.getText().toString();
 
             Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+
             Log.d("TAG", "saveBuildingDataInDB: " + date2);
-
-
             Log.e("TAG", "saveBuildingDataInDB: build_id = " + build_id);
             Log.e("TAG", "saveBuildingDataInDB: wholeAddress =  " + wholeAddress);
             Log.e("TAG", "saveBuildingDataInDB: totalCode =  " + totalCode);
@@ -1164,6 +1173,7 @@ public class AddBuildingActivity extends AppCompatActivity {
             Log.e("TAG", "saveBuildingDataInDB: road Number =  " + road);
             Log.e("TAG", "saveBuildingDataInDB: districtValue =  " + districtValue);
             Log.e("TAG", "saveBuildingDataInDB: area =  " + areaCodeList.get(areaCodePos).toString());
+            Log.e("TAG", "saveBuildingDataInDB: areaName =  " + area);
             Log.e("TAG", "saveBuildingDataInDB: flatformat =  " + flatformat);
             Log.e("TAG", "saveBuildingDataInDB: flatperFloor =  " + flatperFloor);
             Log.e("TAG", "saveBuildingDataInDB: date2 =  " + date2);
@@ -1184,6 +1194,8 @@ public class AddBuildingActivity extends AppCompatActivity {
                     road.replaceAll("\\s",""),
                     districtValue,
                     areaCodeList.get(areaCodePos).toString(),
+                    area,
+                    blockSectorNumberST,
                     flatformat,
                     flatperFloor,
                     date2,

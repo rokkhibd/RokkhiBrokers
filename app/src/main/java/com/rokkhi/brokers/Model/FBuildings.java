@@ -13,6 +13,8 @@ public class FBuildings implements Serializable {
     private String b_roadno="none";
     private String b_district="none";
     private String b_area="none";
+    private String b_areaname="none";
+    private String b_blocksector="none";
     private String flatformat="none";
     private int flatperfloor=0;
     private Date followupdate=new Date();
@@ -33,33 +35,10 @@ public class FBuildings implements Serializable {
     public FBuildings() {
     }
 
-/*
-    public FBuildings(String build_id, String b_address, String b_code, String b_houseno, String b_roadno, String b_district, String b_area, String flatformat, int flatperfloor, Date followupdate, String housename, int totalfloor, Date created_at, Date updated_at, String status_id, String active, ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude, Double longitude) {
-        this.build_id = build_id;
-        this.b_address = b_address;
-        this.b_code = b_code;
-        this.b_houseno = b_houseno;
-        this.b_roadno = b_roadno;
-        this.b_district = b_district;
-        this.b_area = b_area;
-        this.flatformat = flatformat;
-        this.flatperfloor = flatperfloor;
-        this.followupdate = followupdate;
-        this.housename = housename;
-        this.totalfloor = totalfloor;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.status_id = status_id;
-        this.active = active;
-        this.b_imageUrl = b_imageUrl;
-        this.b_array = b_array;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }*/
-//road Name
+
     public FBuildings(
             String build_id, String b_address, String b_code, String b_houseno,
-            String b_roadno, String b_district, String b_area, String flatformat,
+            String b_roadno, String b_district, String b_area,String b_areaname,String b_blocksector,  String flatformat,
             int flatperfloor, Date followupdate, String housename, int totalfloor,
             Date created_at, Date updated_at, String status_id, String active,
             ArrayList<String> b_imageUrl, ArrayList<String> b_array, Double latitude,
@@ -71,6 +50,8 @@ public class FBuildings implements Serializable {
         this.b_roadno = b_roadno;
         this.b_district = b_district;
         this.b_area = b_area;
+        this.b_areaname=b_areaname;
+        this.b_blocksector=b_blocksector;
         this.flatformat = flatformat;
         this.flatperfloor = flatperfloor;
         this.followupdate = followupdate;
@@ -85,6 +66,23 @@ public class FBuildings implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.b_roadName = b_roadName;
+    }
+
+
+    public String getB_areaname() {
+        return b_areaname;
+    }
+
+    public void setB_areaname(String b_areaname) {
+        this.b_areaname = b_areaname;
+    }
+
+    public String getB_blocksector() {
+        return b_blocksector;
+    }
+
+    public void setB_blocksector(String b_blocksector) {
+        this.b_blocksector = b_blocksector;
     }
 
     public String getB_roadName() {

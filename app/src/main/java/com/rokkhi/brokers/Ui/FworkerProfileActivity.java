@@ -968,12 +968,19 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             spinKitProgressBar.setVisibility(View.GONE);
             return;
         }
-        if (f_phone.getText().toString().isEmpty()) {
+        if (f_phone.getText().toString().isEmpty())   {
             f_phone.setError("Insert your mobile number");
             f_phone.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
         }
+        if (!normalfunc.isvalidphone(f_phone.getText().toString()))   {
+            f_phone.setError("Enter valid mobile number");
+            f_phone.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+
 
         if (f_refId.getText().toString().isEmpty()) {
             f_refId.requestFocus();
@@ -1000,6 +1007,13 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         }
         if (TextUtils.isEmpty(f_bkash.getText().toString())) {
             f_bkash.setError("Insert Your Bkash Number");
+            f_bkash.requestFocus();
+            spinKitProgressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        if (!normalfunc.isvalidphone(f_bkash.getText().toString()))   {
+            f_bkash.setError("Enter valid bkash number");
             f_bkash.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
@@ -1048,6 +1062,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
                             //get the image download Link
                             downloadImageUri = task.getResult().toString();
 
+                            saveData.setVisibility(View.GONE);
                             saveAllDataToFirestore();
                         }
                     }
