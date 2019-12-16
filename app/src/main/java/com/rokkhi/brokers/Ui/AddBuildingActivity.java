@@ -1257,14 +1257,17 @@ public class AddBuildingActivity extends AppCompatActivity {
         if (people_we_talk.length() == 0) {
             people_we_talk.setError("Insert the People your are talking");
             people_we_talk.requestFocus();
+            saveNumberBtn.setVisibility(View.VISIBLE);
         }
         if (b_peoplesName.length() == 0) {
             b_peoplesName.setError("Insert the name");
             b_peoplesName.requestFocus();
+            saveNumberBtn.setVisibility(View.VISIBLE);
         }
         if (b_peopleNumber.getText().toString().length() <= 10) {
             b_peopleNumber.setError("Insert the valid mobile number");
             b_peopleNumber.requestFocus();
+            saveNumberBtn.setVisibility(View.VISIBLE);
         } else {
             String design_type = people_we_talk.getText().toString();
             String design_name = b_peoplesName.getText().toString();

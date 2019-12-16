@@ -129,6 +129,8 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         currentUser = mAuth.getCurrentUser();
         userId = currentUser.getUid();
 
+        date = Calendar.getInstance().getTime();
+
         getBuildingsInformation();
 
 
@@ -153,7 +155,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         //getThePeoplesInfo();
         normalfunc = new Normalfunc();
 
-        date = Calendar.getInstance().getTime();
+
 
         Log.e("TAG","date:"+date);
 
@@ -353,6 +355,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         DocumentReference docRef2 = db.collection(getString(R.string.col_fWorkerBuilding)).document(doc_id);
         batch.update(docRef2,"status_id",update_bstatus);
+        batch.update(docRef2,"updated_at",date);
 
         /*Map<String,Object> map2=new HashMap<>();
         map2.put("status_id",update_bstatus);*/
@@ -367,6 +370,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         DocumentReference docRef = db.collection(getString(R.string.col_fBuildings)).document(fBuildings.getBuild_id());
         batch.update(docRef,"status_id",update_bstatus);
+        batch.update(docRef,"updated_at",date);
 
         batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

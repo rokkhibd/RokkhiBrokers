@@ -975,7 +975,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
             return;
         }
         if (!normalfunc.isvalidphone(f_phone.getText().toString()))   {
-            f_phone.setError("Enter valid mobile number");
+            f_phone.setError("Insert valid mobile number");
             f_phone.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
@@ -1013,7 +1013,7 @@ public class FworkerProfileActivity extends AppCompatActivity implements View.On
         }
 
         if (!normalfunc.isvalidphone(f_bkash.getText().toString()))   {
-            f_bkash.setError("Enter valid bkash number");
+            f_bkash.setError("Insert valid bkash number");
             f_bkash.requestFocus();
             spinKitProgressBar.setVisibility(View.GONE);
             return;
