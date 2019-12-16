@@ -2,6 +2,7 @@ package com.rokkhi.brokers.Ui;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -82,6 +83,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
     CircleImageView update_bldngImage;
 
     Normalfunc normalfunc;
+    String picurl="";
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -106,6 +108,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
     String builidID,doc_id;
     int statusCodePos;
+    Context context;
 
 
     @Override
@@ -120,7 +123,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        context=UpdateBldngInfoActivity.this;
 
        // imageLoader=ImageLoader.getInstance();
        // ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getBaseContext()));
@@ -227,11 +230,18 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
                     house_address.setText(fBuildings.getB_address());
                     flat_format.setText(fBuildings.getFlatformat());
 
+                    picurl=fBuildings.getB_imageUrl().toString();
+
                     Log.e("TAG","IMAGE:"+fBuildings.getB_imageUrl());
                     Log.e("TAG","bcode:"+fBuildings.getB_code());
 
-                    Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl().toString()).
-                           error(R.drawable.building).fitCenter().into(houseImage);
+                    if (context!=null){
+                        if(!picurl.equals("none") && !picurl.isEmpty()) Glide.with(getApplicationContext()).load(picurl).error(R.drawable.building).into(houseImage);
+                    }
+
+
+                    /*Glide.with(getApplicationContext()).load(fBuildings.getB_imageUrl().toString()).
+                           error(R.drawable.building).fitCenter().into(houseImage);*/
 
                   //  imageLoader.displayImage(fBuildings.getB_imageUrl().toString(),houseImage);
 
@@ -357,15 +367,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         batch.update(docRef2,"status_id",update_bstatus);
         batch.update(docRef2,"updated_at",date);
 
-        /*Map<String,Object> map2=new HashMap<>();
-        map2.put("status_id",update_bstatus);*/
 
-        /*docRef2.set(map2,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-            }
-        });*/
 
 
         DocumentReference docRef = db.collection(getString(R.string.col_fBuildings)).document(fBuildings.getBuild_id());
@@ -401,12 +403,7 @@ public class UpdateBldngInfoActivity extends AppCompatActivity implements View.O
         });
 
 
-        /*Map<String, Object> map = new HashMap<>();
-        map.put("b_address", update_address);
-        map.put("housename", update_houseName);
-       // map.put("b_array", b_array);
-        map.put("updated_at", date);
-        map.put("status_id",update_bstatus);*/
+
 
         /*docRef.set(map, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

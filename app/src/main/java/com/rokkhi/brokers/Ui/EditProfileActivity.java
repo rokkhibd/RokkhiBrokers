@@ -392,9 +392,10 @@ public class EditProfileActivity extends AppCompatActivity implements IPickResul
 
 
         DocumentReference setinoffice = firebaseFirestore.collection(getString(R.string.col_users)).document(userid);
+        DocumentReference setfworkers=firebaseFirestore.collection(getString(R.string.col_fWorkers)).document(userid);
 
         batch.set(setinoffice, users2, SetOptions.merge());
-
+        batch.update(setfworkers,"fw_name",name.getText().toString());
         //TODO cloud function here
 
         if(!users2.equals(users))batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1085,8 +1085,16 @@ public class AddBuildingActivity extends AppCompatActivity {
             b_name.requestFocus();
             addInfoButton.setVisibility(View.VISIBLE);
 
-        }if (statusIdList.isEmpty()){
+        }if (b_follwing.getText().toString().isEmpty()){
+            b_follwing.setError("Insert the following date");
+            b_follwing.requestFocus();
+            addInfoButton.setVisibility(View.VISIBLE);
+        }
+
+        if (statusIdList.isEmpty()){
+
             FancyToast.makeText(context, "Insert Your Status", FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
+
         } else {
             String area = areaNameET.getText().toString();
             String road = roadNumberET.getText().toString();
