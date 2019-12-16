@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1098122328211:android:c4b64b1b68590fb1c97566",
+        "mobilesdk_app_id": "1:1098122328211:android:5153f63c08cb87aec97566",
         "android_client_info": {
-          "package_name": "com.rokkhi.brokers"
+          "package_name": "com.rokkhi.broker"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "1098122328211-l36ribjv4bubr39p5bmrpeprnl1hb60l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.rokkhi.brokers",
-            "certificate_hash": "3b8a2b7ceb2b732949ca9fe73bb1c1942eb8e20c"
-          }
-        },
         {
           "client_id": "1098122328211-k68vk2h8642daekbgi4spokbehveh0dl.apps.googleusercontent.com",
           "client_type": 3
@@ -179,27 +171,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "1098122328211-or61v8vini0j0sqnadkh403qaskh832t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rokkhi.rokkhiguard",
+            "certificate_hash": "bf2ee3f54347f8ae94c0d234df1adc6c3110bd57"
+          }
+        },
+        {
           "client_id": "1098122328211-qcaftubudjmvuiqgok3llpgaf3u5jgm1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.rokkhi.rokkhiguard",
             "certificate_hash": "1559f6dda8b88294c61aee9a483d81314d23316f"
-          }
-        },
-        {
-          "client_id": "1098122328211-mm29ift6atpe013g4m0oeannk1uknnf4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.rokkhi.rokkhiguard",
-            "certificate_hash": "2cc437071e1c6020ca9a8ec5a3f072dd17981576"
-          }
-        },
-        {
-          "client_id": "1098122328211-0al2o6fpla5d1hth15b6t0ifv7rc021u.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.rokkhi.rokkhiguard",
-            "certificate_hash": "c9f676d663792f94603844023aa889963af6a2b6"
           }
         },
         {

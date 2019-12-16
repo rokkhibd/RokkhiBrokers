@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.rokkhi.brokers">
+    package="com.rokkhi.broker">
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
     <!--
@@ -25,8 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Ui.DueMeetingActivity"></activity>
-        <activity android:name=".Ui.ReportActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.DueMeetingActivity"></activity>
+        <activity android:name="com.rokkhi.broker.Ui.ReportActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -40,24 +40,24 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Ui.MapActivity"
+            android:name="com.rokkhi.broker.Ui.MapActivity"
             android:label="Title" />
-        <activity android:name=".Ui.UserTotalBuildingsActivity" />
-        <activity android:name=".Ui.FworkerProfileActivity" />
-        <activity android:name=".Ui.EditProfileActivity" />
-        <activity android:name=".Ui.GuardTrackListActivity" />
-        <activity android:name=".Ui.ProfileActivity" />
-        <activity android:name=".Ui.NoticeActivity" />
-        <activity android:name=".Ui.PaymentHistoryActivity" />
-        <activity android:name=".Ui.MyHomeActivity" />
-        <activity android:name=".Ui.AddBuildingActivity" />
-        <activity android:name=".Ui.UpdateBldngInfoActivity" />
-        <activity android:name=".Ui.DuerefferalActivity"/>
-        <activity android:name=".Ui.TotalReferralActivity"/>
-        <activity android:name=".Ui.UsersDueBuildingsActivity"/>
-        <activity android:name=".Ui.UsersLiveBuildingActivity"/>
-        <activity android:name=".Ui.TotalMeetingActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.rokkhi.broker.Ui.UserTotalBuildingsActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.FworkerProfileActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.EditProfileActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.GuardTrackListActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.ProfileActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.NoticeActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.PaymentHistoryActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.MyHomeActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.AddBuildingActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.UpdateBldngInfoActivity" />
+        <activity android:name="com.rokkhi.broker.Ui.DuerefferalActivity"/>
+        <activity android:name="com.rokkhi.broker.Ui.TotalReferralActivity"/>
+        <activity android:name="com.rokkhi.broker.Ui.UsersDueBuildingsActivity"/>
+        <activity android:name="com.rokkhi.broker.Ui.UsersLiveBuildingActivity"/>
+        <activity android:name="com.rokkhi.broker.Ui.TotalMeetingActivity"/>
+        <activity android:name="com.rokkhi.broker.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,7 +77,7 @@
         </provider>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name="com.rokkhi.broker.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
